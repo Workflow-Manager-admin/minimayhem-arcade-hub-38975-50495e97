@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub"
+}
