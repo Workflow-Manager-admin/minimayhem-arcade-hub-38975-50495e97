@@ -150,123 +150,166 @@ function App() {
         borderBottom: `2px solid ${darkMode ? COLORS.pink : COLORS.purple}`,
         boxShadow: `0 2px 16px 0 ${darkMode ? COLORS.purple : COLORS.blue}44`
       }}>
-        <nav className="mm-nav" style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '16px 24px'
-        }}>
-          {/* Logo */}
-          <span className="mm-logo" style={{
-            color: COLORS.pink,
-            fontSize: '2rem',
-            letterSpacing: -2,
-            fontWeight: 900,
-            textShadow: neonShadow(COLORS.pink, 2),
+        <nav
+          className="mm-nav"
+          style={{
+            maxWidth: 1200,
+            margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
-            gap: 10,
-            fontFamily: "'Press Start 2P', VT323, monospace",
-            userSelect: 'none'
-          }}>
-            <span style={{
-              color: COLORS.blue, fontSize: '2.5rem',
-              textShadow: neonShadow(COLORS.blue)
-            }}>🕹️</span>
+            justifyContent: 'flex-start',
+            padding: '16px 24px',
+            width: '100%',
+            position: 'relative'
+          }}
+        >
+          {/* Logo */}
+          <span
+            className="mm-logo"
+            style={{
+              color: COLORS.pink,
+              fontSize: '2rem',
+              letterSpacing: -2,
+              fontWeight: 900,
+              textShadow: neonShadow(COLORS.pink, 2),
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              fontFamily: "'Press Start 2P', VT323, monospace",
+              userSelect: 'none',
+            }}
+          >
+            <span
+              style={{
+                color: COLORS.blue,
+                fontSize: '2.5rem',
+                textShadow: neonShadow(COLORS.blue),
+              }}
+            >
+              🕹️
+            </span>
             MiniMayhem Arcade
           </span>
-          {/* Navigation + Dark Mode Toggle (Right) */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 24,
-            marginLeft: 24,
-            marginRight: 0,
-            flexShrink: 0
-          }}>
-            <ul className="mm-nav-links" style={{
+          {/* Nav Links, left-aligned */}
+          <ul
+            className="mm-nav-links"
+            style={{
               listStyle: 'none',
               display: 'flex',
               gap: 28,
-              margin: 0,
+              margin: '0 0 0 32px',
               padding: 0,
-            }}>
-              {quickLinks.map(link => (
-                <li key={link.name}>
-                  <a
-                    href={link.to}
-                    style={{
-                      color: darkMode ? COLORS.yellow : COLORS.purple,
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                      fontSize: '1rem',
-                      padding: '6px 12px',
-                      borderRadius: 6,
-                      letterSpacing: 1,
-                      textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
-                      transition: 'color 0.23s, background 0.28s',
-                    }}
-                    className="mm-nav-link"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {/* Theme Toggle Icon Only: Rightmost in Nav, only icon, no text 
-              - Accessible, persists theme, no text label. */}
-            <button
-              className="mm-theme-toggle"
-              aria-label="Toggle dark/light theme"
-              onClick={toggleTheme}
+              alignItems: 'center',
+              flex: '0 1 auto',
+            }}
+          >
+            {quickLinks.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.to}
+                  style={{
+                    color: darkMode ? COLORS.yellow : COLORS.purple,
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    fontSize: '1rem',
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    letterSpacing: 1,
+                    textShadow: neonShadow(
+                      darkMode ? COLORS.yellow : COLORS.purple,
+                      2
+                    ),
+                    transition: 'color 0.23s, background 0.28s',
+                  }}
+                  className="mm-nav-link"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {/* Absolute right: Theme toggle */}
+          <button
+            className="mm-theme-toggle"
+            aria-label="Toggle dark/light theme"
+            onClick={toggleTheme}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: darkMode ? '#1c1c25cb' : '#f0f0ffcc',
+              border: `2.5px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
+              borderRadius: 8,
+              padding: '0.4em 0.55em',
+              marginLeft: 'auto',
+              cursor: 'pointer',
+              outline: 'none',
+              marginTop: 0,
+              marginRight: 2,
+              fontSize: 32,
+              boxShadow: `0 0 0 3px ${
+                darkMode ? COLORS.pink : COLORS.purple
+              }44,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)}`,
+              color: darkMode ? COLORS.yellow : COLORS.purple,
+              transition:
+                'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s',
+              position: 'absolute',
+              right: 24,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 10,
+            }}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleTheme();
+              }
+            }}
+            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            data-testid="theme-toggle-btn"
+            type="button"
+          >
+            <span
+              aria-hidden="true"
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: darkMode ? '#1c1c25cb' : '#f0f0ffcc', // visually stands out atop nav
-                border: `2.5px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
-                borderRadius: 8,
-                padding: '0.4em 0.55em',
-                marginLeft: 32,
-                cursor: 'pointer',
-                outline: 'none',
-                marginTop: 0,
-                marginRight: 2,
-                fontSize: 32,
-                boxShadow: `0 0 0 3px ${darkMode ? COLORS.pink : COLORS.purple}44,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)}`,
-                color: darkMode ? COLORS.yellow : COLORS.purple,
-                transition: 'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s'
+                display: 'inline-block',
+                lineHeight: 1,
+                transform: darkMode
+                  ? 'rotate(-14deg) scale(1.07)'
+                  : 'rotate(9deg) scale(1.10)',
+                filter: darkMode
+                  ? 'drop-shadow(0 0 2px #ffe46c99)'
+                  : 'drop-shadow(0 0 2px #511cc099)',
+                textShadow: neonShadow(
+                  darkMode ? COLORS.yellow : COLORS.purple,
+                  2
+                ),
+                userSelect: 'none',
+                fontSize: 28,
               }}
-              tabIndex={0}
-              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
-              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              data-testid="theme-toggle-btn"
-              type="button"
             >
-              <span
-                aria-hidden="true"
-                style={{
-                  display: 'inline-block',
-                  lineHeight: 1,
-                  transform: darkMode ? 'rotate(-14deg) scale(1.07)' : 'rotate(9deg) scale(1.10)',
-                  filter: darkMode ? 'drop-shadow(0 0 2px #ffe46c99)' : 'drop-shadow(0 0 2px #511cc099)',
-                  textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
-                  userSelect: 'none',
-                  fontSize: 28
-                }}
-              >
-                {darkMode ? (
-                  // Unicode Moon - pure icon only
-                  <span role="img" aria-label="dark mode" style={{fontSize: '1.7em'}}>🌙</span>
-                ) : (
-                  // Unicode Sun - pure icon only
-                  <span role="img" aria-label="light mode" style={{fontSize: '1.7em'}}>🌞</span>
-                )}
-              </span>
-            </button>
-          </div>
+              {darkMode ? (
+                // Unicode Moon - pure icon only
+                <span
+                  role="img"
+                  aria-label="dark mode"
+                  style={{ fontSize: '1.7em' }}
+                >
+                  🌙
+                </span>
+              ) : (
+                // Unicode Sun - pure icon only
+                <span
+                  role="img"
+                  aria-label="light mode"
+                  style={{ fontSize: '1.7em' }}
+                >
+                  🌞
+                </span>
+              )}
+            </span>
+          </button>
         </nav>
       </header>
       {/* HERO SECTION */}
