@@ -7,7 +7,7 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 1.4 MiB [emitted] (name: main)
+asset bundle.js 1.41 MiB [emitted] (name: main)
 asset index.html 691 bytes [emitted]
 runtime modules 27.5 KiB 14 modules
 modules by path ./node_modules/ 1.24 MiB 31 modules
@@ -15,21 +15,21 @@ modules by path ./.ve/ 15.1 KiB
   modules by path ./.ve/*.js 10.6 KiB 2 modules
   modules by path ./.ve/*.css 2.93 KiB 2 modules
   ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-modules by path ./src/ 27.7 KiB
+modules by path ./src/ 27.8 KiB
   modules by path ./src/*.js 23.7 KiB
     ./src/index.js 610 bytes [built] [code generated]
-    ./src/App.js 23.1 KiB [built] [code generated]
+    ./src/App.js 23.2 KiB [built] [code generated]
   modules by path ./src/*.css 4.01 KiB
     ./src/index.css 2.23 KiB [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/index.css 1.78 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 1499 ms
+webpack 5.99.9 compiled successfully in 1505 ms
 assets by status 691 bytes [cached] 1 asset
 assets by path *.js 1.43 MiB
   asset bundle.js 1.41 MiB [emitted] (name: main)
-  asset main.3719f22b6cd98f8ffe09.hot-update.js 28.6 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.3719f22b6cd98f8ffe09.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 1.43 MiB = bundle.js 1.41 MiB main.3719f22b6cd98f8ffe09.hot-update.js 28.6 KiB
+  asset main.c68df763fe5cde3ca15e.hot-update.js 28.6 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.c68df763fe5cde3ca15e.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.43 MiB = bundle.js 1.41 MiB main.c68df763fe5cde3ca15e.hot-update.js 28.6 KiB
 cached modules 1.26 MiB [cached] 39 modules
 runtime modules 27.5 KiB 14 modules
 ./src/App.js 23.2 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 219 ms
+webpack 5.99.9 compiled successfully in 93 ms

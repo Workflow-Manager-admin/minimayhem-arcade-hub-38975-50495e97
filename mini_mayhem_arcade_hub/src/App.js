@@ -215,7 +215,8 @@ function App() {
                 </li>
               ))}
             </ul>
-            {/* Theme Toggle Icon Only: Rightmost in Nav, only icon, no text */}
+            {/* Theme Toggle Icon Only: Rightmost in Nav, only icon, no text 
+              - Accessible, persists theme, no text label. */}
             <button
               className="mm-theme-toggle"
               aria-label="Toggle dark/light theme" // assures accessibility for icon-only
