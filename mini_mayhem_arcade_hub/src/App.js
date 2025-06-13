@@ -177,36 +177,78 @@ function App() {
             }}>🕹️</span>
             MiniMayhem Arcade
           </span>
-          {/* Navigation */}
-          <ul className="mm-nav-links" style={{
-            listStyle: 'none',
+          {/* Navigation + Dark Mode Toggle (Right) */}
+          <div style={{
             display: 'flex',
-            gap: 28,
-            margin: 0,
-            padding: 0,
+            alignItems: 'center',
+            gap: 24,
+            marginLeft: 24,
+            marginRight: 0,
+            flexShrink: 0
           }}>
-            {quickLinks.map(link => (
-              <li key={link.name}>
-                <a
-                  href={link.to}
-                  style={{
-                    color: darkMode ? COLORS.yellow : COLORS.purple,
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    fontSize: '1rem',
-                    padding: '6px 12px',
-                    borderRadius: 6,
-                    letterSpacing: 1,
-                    textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
-                    transition: 'color 0.23s, background 0.28s',
-                  }}
-                  className="mm-nav-link"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+            <ul className="mm-nav-links" style={{
+              listStyle: 'none',
+              display: 'flex',
+              gap: 28,
+              margin: 0,
+              padding: 0,
+            }}>
+              {quickLinks.map(link => (
+                <li key={link.name}>
+                  <a
+                    href={link.to}
+                    style={{
+                      color: darkMode ? COLORS.yellow : COLORS.purple,
+                      fontWeight: 600,
+                      textDecoration: 'none',
+                      fontSize: '1rem',
+                      padding: '6px 12px',
+                      borderRadius: 6,
+                      letterSpacing: 1,
+                      textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
+                      transition: 'color 0.23s, background 0.28s',
+                    }}
+                    className="mm-nav-link"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {/* Theme Toggle Icon Only */}
+            <button
+              className="mm-theme-toggle"
+              aria-label="Switch dark/light mode"
+              onClick={toggleTheme}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'none',
+                border: `2px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
+                borderRadius: 7,
+                padding: '8px',
+                marginLeft: 32,
+                cursor: 'pointer',
+                outline: 'none',
+                boxShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
+                color: darkMode ? COLORS.yellow : COLORS.purple,
+                fontSize: 28,
+                transition: 'background 0.17s, color 0.19s, border 0.10s, box-shadow 0.15s'
+              }}
+            >
+              <span
+                style={{
+                  display: 'inline-block',
+                  transform: darkMode ? 'rotate(-17deg)' : 'rotate(9deg)',
+                  filter: 'drop-shadow(0 0 2px #0006)',
+                  // For pixel style: use emoji only, but if react-icons added, could use a pixel moon/sun here
+                }}
+              >
+                {darkMode ? '🌙' : '🌞'}
+              </span>
+            </button>
+          </div>
         </nav>
       </header>
       {/* HERO SECTION */}
@@ -464,7 +506,7 @@ function App() {
         boxShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
         position: 'relative'
       }}>
-        {/* Theme Toggle & Links */}
+        {/* Footer Links */}
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -472,27 +514,6 @@ function App() {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-          {/* Theme Toggle */}
-          <button
-            className="mm-theme-toggle"
-            aria-label="Switch dark/light mode"
-            onClick={toggleTheme}
-            style={{
-              fontFamily: fontFamilyArcade,
-              color: darkMode ? COLORS.yellow : COLORS.purple,
-              fontSize: 24,
-              background: 'none',
-              border: `2px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
-              borderRadius: 7,
-              padding: '6px 18px',
-              marginRight: '10px',
-              cursor: 'pointer',
-              textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
-              transition: 'background 0.18s, color 0.17s'
-            }}>
-            {darkMode ? '🌞 Light Mode' : '🌙 Dark Mode'}
-          </button>
-          {/* Quick Footer Links */}
           <nav>
             <a href="#games" style={{
               color: COLORS.blue,

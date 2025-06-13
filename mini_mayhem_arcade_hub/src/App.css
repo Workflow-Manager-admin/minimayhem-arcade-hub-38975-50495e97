@@ -164,11 +164,32 @@ code {
   .mm-nav-links { gap: 13px !important; font-size: 97%;}
   .mm-footer { font-size: 90%!important;}
   .mm-game-cards { flex-direction: column !important; align-items: center; }
+  .mm-theme-toggle {
+    position: absolute !important;
+    right: 15px !important;
+    top: 15px !important;
+    z-index: 999 !important;
+    margin: 0 !important;
+    background: none !important;
+    border-radius: 7px !important;
+    font-size: 27px !important;
+    padding: 7px !important;
+    box-shadow: none !important;
+  }
 }
+
 @media (max-width: 600px) {
   .mm-header { padding: 9px 0!important; }
   .mm-nav { padding: 9px 8px!important; flex-direction: column;}
   .mm-logo { font-size: 1.13rem !important;}
   .mm-hero-arcade-icon { font-size: 36px !important;}
   .mm-hero-description, .mm-game-card, .mm-game-cards { font-size: 98%!important;}
+  .mm-theme-toggle {
+    position: absolute !important;
+    right: 7px !important;
+    top: 7px !important;
+    font-size: 22px !important;
+    padding: 6px !important;
+    z-index: 999 !important;
+  }
 }
