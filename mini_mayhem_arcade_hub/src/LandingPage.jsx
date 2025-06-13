@@ -136,17 +136,20 @@ function LandingPage() {
       <nav className="arcade-navbar">
         <div className="arcade-logo">
           <ArcadeLogo />
-          <span
+          <a
+            href="/"
             style={{
               fontFamily: "'Press Start 2P', 'VT323', monospace",
               fontWeight: "bold",
               fontSize: "1.22rem",
               color: "#fff",
               letterSpacing: "1.4px",
+              textDecoration: "none"
             }}
+            aria-label="Go to Home"
           >
             MiniMayhem Arcade Hub
-          </span>
+          </a>
         </div>
         <ul className="arcade-navlinks">
           <li>
