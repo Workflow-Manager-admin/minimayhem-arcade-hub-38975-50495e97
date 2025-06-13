@@ -1,0 +1,31 @@
+:root {
+  --neon-pink: #F72585;
+  --neon-purple: #3A0CA3;
+  --neon-blue: #4CC9F0;
+  --neon-yellow: #FFB703;
+  --arcade-black: #0D0D0D;
+  --neon-text: #fffbe6;
+}
+body.dark {
+  background: linear-gradient(135deg, var(--arcade-black), #1E003A 100%) !important;
+  color: var(--neon-text) !important;
+}
+body.light {
+  background: linear-gradient(135deg, #fff 0%, var(--neon-blue) 130%) !important;
+  color: #252525 !important;
+}
+* {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-pink);
+}
+::-webkit-scrollbar { height: 7px; background: #141426; }
+a { outline: none; }
+.mm-cta-btn:focus,
+.mm-theme-toggle:focus,
+.mm-game-card:focus {
+  outline: 2.5px solid var(--neon-pink);
+  background: #F7258534;
+  box-shadow: 0 0 18px 5px var(--neon-pink);
+}
