@@ -219,36 +219,51 @@ function App() {
               - Accessible, persists theme, no text label. */}
             <button
               className="mm-theme-toggle"
-              aria-label="Toggle dark/light theme" // assures accessibility for icon-only
+              aria-label="Toggle dark/light theme"
               onClick={toggleTheme}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'none',
-                border: `2px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
-                borderRadius: 7,
-                padding: '8px',
+                background: darkMode ? '#1c1c25cb' : '#f0f0ffcc', // visually stands out atop nav
+                border: `2.5px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
+                borderRadius: 8,
+                padding: '0.4em 0.55em',
                 marginLeft: 32,
                 cursor: 'pointer',
                 outline: 'none',
-                boxShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
+                marginTop: 0,
+                marginRight: 2,
+                fontSize: 32,
+                boxShadow: `0 0 0 3px ${darkMode ? COLORS.pink : COLORS.purple}44,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)}`,
                 color: darkMode ? COLORS.yellow : COLORS.purple,
-                fontSize: 28,
-                transition: 'background 0.17s, color 0.19s, border 0.10s, box-shadow 0.15s'
+                transition: 'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s'
               }}
               tabIndex={0}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); } }}
+              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              data-testid="theme-toggle-btn"
+              type="button"
             >
               <span
                 aria-hidden="true"
                 style={{
                   display: 'inline-block',
-                  transform: darkMode ? 'rotate(-17deg)' : 'rotate(9deg)',
-                  filter: 'drop-shadow(0 0 2px #0006)'
-                  // Only show sun/moon emoji, no extra text
+                  lineHeight: 1,
+                  transform: darkMode ? 'rotate(-14deg) scale(1.07)' : 'rotate(9deg) scale(1.10)',
+                  filter: darkMode ? 'drop-shadow(0 0 2px #ffe46c99)' : 'drop-shadow(0 0 2px #511cc099)',
+                  textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2),
+                  userSelect: 'none',
+                  fontSize: 28
                 }}
               >
-                {darkMode ? '🌙' : '🌞'}
+                {darkMode ? (
+                  // Unicode Moon - pure icon only
+                  <span role="img" aria-label="dark mode" style={{fontSize: '1.7em'}}>🌙</span>
+                ) : (
+                  // Unicode Sun - pure icon only
+                  <span role="img" aria-label="light mode" style={{fontSize: '1.7em'}}>🌞</span>
+                )}
               </span>
             </button>
           </div>

@@ -106,6 +106,78 @@ input, button, select, textarea {
   -webkit-font-smoothing: none !important;
 }
 
+/* Improved visually distinct, accessible style for theme toggle */
+.mm-theme-toggle {
+  position: relative;
+  top: 0;
+  right: 0;
+  margin-right: 0;
+  background: none !important;
+  border: 2.5px solid var(--neon-yellow);
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 3px var(--neon-pink)44,
+    0 0 9px 3px var(--neon-yellow),
+    0 0 2px 1px #ffa 33%;
+  color: var(--neon-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  cursor: pointer;
+  outline: none;
+  font-size: 28px !important;
+  transition: background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s;
+}
+
+body.light .mm-theme-toggle {
+  border: 2.5px solid var(--neon-purple);
+  color: var(--neon-purple);
+  box-shadow:
+    0 0 0 3px var(--neon-purple)44,
+    0 0 12px 2.5px var(--neon-blue),
+    0 0 2px 1px #5af3ff55;
+}
+
+.mm-theme-toggle:hover,
+.mm-theme-toggle:focus {
+  outline: 3px solid var(--neon-pink);
+  background: #fffbe617 !important;
+  box-shadow:
+    0 0 0 4px var(--neon-pink)88,
+    0 0 18px 5px var(--neon-yellow)cc;
+}
+.mm-theme-toggle:active {
+  border-color: var(--neon-pink) !important;
+}
+
+@media (max-width: 768px) {
+  .mm-theme-toggle {
+    position: absolute !important;
+    right: 15px !important;
+    top: 15px !important;
+    z-index: 999 !important;
+    margin: 0 !important;
+    background: none !important;
+    border-radius: 7px !important;
+    font-size: 27px !important;
+    padding: 7px !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .mm-theme-toggle {
+    position: absolute !important;
+    right: 7px !important;
+    top: 7px !important;
+    font-size: 22px !important;
+    padding: 6px !important;
+    z-index: 999 !important;
+  }
+}
+
+
 .mm-cta-btn {
   text-transform: uppercase;
   letter-spacing: 0.07em;
