@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 // Import react-icons for Moon/Sun.
 import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
+// PUBLIC_INTERFACE
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import TopGamesPage from './TopGamesPage';
+import GamesPage from './GamesPage';
 
 // Google Fonts Import
 const FONT_URL =
@@ -112,14 +115,9 @@ function App() {
   // We now hardcode nav links as per new spec; use state for dropdown open/close
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  // Simple navigation state for hash-based "pages"
-  const [currentPage, setCurrentPage] = useState(() => window.location.hash || '');
-
-  useEffect(() => {
-    const handleHash = () => setCurrentPage(window.location.hash || '');
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
-  }, []);
+    // Use navigation for route changes
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Utilities for closing dropdown if user clicks outside
   useEffect(() => {
@@ -168,15 +166,19 @@ function App() {
           }}
         >
           {/* Logo/Landing Link */}
-          <a
-            href="/"
+          {/* Use Link for SPA navigation */}
+          <span
             className="mm-logo-link"
             style={{
               textDecoration: 'none',
               outline: 'none',
               marginRight: 0,
+              cursor: 'pointer'
             }}
             aria-label="Go to MiniMayhem Arcade Landing Page"
+            onClick={() => navigate('/')}
+            tabIndex={0}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/'); }}
           >
             <span
               className="mm-logo"
@@ -204,7 +206,7 @@ function App() {
               </span>
               MiniMayhem Arcade
             </span>
-          </a>
+          </span>
           {/* New Nav Links, left-aligned */}
           <ul
             className="mm-nav-links"
@@ -220,8 +222,11 @@ function App() {
           >
             {/* Our Games */}
             <li>
-              <a
-                href="#games"
+              <span
+                role="button"
+                tabIndex={0}
+                onClick={() => navigate('/games')}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/games'); }}
                 style={{
                   color: darkMode ? COLORS.yellow : COLORS.purple,
                   fontWeight: 600,
@@ -234,16 +239,21 @@ function App() {
                     darkMode ? COLORS.yellow : COLORS.purple, 2
                   ),
                   transition: 'color 0.23s, background 0.28s',
+                  cursor: 'pointer',
+                  outline: 'none'
                 }}
                 className="mm-nav-link"
               >
                 Our Games
-              </a>
+              </span>
             </li>
             {/* Top Game */}
             <li>
-              <a
-                href="#top-game"
+              <span
+                role="button"
+                tabIndex={0}
+                onClick={() => navigate('/top-game')}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/top-game'); }}
                 style={{
                   color: darkMode ? COLORS.pink : COLORS.blue,
                   fontWeight: 600,
@@ -256,11 +266,13 @@ function App() {
                     darkMode ? COLORS.pink : COLORS.blue, 2
                   ),
                   transition: 'color 0.23s, background 0.28s',
+                  cursor: 'pointer',
+                  outline: 'none'
                 }}
                 className="mm-nav-link"
               >
                 Top Game
-              </a>
+              </span>
             </li>
             {/* Settings Dropdown */}
             <li
@@ -334,8 +346,7 @@ function App() {
                 >
                   {/* About Us */}
                   <li>
-                    <a
-                      href="#about-us"
+                    <span
                       className="mm-dropdown-item"
                       tabIndex={0}
                       style={{
@@ -355,16 +366,16 @@ function App() {
                         textShadow: neonShadow(darkMode ? COLORS.purple : COLORS.blue, 1),
                         transition: 'background 0.19s, color 0.19s',
                       }}
-                      onMouseDown={e => setSettingsOpen(false)}
+                      onClick={() => { setSettingsOpen(false); navigate('/about'); }}
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setSettingsOpen(false); navigate('/about'); } }}
                       role="menuitem"
                     >
                       About Us
-                    </a>
+                    </span>
                   </li>
                   {/* Help */}
                   <li>
-                    <a
-                      href="#help"
+                    <span
                       className="mm-dropdown-item"
                       tabIndex={0}
                       style={{
@@ -384,16 +395,16 @@ function App() {
                         textShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 1),
                         transition: 'background 0.19s, color 0.19s',
                       }}
-                      onMouseDown={e => setSettingsOpen(false)}
+                      onClick={() => { setSettingsOpen(false); navigate('/help'); }}
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setSettingsOpen(false); navigate('/help'); } }}
                       role="menuitem"
                     >
                       Help
-                    </a>
+                    </span>
                   </li>
                   {/* Contact */}
                   <li>
-                    <a
-                      href="#contact"
+                    <span
                       className="mm-dropdown-item"
                       tabIndex={0}
                       style={{
@@ -413,11 +424,12 @@ function App() {
                         textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.pink, 1),
                         transition: 'background 0.19s, color 0.19s',
                       }}
-                      onMouseDown={e => setSettingsOpen(false)}
+                      onClick={() => { setSettingsOpen(false); navigate('/contact'); }}
+                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { setSettingsOpen(false); navigate('/contact'); } }}
                       role="menuitem"
                     >
                       Contact
-                    </a>
+                    </span>
                   </li>
                 </ul>
               )}
@@ -531,232 +543,354 @@ function App() {
         minHeight: '100vh',
         width: '100vw',
       }}>
-        {/* If hash == "#top-game", render TopGamesPage */}
-        {currentPage === '#top-game' ? (
-          <TopGamesPage
-            darkMode={darkMode}
-            neonShadow={neonShadow}
-            fontFamilyArcade={fontFamilyArcade}
-            COLORS={COLORS}
-          />
-        ) : (
-          <>
-            <section className="mm-hero" style={{
-              width: '100%',
-              textAlign: 'center',
-              paddingBottom: 32,
-            }}>
-              {/* Animated hero icon */}
-              <div className="mm-hero-arcade-icon"
-                style={{
-                  margin: '0 auto 14px auto',
-                  animation: 'icon-bounce 1.5s infinite alternate cubic-bezier(.93,.17,.47,1.13)'
-                }}
-              >
-                <span style={{
-                  fontSize: 72,
-                  textShadow: neonShadow(COLORS.blue, 4)
-                }}>👾</span>
-              </div>
-              <h1
-                style={{
-                  fontSize: '2.8rem',
-                  background: `linear-gradient(89deg, ${COLORS.pink}, ${COLORS.purple}, ${COLORS.blue})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontFamily: "'Press Start 2P', VT323, monospace",
-                  letterSpacing: '.06em',
-                  transition: 'text-shadow 0.5s',
-                  textShadow: neonGlow
-                    ? `${neonShadow(COLORS.pink, 4)}, ${neonShadow(COLORS.blue, 4)}`
-                    : `${neonShadow(COLORS.purple, 3)}`,
-                  margin: 0
-                }}
-              >Welcome to MiniMayhem Arcade</h1>
-              <div
-                className="mm-hero-description"
-                style={{
-                  marginTop: 16,
-                  marginBottom: 24,
-                  fontSize: '1.1rem',
-                  color: darkMode ? COLORS.blue : COLORS.pink,
-                  textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 2),
-                  maxWidth: 425,
-                  marginInline: 'auto'
-                }}
-              >
-                Play lightning-fast mini-games, win daily challenges, and outscore your rivals in a neon blitz.
-              </div>
-              {/* CTA Button */}
-              <a
-                href="#games"
-                className="mm-cta-btn"
-                style={{
-                  color: darkMode ? COLORS.pink : '#fff',
-                  background: darkMode
-                    ? `linear-gradient( 90deg, ${COLORS.purple} 0%, ${COLORS.pink} 100%)`
-                    : `linear-gradient(90deg, ${COLORS.blue} 0%, ${COLORS.yellow} 100%)`,
-                  border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
-                  boxShadow: [
-                    neonShadow(COLORS.yellow),
-                    '0 0 16px 2px #fff3'
-                  ].join(','),
-                  fontFamily: "'Press Start 2P', monospace",
-                  textTransform: 'uppercase',
-                  fontWeight: 900,
-                  fontSize: 18,
-                  padding: '12px 28px',
-                  borderRadius: 8,
-                  letterSpacing: "0.06em",
-                  cursor: 'pointer',
-                  transition: 'background 0.2s, color 0.18s, box-shadow 0.2s'
-                }}
-              >Enter the Arcade!</a>
-            </section>
-            {/* FEATURE TEASERS */}
-            <section id="games" style={{
-              width: '100%',
-              margin: '0 auto',
-              maxWidth: 1200,
-              padding: '30px 12px 0 12px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}>
-              <h2 style={{
-                fontFamily: fontFamilyArcade,
-                fontSize: 28,
-                color: darkMode ? COLORS.yellow : COLORS.purple,
-                margin: '0 0 20px 0',
-                textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)
-              }}>🎮 Featured Games</h2>
-              {/* Game cards */}
-              <div className="mm-game-cards" style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 32,
-                justifyContent: 'center'
-              }}>
-                {games.map(game => (
-                  <div
-                    className="mm-game-card"
-                    key={game.title}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <section className="mm-hero" style={{
+                  width: '100%',
+                  textAlign: 'center',
+                  paddingBottom: 32,
+                }}>
+                  {/* Animated hero icon */}
+                  <div className="mm-hero-arcade-icon"
                     style={{
-                      flex: '1 1 180px',
-                      minWidth: 180,
-                      maxWidth: 240,
-                      background: darkMode
-                        ? `linear-gradient(135deg, #292049 50%, #26126e 100%)`
-                        : `linear-gradient(135deg, #fff 60%,${game.color}11 120%)`,
-                      border: `2.5px solid ${game.color}`,
-                      borderRadius: 18,
-                      boxShadow: neonShadow(game.color, 4),
-                      margin: '8px 0',
-                      cursor: 'pointer',
-                      overflow: 'hidden',
-                      padding: 18,
-                      transition: 'transform 0.22s,cubic-bezier(.87,-0.29,.65,1.96),box-shadow 0.18s,border 0.13s',
-                      willChange: 'transform',
-                      position: 'relative'
-                    }}
-                    tabIndex={0}
-                    onMouseOver={e => {
-                      e.currentTarget.style.transform = 'scale(1.065) rotate(-2deg)';
-                      e.currentTarget.style.boxShadow = `${neonShadow(game.color, 8)},0 0 24px 4px #fff2`
-                    }}
-                    onMouseOut={e => {
-                      e.currentTarget.style.transform = 'scale(1) rotate(0)';
-                      e.currentTarget.style.boxShadow = neonShadow(game.color, 4);
+                      margin: '0 auto 14px auto',
+                      animation: 'icon-bounce 1.5s infinite alternate cubic-bezier(.93,.17,.47,1.13)'
                     }}
                   >
-                    {/* Arcade Animated icon */}
-                    <div style={{
-                      fontSize: 38,
-                      textShadow: neonShadow(game.color, 2),
-                      marginBottom: 12,
-                      filter: 'none'
-                    }}>{game.icon}</div>
-                    <div
-                      style={{
-                        fontFamily: "'VT323',monospace",
-                        fontSize: 22,
-                        color: game.color,
-                        marginBottom: 10,
-                        letterSpacing: '0.04em',
-                        textShadow: neonShadow(game.color, 2)
-                      }}
-                    >{game.title}</div>
-                    <div style={{
-                      fontSize: 13,
-                      color: darkMode ? COLORS.blue : COLORS.purple,
-                      fontFamily: "'Press Start 2P', monospace",
-                      textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
-                    }}>
-                      {game.description}
-                    </div>
-                    <span
-                      style={{
-                        position: 'absolute',
-                        right: 16,
-                        bottom: 12,
-                        color: game.color,
-                        opacity: 0.6,
-                        fontSize: 18,
-                        filter: 'none',
-                      }}
-                    >🟩</span>
+                    <span style={{
+                      fontSize: 72,
+                      textShadow: neonShadow(COLORS.blue, 4)
+                    }}>👾</span>
                   </div>
-                ))}
-              </div>
-            </section>
-            {/* DAILY CHALLENGE */}
-            <section id="challenge" style={{
-              marginTop: 55,
-              width: '100%',
-              maxWidth: 680,
-              textAlign: 'center',
-              padding: '30px 16px',
-              borderRadius: 14,
-              background: darkMode
-                ? `linear-gradient(137deg, ${COLORS.pink}12, ${COLORS.yellow}0e 120%)`
-                : `linear-gradient(134deg, #fff8, ${COLORS.blue}11 120%)`,
-              boxShadow: neonShadow(COLORS.yellow, 2)
-            }}>
-              <h2 style={{
+                  <h1
+                    style={{
+                      fontSize: '2.8rem',
+                      background: `linear-gradient(89deg, ${COLORS.pink}, ${COLORS.purple}, ${COLORS.blue})`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      fontFamily: "'Press Start 2P', VT323, monospace",
+                      letterSpacing: '.06em',
+                      transition: 'text-shadow 0.5s',
+                      textShadow: neonGlow
+                        ? `${neonShadow(COLORS.pink, 4)}, ${neonShadow(COLORS.blue, 4)}`
+                        : `${neonShadow(COLORS.purple, 3)}`,
+                      margin: 0
+                    }}
+                  >Welcome to MiniMayhem Arcade</h1>
+                  <div
+                    className="mm-hero-description"
+                    style={{
+                      marginTop: 16,
+                      marginBottom: 24,
+                      fontSize: '1.1rem',
+                      color: darkMode ? COLORS.blue : COLORS.pink,
+                      textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 2),
+                      maxWidth: 425,
+                      marginInline: 'auto'
+                    }}
+                  >
+                    Play lightning-fast mini-games, win daily challenges, and outscore your rivals in a neon blitz.
+                  </div>
+                  {/* CTA Button */}
+                  <span
+                    className="mm-cta-btn"
+                    role="button"
+                    tabIndex={0}
+                    style={{
+                      color: darkMode ? COLORS.pink : '#fff',
+                      background: darkMode
+                        ? `linear-gradient( 90deg, ${COLORS.purple} 0%, ${COLORS.pink} 100%)`
+                        : `linear-gradient(90deg, ${COLORS.blue} 0%, ${COLORS.yellow} 100%)`,
+                      border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
+                      boxShadow: [
+                        neonShadow(COLORS.yellow),
+                        '0 0 16px 2px #fff3'
+                      ].join(','),
+                      fontFamily: "'Press Start 2P', monospace",
+                      textTransform: 'uppercase',
+                      fontWeight: 900,
+                      fontSize: 18,
+                      padding: '12px 28px',
+                      borderRadius: 8,
+                      letterSpacing: "0.06em",
+                      cursor: 'pointer',
+                      transition: 'background 0.2s, color 0.18s, box-shadow 0.2s'
+                    }}
+                    onClick={() => navigate('/games')}
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/games'); }}
+                  >Enter the Arcade!</span>
+                </section>
+                {/* FEATURE TEASERS */}
+                <section id="games" style={{
+                  width: '100%',
+                  margin: '0 auto',
+                  maxWidth: 1200,
+                  padding: '30px 12px 0 12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}>
+                  <h2 style={{
+                    fontFamily: fontFamilyArcade,
+                    fontSize: 28,
+                    color: darkMode ? COLORS.yellow : COLORS.purple,
+                    margin: '0 0 20px 0',
+                    textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)
+                  }}>🎮 Featured Games</h2>
+                  {/* Game cards */}
+                  <div className="mm-game-cards" style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 32,
+                    justifyContent: 'center'
+                  }}>
+                    {games.map(game => (
+                      <div
+                        className="mm-game-card"
+                        key={game.title}
+                        style={{
+                          flex: '1 1 180px',
+                          minWidth: 180,
+                          maxWidth: 240,
+                          background: darkMode
+                            ? `linear-gradient(135deg, #292049 50%, #26126e 100%)`
+                            : `linear-gradient(135deg, #fff 60%,${game.color}11 120%)`,
+                          border: `2.5px solid ${game.color}`,
+                          borderRadius: 18,
+                          boxShadow: neonShadow(game.color, 4),
+                          margin: '8px 0',
+                          cursor: 'pointer',
+                          overflow: 'hidden',
+                          padding: 18,
+                          transition: 'transform 0.22s,cubic-bezier(.87,-0.29,.65,1.96),box-shadow 0.18s,border 0.13s',
+                          willChange: 'transform',
+                          position: 'relative'
+                        }}
+                        tabIndex={0}
+                        onMouseOver={e => {
+                          e.currentTarget.style.transform = 'scale(1.065) rotate(-2deg)';
+                          e.currentTarget.style.boxShadow = `${neonShadow(game.color, 8)},0 0 24px 4px #fff2`
+                        }}
+                        onMouseOut={e => {
+                          e.currentTarget.style.transform = 'scale(1) rotate(0)';
+                          e.currentTarget.style.boxShadow = neonShadow(game.color, 4);
+                        }}
+                      >
+                        {/* Arcade Animated icon */}
+                        <div style={{
+                          fontSize: 38,
+                          textShadow: neonShadow(game.color, 2),
+                          marginBottom: 12,
+                          filter: 'none'
+                        }}>{game.icon}</div>
+                        <div
+                          style={{
+                            fontFamily: "'VT323',monospace",
+                            fontSize: 22,
+                            color: game.color,
+                            marginBottom: 10,
+                            letterSpacing: '0.04em',
+                            textShadow: neonShadow(game.color, 2)
+                          }}
+                        >{game.title}</div>
+                        <div style={{
+                          fontSize: 13,
+                          color: darkMode ? COLORS.blue : COLORS.purple,
+                          fontFamily: "'Press Start 2P', monospace",
+                          textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
+                        }}>
+                          {game.description}
+                        </div>
+                        <span
+                          style={{
+                            position: 'absolute',
+                            right: 16,
+                            bottom: 12,
+                            color: game.color,
+                            opacity: 0.6,
+                            fontSize: 18,
+                            filter: 'none',
+                          }}
+                        >🟩</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+                {/* DAILY CHALLENGE */}
+                <section id="challenge" style={{
+                  marginTop: 55,
+                  width: '100%',
+                  maxWidth: 680,
+                  textAlign: 'center',
+                  padding: '30px 16px',
+                  borderRadius: 14,
+                  background: darkMode
+                    ? `linear-gradient(137deg, ${COLORS.pink}12, ${COLORS.yellow}0e 120%)`
+                    : `linear-gradient(134deg, #fff8, ${COLORS.blue}11 120%)`,
+                  boxShadow: neonShadow(COLORS.yellow, 2)
+                }}>
+                  <h2 style={{
+                    fontFamily: fontFamilyArcade,
+                    fontSize: 24,
+                    color: COLORS.purple,
+                    margin: 0,
+                    textShadow: neonShadow(COLORS.purple, 2)
+                  }}>🗓️ Daily Challenge!</h2>
+                  <div style={{
+                    margin: '18px auto 12px auto',
+                    maxWidth: 400,
+                    color: darkMode ? COLORS.blue : COLORS.pink,
+                    fontSize: 15,
+                    textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 1)
+                  }}>
+                    <strong>Motivation:</strong>
+                    <div style={{
+                      marginTop: 5, marginBottom: 14,
+                      fontStyle: 'italic',
+                      fontFamily: "'VT323',monospace"
+                    }} aria-live="polite">
+                      {quote ? <span>“{quote}”</span> : <span>Loading inspiration…</span>}
+                    </div>
+                  </div>
+                  <div style={{
+                    marginTop: 20,
+                    color: COLORS.yellow,
+                    fontWeight: 700,
+                    textShadow: neonShadow(COLORS.yellow),
+                    fontSize: 19,
+                  }}>
+                    Can you beat today's high score? 🎯
+                  </div>
+                </section>
+              </>
+            }
+          />
+          <Route
+            path="/games"
+            element={
+              <GamesPage />
+            }
+          />
+          <Route
+            path="/top-game"
+            element={
+              <TopGamesPage
+                darkMode={darkMode}
+                neonShadow={neonShadow}
+                fontFamilyArcade={fontFamilyArcade}
+                COLORS={COLORS}
+              />
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <section style={{
+                marginTop: 40, textAlign: 'center', width: '100vw', minHeight: '400px',
+                color: darkMode ? COLORS.blue : COLORS.purple,
                 fontFamily: fontFamilyArcade,
-                fontSize: 24,
-                color: COLORS.purple,
-                margin: 0,
-                textShadow: neonShadow(COLORS.purple, 2)
-              }}>🗓️ Daily Challenge!</h2>
-              <div style={{
-                margin: '18px auto 12px auto',
-                maxWidth: 400,
-                color: darkMode ? COLORS.blue : COLORS.pink,
-                fontSize: 15,
-                textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 1)
+                fontSize: 22
               }}>
-                <strong>Motivation:</strong>
+                <h2>About Us</h2>
+                <p>Welcome to MiniMayhem Arcade Hub! Created with ❤️ for game lovers.<br />Find more at our homepage. (Coming soon!)</p>
+              </section>
+            }
+          />
+          <Route
+            path="/help"
+            element={
+              <section style={{
+                marginTop: 40, textAlign: 'center', width: '100vw', minHeight: '400px',
+                color: darkMode ? COLORS.pink : COLORS.yellow,
+                fontFamily: fontFamilyArcade,
+                fontSize: 22
+              }}>
+                <h2>Help</h2>
+                <p>Need tips or having trouble? Contact our support team or check back for documentation!</p>
+              </section>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <section style={{
+                marginTop: 40, textAlign: 'center', width: '100vw', minHeight: '400px',
+                color: darkMode ? COLORS.yellow : COLORS.pink,
+                fontFamily: fontFamilyArcade,
+                fontSize: 22
+              }}>
+                <h2>Contact</h2>
+                <p>Email: hi@minimayhem.com<br />We're always listening!</p>
+              </section>
+            }
+          />
+          <Route
+            path="/challenge"
+            element={
+              <section id="challenge" style={{
+                marginTop: 55,
+                width: '100%',
+                maxWidth: 680,
+                textAlign: 'center',
+                padding: '30px 16px',
+                borderRadius: 14,
+                background: darkMode
+                  ? `linear-gradient(137deg, ${COLORS.pink}12, ${COLORS.yellow}0e 120%)`
+                  : `linear-gradient(134deg, #fff8, ${COLORS.blue}11 120%)`,
+                boxShadow: neonShadow(COLORS.yellow, 2),
+                fontFamily: fontFamilyArcade,
+              }}>
+                <h2 style={{
+                  fontFamily: fontFamilyArcade,
+                  fontSize: 24,
+                  color: COLORS.purple,
+                  margin: 0,
+                  textShadow: neonShadow(COLORS.purple, 2)
+                }}>🗓️ Daily Challenge!</h2>
                 <div style={{
-                  marginTop: 5, marginBottom: 14,
-                  fontStyle: 'italic',
-                  fontFamily: "'VT323',monospace"
-                }} aria-live="polite">
-                  {quote ? <span>“{quote}”</span> : <span>Loading inspiration…</span>}
+                  margin: '18px auto 12px auto',
+                  maxWidth: 400,
+                  color: darkMode ? COLORS.blue : COLORS.pink,
+                  fontSize: 15,
+                  textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 1)
+                }}>
+                  <strong>Motivation:</strong>
+                  <div style={{
+                    marginTop: 5, marginBottom: 14,
+                    fontStyle: 'italic',
+                    fontFamily: "'VT323',monospace"
+                  }} aria-live="polite">
+                    {quote ? <span>“{quote}”</span> : <span>Loading inspiration…</span>}
+                  </div>
                 </div>
-              </div>
-              <div style={{
-                marginTop: 20,
-                color: COLORS.yellow,
-                fontWeight: 700,
-                textShadow: neonShadow(COLORS.yellow),
-                fontSize: 19,
+                <div style={{
+                  marginTop: 20,
+                  color: COLORS.yellow,
+                  fontWeight: 700,
+                  textShadow: neonShadow(COLORS.yellow),
+                  fontSize: 19,
+                }}>
+                  Can you beat today's high score? 🎯
+                </div>
+              </section>
+            }
+          />
+          {/* Fallback route */}
+          <Route
+            path="*"
+            element={
+              <section style={{
+                textAlign: 'center', padding: '80px 0 40px 0', width: '100vw'
               }}>
-                Can you beat today's high score? 🎯
-              </div>
-            </section>
-          </>
-        )}
+                <h2 style={{ color: COLORS.pink, textShadow: neonShadow(COLORS.pink, 2) }}>404 - Arcade Door Not Found!</h2>
+                <p>Try the Home, Games, or Top Game pages from the menu above.</p>
+              </section>
+            }
+          />
+        </Routes>
       </main>
       {/* FOOTER */}
       <footer className="mm-footer" style={{
@@ -778,27 +912,43 @@ function App() {
           alignItems: 'center',
         }}>
           <nav>
-            <a href="#games" style={{
-              color: COLORS.blue,
-              textDecoration: 'none',
-              fontWeight: 700,
-              fontFamily: fontFamilyArcade,
-              fontSize: 16,
-              marginRight: 18,
-              textShadow: neonShadow(COLORS.blue, 1)
-            }}>
+            <span
+              tabIndex={0}
+              role="button"
+              onClick={() => navigate('/games')}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/games'); }}
+              style={{
+                color: COLORS.blue,
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontFamily: fontFamilyArcade,
+                fontSize: 16,
+                marginRight: 18,
+                textShadow: neonShadow(COLORS.blue, 1),
+                cursor: 'pointer',
+                outline: 'none'
+              }}
+            >
               Games
-            </a>
-            <a href="#challenge" style={{
-              color: COLORS.pink,
-              textDecoration: 'none',
-              fontWeight: 700,
-              fontFamily: fontFamilyArcade,
-              fontSize: 16,
-              textShadow: neonShadow(COLORS.pink, 1)
-            }}>
+            </span>
+            <span
+              tabIndex={0}
+              role="button"
+              onClick={() => navigate('/challenge')}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/challenge'); }}
+              style={{
+                color: COLORS.pink,
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontFamily: fontFamilyArcade,
+                fontSize: 16,
+                textShadow: neonShadow(COLORS.pink, 1),
+                cursor: 'pointer',
+                outline: 'none'
+              }}
+            >
               Challenge
-            </a>
+            </span>
           </nav>
         </div>
         <div style={{
