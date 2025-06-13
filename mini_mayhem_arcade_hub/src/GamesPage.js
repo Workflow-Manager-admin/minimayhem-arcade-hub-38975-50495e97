@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCube, FaBrain, FaBolt, FaKeyboard, FaTable, FaThLarge } from "react-icons/fa";
-import { MdNightlightRound, MdWbSunny } from "react-icons/md";
+import { useTheme } from "./ThemeContext";
 
 // Neon arcade/pixel font settings (Pulled from App.css root)
 const arcadeFont = "'Press Start 2P', 'VT323', 'Orbitron', monospace";
@@ -10,20 +10,7 @@ const neonColors = ["#4CC9F0", "#00FF99", "#F72585"];
 // PUBLIC_INTERFACE
 function GamesPage() {
   const navigate = useNavigate();
-
-  // Theme persistence (localStorage) and theme state
-  const [darkMode, setDarkMode] = useState(() => {
-    // Default: dark, sync with localStorage
-    const local = window.localStorage.getItem("mm-arcade-theme");
-    return local ? JSON.parse(local) : true;
-  });
-
-  // Sync theme class on <body> & localStorage
-  useEffect(() => {
-    document.body.classList.toggle("dark", darkMode);
-    document.body.classList.toggle("light", !darkMode);
-    window.localStorage.setItem("mm-arcade-theme", JSON.stringify(darkMode));
-  }, [darkMode]);
+  const { darkMode } = useTheme();
 
   // Neon glowing box-shadow builder
   const neonShadow = (color, intensity = 3) =>
@@ -76,9 +63,8 @@ function GamesPage() {
   ];
 
   // PUBLIC_INTERFACE
-  function toggleTheme() {
-    setDarkMode((dm) => !dm);
-  }
+  // Removed toggleTheme and setDarkMode: theme is now managed globally.
+
 
   // Card background/light/dark
   const getCardBg = (color) =>
@@ -159,64 +145,6 @@ function GamesPage() {
           position: "relative",
         }}
       >
-        {/* Theme toggle button (absolute in header top right) */}
-        <button
-          className="mm-theme-toggle"
-          aria-label="Toggle dark/light theme"
-          onClick={toggleTheme}
-          style={{
-            position: "absolute",
-            right: 17,
-            top: 15,
-            background: themeBtnColors.bg,
-            border: `2px solid ${themeBtnColors.btnBorder}`,
-            borderRadius: 8,
-            color: themeBtnColors.icon,
-            boxShadow: themeBtnColors.shadow,
-            zIndex: 99,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minWidth: 30,
-            minHeight: 30,
-            fontSize: 21,
-            cursor: "pointer",
-            outline: "none",
-            transition:
-              "background 0.13s, color 0.17s, border 0.09s, box-shadow 0.13s",
-          }}
-          title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          type="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              toggleTheme();
-            }
-          }}
-        >
-          {darkMode ? (
-            <MdNightlightRound
-              size={20}
-              style={{
-                color: neonColors[1],
-                filter: "drop-shadow(0 0 2.5px #00FF99)",
-              }}
-              aria-label="dark mode"
-              title="Currently Dark Mode"
-            />
-          ) : (
-            <MdWbSunny
-              size={24}
-              style={{
-                color: neonColors[2],
-                filter: "drop-shadow(0 0 2.5px #F72585)",
-              }}
-              aria-label="light mode"
-              title="Currently Light Mode"
-            />
-          )}
-        </button>
         <h1
           style={{
             fontFamily: "'Press Start 2P', 'VT323', 'Orbitron', monospace",
@@ -428,7 +356,7 @@ function GamesPage() {
         }
         `}
       </style>
-      {/* Optional: floating theme toggle icon at footer on mobile (duplicated for convenience) */}
+      {/* Optional: floating theme toggle icon at footer on mobile (duplicate) is REMOVED */}
       <footer className="mm-footer" style={{
         marginTop: 18,
         padding: '21px 0 16px 0',
@@ -453,63 +381,6 @@ function GamesPage() {
         }}>
           © MiniMayhem Arcade Hub {new Date().getFullYear()}
         </span>
-        {/* footer theme toggle for mobile users */}
-        <button
-          className="mm-theme-toggle"
-          aria-label="Toggle dark/light theme"
-          onClick={toggleTheme}
-          style={{
-            position: "absolute",
-            right: 16,
-            top: 13,
-            background: themeBtnColors.bg,
-            border: `2px solid ${themeBtnColors.btnBorder}`,
-            borderRadius: 8,
-            color: themeBtnColors.icon,
-            boxShadow: themeBtnColors.shadow,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minWidth: 30,
-            minHeight: 30,
-            fontSize: 19,
-            cursor: "pointer",
-            outline: "none",
-            transition:
-              "background 0.13s, color 0.17s, border 0.09s, box-shadow 0.13s",
-          }}
-          title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          type="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              toggleTheme();
-            }
-          }}
-        >
-          {darkMode ? (
-            <MdNightlightRound
-              size={20}
-              style={{
-                color: neonColors[1],
-                filter: "drop-shadow(0 0 2.5px #00FF99)",
-              }}
-              aria-label="dark mode"
-              title="Currently Dark Mode"
-            />
-          ) : (
-            <MdWbSunny
-              size={22}
-              style={{
-                color: neonColors[2],
-                filter: "drop-shadow(0 0 2.5px #F72585)",
-              }}
-              aria-label="light mode"
-              title="Currently Light Mode"
-            />
-          )}
-        </button>
       </footer>
     </div>
   );

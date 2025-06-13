@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// Import react-icons for Moon/Sun.
 import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
-// PUBLIC_INTERFACE
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import TopGamesPage from './TopGamesPage';
 import GamesPage from './GamesPage';
+import { ThemeProvider, useTheme } from './ThemeContext';
 
 // Google Fonts Import
 const FONT_URL =
@@ -48,13 +47,9 @@ const games = [
   },
 ];
 
-// PUBLIC_INTERFACE
 function App() {
-  // Dark mode state
-  const [darkMode, setDarkMode] = useState(() => {
-    const local = window.localStorage.getItem('mm-arcade-theme');
-    return local ? JSON.parse(local) : true;
-  });
+  // Use global theme context for darkMode, toggleTheme, etc.
+  const { darkMode, toggleTheme } = useTheme();
 
   // Animated neon hero text
   const [neonGlow, setNeonGlow] = useState(false);
@@ -70,13 +65,6 @@ function App() {
     document.head.appendChild(link);
     return () => document.head.removeChild(link);
   }, []);
-
-  // Theme on <body>
-  useEffect(() => {
-    document.body.classList.toggle('dark', darkMode);
-    document.body.classList.toggle('light', !darkMode);
-    window.localStorage.setItem('mm-arcade-theme', JSON.stringify(darkMode));
-  }, [darkMode]);
 
   // Neon title animation
   useEffect(() => {
@@ -97,11 +85,6 @@ function App() {
     }
     fetchQuote();
   }, []);
-
-  // PUBLIC_INTERFACE
-  function toggleTheme() {
-    setDarkMode(dm => !dm);
-  }
 
   // Google Fonts family string
   const fontFamilyArcade = "'Press Start 2P', 'VT323', monospace";
