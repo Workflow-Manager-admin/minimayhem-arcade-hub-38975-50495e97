@@ -9,21 +9,21 @@
 }
 
 /* Google Fonts Arcade Imports */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@400;700&display=swap');
 
-/* Remove any frosted glass/blur effect globally */
+/* UNIVERSAL: eliminate blurry text, maximize sharpness */
 body.dark, body.light {
-  /* Both modes: sharp font and clear colors */
   font-family: var(--arcade-font) !important;
   background: inherit;
   color: inherit;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   -webkit-font-smoothing: none !important;
-  -moz-osx-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: unset !important;
   font-smooth: never !important;
   text-rendering: geometricPrecision !important;
   image-rendering: pixelated;
+  /* completely avoid blurring filters for sharp text */
 }
 
 body.dark {
@@ -35,22 +35,30 @@ body.light {
   color: #252525 !important;
 }
 
-/* All text elements use sharp arcade font */
+/* MAXIMUM FONT SHARPNESS: global reset */
 *, *:before, *:after {
   box-sizing: border-box;
   font-family: var(--arcade-font), monospace !important;
+  font-weight: 700 !important;
   -webkit-font-smoothing: none !important;
-  -moz-osx-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: unset !important;
   font-smooth: never !important;
   text-rendering: geometricPrecision !important;
   image-rendering: pixelated;
+  text-shadow: none !important;
+  filter: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--neon-pink);
 }
 ::-webkit-scrollbar { height: 7px; background: #141426; }
-a { outline: none !important; text-shadow: none !important; }
+
+a { 
+  outline: none !important; 
+  text-shadow: none !important; 
+  filter: none !important;
+}
 
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, li, ul, button, input, select, textarea {
   font-family: var(--arcade-font), monospace !important;
@@ -58,18 +66,109 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, li, ul, button, input, sele
   text-shadow: none !important;
   filter: none !important;
   -webkit-font-smoothing: none !important;
-  -moz-osx-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: unset !important;
   font-smooth: never !important;
   text-rendering: geometricPrecision !important;
 }
 
-/* Remove blurred text shadow for all focus */
+/* Headings: Extra crisp, bold arcade style */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Press Start 2P', 'Orbitron', 'VT323', monospace !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: none !important;
+}
+
+/* Text elements: emphasis on pixelated display */
+p, li, ul, span, label {
+  font-family: var(--arcade-font), monospace !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+
+/* Remove blurred/fuzzy focus/active overlays */
+input, button, select, textarea {
+  background: none !important;
+  font-smooth: never !important;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Button tweaks for sharp text */
+.mm-cta-btn,
+.mm-theme-toggle,
+.mm-game-card {
+  font-family: 'Press Start 2P', 'Orbitron', 'VT323', monospace !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-font-smoothing: none !important;
+}
+
+.mm-cta-btn {
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* Remove blurred text shadow for all focus/selected cards/cta */
 .mm-cta-btn:focus,
 .mm-theme-toggle:focus,
 .mm-game-card:focus {
   outline: 2.5px solid var(--neon-pink);
-  background: #F7258522; /* reduce overlay */
-  box-shadow: 0 0 11px 3px var(--neon-pink); /* less strong, no blur */
+  background: #F7258522;
+  box-shadow: 0 0 11px 3px var(--neon-pink); /* box-shadow only, not text */
   text-shadow: none !important;
   filter: none !important;
+}
+
+/* Game card headings and details: */
+.mm-game-card {
+  font-family: 'VT323', 'Orbitron', monospace !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+
+/* NAV/FOOTER: sharp font */
+.mm-logo,
+.mm-nav-link,
+.mm-footer,
+.mm-nav-links {
+  font-family: 'Press Start 2P', 'VT323', 'Orbitron', monospace !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+/* Scrollbar track and thumb customizations */
+::-webkit-scrollbar-thumb {
+  background: var(--neon-pink);
+}
+::-webkit-scrollbar { 
+  height: 7px;
+  background: #141426;
+}
+
+/* For monospaced/arcade code blocks - extra sharp */
+code {
+  font-family: 'VT323', 'Orbitron', 'Press Start 2P', monospace !important;
+  font-weight: 700 !important;
+  font-size: 1em;
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: unset !important;
+  font-smooth: never !important;
+  text-rendering: geometricPrecision !important;
+}
+
+/* Responsive arcade font scaling */
+@media (max-width: 768px) {
+  .mm-nav-links { gap: 13px !important; font-size: 97%;}
+  .mm-footer { font-size: 90%!important;}
+  .mm-game-cards { flex-direction: column !important; align-items: center; }
+}
+@media (max-width: 600px) {
+  .mm-header { padding: 9px 0!important; }
+  .mm-nav { padding: 9px 8px!important; flex-direction: column;}
+  .mm-logo { font-size: 1.13rem !important;}
+  .mm-hero-arcade-icon { font-size: 36px !important;}
+  .mm-hero-description, .mm-game-card, .mm-game-cards { font-size: 98%!important;}
 }

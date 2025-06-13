@@ -1,26 +1,40 @@
-/* Base resets and coding styles */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@400;700&display=swap');
+
+/* Base resets, maximize pixel text clarity globally */
 * {
   box-sizing: border-box;
+  font-family: 'Press Start 2P', 'VT323', 'Orbitron', monospace !important;
+  font-weight: 700 !important;
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: unset !important;
+  font-smooth: never !important;
+  text-rendering: geometricPrecision !important;
+  text-shadow: none !important;
+  filter: none !important;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Press Start 2P', 'VT323', 'Orbitron', monospace !important;
-  font-weight: 700;
+  font-weight: 700 !important;
   -webkit-font-smoothing: none !important;
-  -moz-osx-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: unset !important;
   font-smooth: never !important;
   text-rendering: geometricPrecision !important;
+  text-shadow: none !important;
+  filter: none !important;
 }
 
 /* Ensure code blocks also inherit arcade style for uniformity */
 code {
-  font-family: 'VT323', 'Source Code Pro', Menlo, Monaco, 'Press Start 2P', 'Courier New', monospace !important;
+  font-family: 'VT323', 'Orbitron', 'Press Start 2P', monospace !important;
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 700 !important;
   -webkit-font-smoothing: none !important;
-  -moz-osx-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: unset !important;
   font-smooth: never !important;
   text-rendering: geometricPrecision !important;
+  text-shadow: none !important;
+  filter: none !important;
 }
