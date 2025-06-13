@@ -244,6 +244,20 @@ function LandingPage() {
                   rotate: [0, 2, -2, 2, 0],
                   boxShadow: `0 0 18px ${feature.color}`,
                   border: `2.5px solid ${feature.color}`,
+                  transition: { // Use 'tween' for multi-keyframe (like rotate) to avoid framer-motion error
+                    rotate: {
+                      type: "tween",
+                      duration: 0.49,
+                      ease: "easeInOut",
+                    },
+                    scale: {
+                      type: "spring",
+                      stiffness: 220,
+                      damping: 20,
+                    },
+                    boxShadow: { type: "tween", duration: 0.15 },
+                    border: { type: "tween", duration: 0.15 },
+                  },
                 }}
                 initial={{ opacity: 0, y: 55 }}
                 animate={{ opacity: 1, y: 0 }}

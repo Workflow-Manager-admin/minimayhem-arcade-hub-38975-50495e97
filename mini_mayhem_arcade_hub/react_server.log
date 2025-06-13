@@ -7,11 +7,11 @@
 <i> [webpack-dev-server] On Your Network (IPv4): http://172.17.0.2:3000/
 <i> [webpack-dev-server] Content not from webpack is served from './public' directory
 Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-asset bundle.js 2.14 MiB [emitted] (name: main)
+asset bundle.js 3.67 MiB [emitted] (name: main)
 asset index.html 1.92 KiB [emitted]
 orphan modules 166 KiB [orphan] 133 modules
 runtime modules 27.5 KiB 14 modules
-modules by path ./node_modules/ 1.62 MiB 286 modules
+modules by path ./node_modules/ 2.94 MiB 291 modules
 modules by path ./src/ 34.4 KiB
   modules by path ./src/*.css 17.6 KiB 6 modules
   modules by path ./src/*.js 813 bytes
@@ -22,188 +22,28 @@ modules by path ./.ve/ 15.1 KiB
   modules by path ./.ve/*.js 10.6 KiB 2 modules
   modules by path ./.ve/*.css 2.93 KiB 2 modules
   ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-
-ERROR in ./src/LandingPage.jsx 9:0-89
-Module not found: Error: Can't resolve 'react-icons/fa6' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src'
-resolve 'react-icons/fa6' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src'
-  Parsed request is a module
-  using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./src)
-    Field 'browser' doesn't contain a valid alias configuration
-    resolve as module
-      /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src/node_modules doesn't exist or is not a directory
-      looking for modules in /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules
-        /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons doesn't exist
-      /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/node_modules doesn't exist or is not a directory
-      /home/kavia/workspace/code-generation/node_modules doesn't exist or is not a directory
-      /home/kavia/workspace/node_modules doesn't exist or is not a directory
-      /home/kavia/node_modules doesn't exist or is not a directory
-      /home/node_modules doesn't exist or is not a directory
-      /node_modules doesn't exist or is not a directory
- @ ./src/App.js 3:0-40 8:27-38
- @ ./src/index.js 5:0-24 11:32-35
-
-webpack 5.99.9 compiled with 1 error in 2158 ms
+webpack 5.99.9 compiled successfully in 2367 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 2.16 MiB
-  asset bundle.js 2.14 MiB [emitted] (name: main)
-  asset main.f51c62626932979c35f9.hot-update.js 23.1 KiB [emitted] [immutable] [hmr] (name: main)
-asset main.f51c62626932979c35f9.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 2.16 MiB = bundle.js 2.14 MiB main.f51c62626932979c35f9.hot-update.js 23.1 KiB
-cached modules 1.82 MiB [cached] 432 modules
+assets by path *.js 3.7 MiB
+  asset bundle.js 3.67 MiB [emitted] (name: main)
+  asset main.898d57e3d726d4f4961b.hot-update.js 23.1 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.898d57e3d726d4f4961b.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 3.7 MiB = bundle.js 3.67 MiB main.898d57e3d726d4f4961b.hot-update.js 23.1 KiB
+cached modules 3.13 MiB [cached] 437 modules
 runtime modules 27.5 KiB 14 modules
-./src/LandingPage.jsx 16 KiB [built] [code generated]
-
-ERROR in ./src/LandingPage.jsx 9:0-88
-Module not found: Error: Can't resolve 'react-icons/fa' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src'
-resolve 'react-icons/fa' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src'
-  Parsed request is a module
-  using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./src)
-    Field 'browser' doesn't contain a valid alias configuration
-    resolve as module
-      /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src/node_modules doesn't exist or is not a directory
-      looking for modules in /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules
-        /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons doesn't exist
-      /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/node_modules doesn't exist or is not a directory
-      /home/kavia/workspace/code-generation/node_modules doesn't exist or is not a directory
-      /home/kavia/workspace/node_modules doesn't exist or is not a directory
-      /home/kavia/node_modules doesn't exist or is not a directory
-      /home/node_modules doesn't exist or is not a directory
-      /node_modules doesn't exist or is not a directory
- @ ./src/App.js 3:0-40 8:27-38
- @ ./src/index.js 5:0-24 11:32-35
-
-webpack 5.99.9 compiled with 1 error in 276 ms
-assets by status 2.14 MiB [cached] 2 assets
-cached modules 1.83 MiB (javascript) 27.5 KiB (runtime) [cached] 447 modules
-
-LOG from webpack.FileSystemInfo
-<w> Managed item /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
-+ 13 hidden lines
-
-ERROR in ./src/LandingPage.jsx 9:0-88
-Module not found: Error: Can't resolve 'react-icons/fa' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src'
-resolve 'react-icons/fa' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src'
-  Parsed request is a module
-  using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./src)
-    Field 'browser' doesn't contain a valid alias configuration
-    resolve as module
-      /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src/node_modules doesn't exist or is not a directory
-      looking for modules in /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules
-        existing directory /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons
-          using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./node_modules/react-icons)
-            using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./node_modules/react-icons/fa)
-              no extension
-                Field 'browser' doesn't contain a valid alias configuration
-                /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/fa doesn't exist
-              .js
-                Field 'browser' doesn't contain a valid alias configuration
-                /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/fa.js doesn't exist
-              .jsx
-                Field 'browser' doesn't contain a valid alias configuration
-                /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/fa.jsx doesn't exist
-              as directory
-                /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/fa doesn't exist
-      /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/node_modules doesn't exist or is not a directory
-      /home/kavia/workspace/code-generation/node_modules doesn't exist or is not a directory
-      /home/kavia/workspace/node_modules doesn't exist or is not a directory
-      /home/kavia/node_modules doesn't exist or is not a directory
-      /home/node_modules doesn't exist or is not a directory
-      /node_modules doesn't exist or is not a directory
- @ ./src/App.js 3:0-40 8:27-38
- @ ./src/index.js 5:0-24 11:32-35
-
-webpack 5.99.9 compiled with 1 error in 83 ms
+./src/LandingPage.jsx 16.6 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 340 ms
+assets by status 3.67 MiB [cached] 2 assets
+cached modules 3.13 MiB (javascript) 27.5 KiB (runtime) [cached] 451 modules
+./src/LandingPage.jsx 16.6 KiB [built]
+webpack 5.99.9 compiled successfully in 122 ms
 assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 4.92 MiB
-  asset bundle.js 3.52 MiB [emitted] (name: main)
-  asset main.286006f6d927f6c3c0bb.hot-update.js 1.4 MiB [emitted] [immutable] [hmr] (name: main)
-asset main.286006f6d927f6c3c0bb.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 4.92 MiB = bundle.js 3.52 MiB main.286006f6d927f6c3c0bb.hot-update.js 1.4 MiB
-cached modules 1.82 MiB [cached] 432 modules
+assets by path *.js 3.68 MiB
+  asset bundle.js 3.67 MiB [emitted] (name: main)
+  asset main.d92f1a08ee3f22f8dfbd.hot-update.js 2.38 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.d92f1a08ee3f22f8dfbd.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 3.68 MiB = bundle.js 3.67 MiB main.d92f1a08ee3f22f8dfbd.hot-update.js 2.38 KiB
+cached modules 3.15 MiB [cached] 437 modules
 runtime modules 27.5 KiB 14 modules
-javascript modules 1.35 MiB
-  ./src/LandingPage.jsx 16 KiB [code generated]
-  ./node_modules/react-icons/fa/index.js 1.34 MiB [built] [code generated]
-
-LOG from webpack.FileSystemInfo
-<w> Managed item /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
-+ 13 hidden lines
-
-ERROR in ./node_modules/react-icons/fa/index.js 2:14-39
-Module not found: Error: Can't resolve '../lib' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/fa'
-resolve '../lib' in '/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/fa'
-  using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./node_modules/react-icons/fa)
-    Field 'browser' doesn't contain a valid alias configuration
-    using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./node_modules/react-icons/lib)
-      no extension
-        Field 'browser' doesn't contain a valid alias configuration
-        /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib is not a file
-      .js
-        Field 'browser' doesn't contain a valid alias configuration
-        /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib.js doesn't exist
-      .jsx
-        Field 'browser' doesn't contain a valid alias configuration
-        /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib.jsx doesn't exist
-      as directory
-        existing directory /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib
-          using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./node_modules/react-icons/lib)
-            using path: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib/index
-              using description file: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/package.json (relative path: ./node_modules/react-icons/lib/index)
-                no extension
-                  Field 'browser' doesn't contain a valid alias configuration
-                  /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib/index doesn't exist
-                .js
-                  Field 'browser' doesn't contain a valid alias configuration
-                  /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib/index.js doesn't exist
-                .jsx
-                  Field 'browser' doesn't contain a valid alias configuration
-                  /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons/lib/index.jsx doesn't exist
- @ ./src/LandingPage.jsx 9:0-88 25:26-36 32:26-35 39:26-34 46:26-32 176:59-64 181:35-41 426:59-64 432:35-41
- @ ./src/App.js 3:0-40 8:27-38
- @ ./src/index.js 5:0-24 11:32-35
-
-webpack 5.99.9 compiled with 1 error in 326 ms
-assets by status 1.92 KiB [cached] 1 asset
-assets by path *.js 4.92 MiB
-  asset bundle.js 3.53 MiB [emitted] (name: main)
-  asset main.43fd734cac74bfb229b4.hot-update.js 1.39 MiB [emitted] [immutable] [hmr] (name: main)
-asset main.43fd734cac74bfb229b4.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 4.92 MiB = bundle.js 3.53 MiB main.43fd734cac74bfb229b4.hot-update.js 1.39 MiB
-cached modules 1.83 MiB [cached] 433 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 1.35 MiB
-  ./node_modules/react-icons/fa/index.js 1.34 MiB [code generated]
-  ./node_modules/react-icons/lib/index.js 1.12 KiB [built] [code generated]
-  ./node_modules/react-icons/lib/iconsManifest.js 6.23 KiB [built] [code generated]
-  ./node_modules/react-icons/lib/iconBase.js 4.24 KiB [built] [code generated]
-  ./node_modules/react-icons/lib/iconContext.js 568 bytes [built] [code generated]
-
-LOG from webpack.FileSystemInfo
-<w> Managed item /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
-+ 13 hidden lines
-
-webpack 5.99.9 compiled successfully in 150 ms
-Injecting EditorRootWrapper import: ../.ve/EditorRootWrapper
-assets by path *.js 3.53 MiB
-  asset bundle.js 3.53 MiB [emitted] (name: main)
-  asset main.28ec8c4cb0342a4c2de2.hot-update.js 854 bytes [emitted] [immutable] [hmr] (name: main)
-asset index.html 1.92 KiB [emitted]
-asset main.28ec8c4cb0342a4c2de2.hot-update.json 28 bytes [emitted] [immutable] [hmr]
-Entrypoint main 3.53 MiB = bundle.js 3.53 MiB main.28ec8c4cb0342a4c2de2.hot-update.js 854 bytes
-cached modules 3.15 MiB [cached] 432 modules
-runtime modules 27.5 KiB 14 modules
-javascript modules 28.9 KiB
-  modules by path ./src/ 16.8 KiB
-    ./src/index.js 530 bytes [built]
-    ./src/App.js 283 bytes [built]
-    ./src/LandingPage.jsx 16 KiB [built]
-  modules by path ./.ve/ 12.2 KiB
-    ./.ve/EditorRootWrapper.js 2.68 KiB [built]
-    ./.ve/EditorOverlay.jsx 1.58 KiB [built]
-    ./.ve/SidePanel.js 7.93 KiB [built]
-
-LOG from webpack.FileSystemInfo
-<w> Managed item /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/react-icons isn't a directory or doesn't contain a package.json (see snapshot.managedPaths option)
-+ 13 hidden lines
-
-webpack 5.99.9 compiled successfully in 220 ms
+./src/App.js 392 bytes [built] [code generated]
+webpack 5.99.9 compiled successfully in 119 ms
