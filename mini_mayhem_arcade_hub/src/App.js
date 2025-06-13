@@ -163,8 +163,6 @@ function App() {
             margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-start',
-            padding: '16px 24px',
             width: '100%',
             position: 'relative'
           }}
@@ -213,7 +211,7 @@ function App() {
             style={{
               listStyle: 'none',
               display: 'flex',
-              gap: 28,
+              gap: 24,
               margin: '0 0 0 32px',
               padding: 0,
               alignItems: 'center',
@@ -425,7 +423,7 @@ function App() {
               )}
             </li>
           </ul>
-          {/* Absolute right: Theme toggle */}
+          {/* Theme toggle - right-most, small */}
           <button
             className="mm-theme-toggle"
             aria-label="Toggle dark/light theme"
@@ -435,28 +433,28 @@ function App() {
               alignItems: 'center',
               justifyContent: 'center',
               background: darkMode ? '#1c1c25cb' : '#f0f0ffcc',
-              border: `2.5px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
+              border: `2px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
               borderRadius: 8,
-              padding: '0.2em 0.35em',
+              padding: '0.09em 0.25em',
               marginLeft: 'auto',
               cursor: 'pointer',
               outline: 'none',
               marginTop: 0,
               marginRight: 2,
-              fontSize: 22,
-              boxShadow: `0 0 0 2.5px ${
+              fontSize: 18, // smaller
+              boxShadow: `0 0 0 2px ${
                 darkMode ? COLORS.pink : COLORS.purple
               }33,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)}`,
               color: darkMode ? COLORS.yellow : COLORS.purple,
               transition:
                 'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s',
               position: 'absolute',
-              right: 20,
+              right: 14,
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 10,
-              minWidth: 32,
-              minHeight: 32,
+              minWidth: 27,
+              minHeight: 27,
               lineHeight: 1,
             }}
             tabIndex={0}
@@ -486,7 +484,7 @@ function App() {
                   1
                 ),
                 userSelect: 'none',
-                fontSize: 18,
+                fontSize: 13,
                 margin: 0,
                 padding: 0,
               }}
@@ -496,7 +494,7 @@ function App() {
                 <span
                   role="img"
                   aria-label="dark mode"
-                  style={{ fontSize: '1.33em' }}
+                  style={{ fontSize: '1.18em' }}
                 >
                   🌙
                 </span>
@@ -505,7 +503,7 @@ function App() {
                 <span
                   role="img"
                   aria-label="light mode"
-                  style={{ fontSize: '1.33em' }}
+                  style={{ fontSize: '1.18em' }}
                 >
                   🌞
                 </span>
