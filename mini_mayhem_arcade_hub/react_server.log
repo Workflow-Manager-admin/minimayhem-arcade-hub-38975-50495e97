@@ -123,3 +123,13 @@ cached modules 4.95 MiB [cached] 55 modules
 runtime modules 27.5 KiB 14 modules
 ./src/App.js 41.4 KiB [built] [code generated]
 webpack 5.99.9 compiled successfully in 166 ms
+assets by status 691 bytes [cached] 1 asset
+assets by path *.js 6.02 MiB
+  asset bundle.js 6 MiB [emitted] (name: main)
+  asset main.ff6fb3bf8c5f982b0db9.hot-update.js 22.9 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.ff6fb3bf8c5f982b0db9.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 6.02 MiB = bundle.js 6 MiB main.ff6fb3bf8c5f982b0db9.hot-update.js 22.9 KiB
+cached modules 4.98 MiB [cached] 55 modules
+runtime modules 27.5 KiB 14 modules
+./src/GamesPage.js 18.2 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 217 ms
