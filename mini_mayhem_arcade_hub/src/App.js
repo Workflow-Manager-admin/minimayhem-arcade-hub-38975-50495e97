@@ -5,6 +5,8 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import TopGamesPage from './TopGamesPage';
 import GamesPage from './GamesPage';
 import { ThemeProvider, useTheme } from './ThemeContext';
+// Lazy load BlockGame for route
+const BlockGameLazy = React.lazy(() => import('./BlockGame'));
 
 // Google Fonts Import
 const FONT_URL =
@@ -755,6 +757,18 @@ function App() {
             path="/games"
             element={
               <GamesPage />
+            }
+          />
+          <Route
+            path="/block-game"
+            element={
+              <React.Suspense fallback={
+                <div style={{ textAlign: "center", marginTop: 140, fontFamily: "'VT323', monospace", fontSize: 26 }}>
+                  Loading Block Builder…
+                </div>
+              }>
+                <BlockGameLazy />
+              </React.Suspense>
             }
           />
           <Route
