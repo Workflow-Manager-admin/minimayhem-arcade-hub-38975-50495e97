@@ -773,9 +773,28 @@ function App() {
                 <div style={{
                   marginTop: 7,
                   fontStyle: 'italic',
-                  letterSpacing: '.01em'
+                  letterSpacing: '.01em',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.45em"
                 }} aria-live="polite">
-                  {joke ? <span>{joke}</span> : <span>Loading a good laugh…</span>}
+                  {joke ? (
+                    <>
+                      <span>{joke}</span>
+                      <span style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "0.8em",
+                        color: darkMode ? COLORS.yellow : COLORS.blue,
+                        opacity: 0.82,
+                        marginLeft: 6,
+                        letterSpacing: "0.025em",
+                        textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.blue, 1)
+                      }}>(JokeAPI)</span>
+                    </>
+                  ) : (
+                    <span>Loading a good laugh…</span>
+                  )}
                 </div>
               </div>
               <div style={{
