@@ -215,10 +215,10 @@ function App() {
                 </li>
               ))}
             </ul>
-            {/* Theme Toggle Icon Only */}
+            {/* Theme Toggle Icon Only: Rightmost in Nav, only icon, no text */}
             <button
               className="mm-theme-toggle"
-              aria-label="Switch dark/light mode"
+              aria-label="Toggle dark/light theme" // assures accessibility for icon-only
               onClick={toggleTheme}
               style={{
                 display: 'flex',
@@ -236,13 +236,15 @@ function App() {
                 fontSize: 28,
                 transition: 'background 0.17s, color 0.19s, border 0.10s, box-shadow 0.15s'
               }}
+              tabIndex={0}
             >
               <span
+                aria-hidden="true"
                 style={{
                   display: 'inline-block',
                   transform: darkMode ? 'rotate(-17deg)' : 'rotate(9deg)',
-                  filter: 'drop-shadow(0 0 2px #0006)',
-                  // For pixel style: use emoji only, but if react-icons added, could use a pixel moon/sun here
+                  filter: 'drop-shadow(0 0 2px #0006)'
+                  // Only show sun/moon emoji, no extra text
                 }}
               >
                 {darkMode ? '🌙' : '🌞'}
