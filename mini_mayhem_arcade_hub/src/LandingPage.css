@@ -98,6 +98,90 @@ body[data-theme="light"] {
   outline: 2px solid var(--arcade-neon-yellow);
 }
 
+/* --- Settings Dropdown Styles --- */
+.arcade-settings-dropdown-wrapper {
+  position: relative;
+  z-index: 401;
+}
+
+.arcade-settings-dropdown-btn {
+  background: none;
+  border: none;
+  color: var(--arcade-neon-yellow);
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1.7px;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: background 0.16s, color 0.1s, box-shadow 0.13s;
+  outline: none;
+  margin: 0;
+}
+.arcade-settings-dropdown-btn:focus, .arcade-settings-dropdown-btn:hover {
+  background: var(--arcade-neon-pink);
+  color: #fff;
+  box-shadow: 0 0 14px var(--arcade-neon-pink);
+}
+
+.arcade-settings-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 185px;
+  background: var(--arcade-nav-bg, #151731e6);
+  border: 2px solid var(--arcade-neon-yellow);
+  border-radius: 12px;
+  box-shadow: 0 8px 26px #F7C94840;
+  z-index: 402;
+  font-family: 'VT323', 'Press Start 2P', monospace;
+  padding: 8px 0;
+  margin: 0;
+  list-style: none;
+  animation: arcadeDropdownOpen 0.18s cubic-bezier(.16,.61,.41,.99);
+}
+@keyframes arcadeDropdownOpen {
+  from { opacity: 0; transform: translateY(-12px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.arcade-settings-dropdown li {
+  width: 100%;
+}
+.arcade-dropdown-link {
+  display: block;
+  width: 100%;
+  padding: 11px 20px 11px 20px;
+  color: var(--arcade-neon-yellow);
+  background: none;
+  text-decoration: none;
+  border: none;
+  text-align: left;
+  font-family: 'VT323', 'Press Start 2P', monospace;
+  font-size: 1.06rem;
+  letter-spacing: 1.2px;
+  transition: background 0.13s, color 0.10s;
+  border-radius: 7px;
+  outline: none;
+}
+
+.arcade-dropdown-link:focus,
+.arcade-dropdown-link:hover {
+  background: var(--arcade-neon-pink);
+  color: #fff;
+  box-shadow: 0 0 10px var(--arcade-neon-pink);
+}
+
+@media (max-width: 768px) {
+  .arcade-settings-dropdown {
+    left: auto;
+    right: 0;
+    min-width: 155px;
+    font-size: 0.94rem;
+  }
+}
+
 .arcade-hero {
   margin: 0 auto;
   padding-top: 100px;

@@ -10,7 +10,9 @@ import { FaGamepad, FaUser, FaTrophy, FaSun, FaMoon, FaTerminal } from "react-ic
 
 import "./LandingPage.css";
 
-// Google Fonts (Press Start 2P, VT323 loaded dynamically)
+/* Google Fonts (Press Start 2P, VT323 loaded dynamically)
+ * No reference to PUBLIC_URL here; code is safe.
+ */
 const addGoogleFonts = () => {
   if (!document.getElementById("google-font-arcadehub")) {
     const link = document.createElement("link");
@@ -92,12 +94,27 @@ function getInitialTheme() {
     : "light";
 }
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * Main Landing Page with Settings dropdown in navbar
+ */
 function LandingPage() {
   // State
   const [quote, setQuote] = useState(null);
   const [joke, setJoke] = useState(null);
   const [theme, setTheme] = useState(getInitialTheme());
+  // Dropdown for Settings nav
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Close dropdown on click away
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const onClick = (e) => {
+      setDropdownOpen(false);
+    };
+    window.addEventListener("click", onClick, true);
+    return () => window.removeEventListener("click", onClick, true);
+  }, [dropdownOpen]);
 
   // Fetch daily quote
   useEffect(() => {
@@ -158,8 +175,74 @@ function LandingPage() {
           <li>
             <a href="#topgames">Top Games</a>
           </li>
-          <li>
-            <a href="#settings">Settings</a>
+          <li style={{ position: "relative" }} className="arcade-settings-dropdown-wrapper">
+            {/* Dropdown Toggle */}
+            <button
+              className="arcade-settings-dropdown-btn"
+              aria-haspopup="true"
+              aria-expanded="false"
+              tabIndex={0}
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--arcade-neon-yellow)",
+                fontFamily: "'Press Start 2P', 'VT323', monospace",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                letterSpacing: "1.7px",
+                cursor: "pointer",
+                textTransform: "uppercase",
+                padding: "7px 12px",
+                borderRadius: "8px",
+                transition: "background 0.18s, color 0.1s",
+              }}
+              onClick={e => {
+                e.stopPropagation();
+                setDropdownOpen(open => !open);
+              }}
+              onBlur={() => setTimeout(() => setDropdownOpen(false), 140)}
+              onKeyDown={e => {
+                if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setDropdownOpen(true);
+                  // Focus first item logic may be added if full accessibility wanted
+                }
+                if (e.key === "Escape") setDropdownOpen(false);
+              }}
+            >
+              Settings ▾
+            </button>
+            {/* Dropdown Menu */}
+            {dropdownOpen && (
+              <ul className="arcade-settings-dropdown" style={{
+                position: "absolute",
+                top: "110%",
+                left: 0,
+                minWidth: "185px",
+                background: "var(--arcade-nav-bg, #151731e6)",
+                border: "2px solid var(--arcade-neon-yellow)",
+                borderRadius: "12px",
+                boxShadow: "0 4px 26px #F7C94833",
+                zIndex: 400,
+                fontFamily: "'VT323', 'Press Start 2P', monospace",
+                padding: "8px 0",
+                margin: 0,
+                listStyle: "none"
+              }}>
+                <li>
+                  <a href="#about" tabIndex={0} className="arcade-dropdown-link">About</a>
+                </li>
+                <li>
+                  <a href="#privacy" tabIndex={0} className="arcade-dropdown-link">Privacy</a>
+                </li>
+                <li>
+                  <a href="#help" tabIndex={0} className="arcade-dropdown-link">Help</a>
+                </li>
+                <li>
+                  <a href="#contact" tabIndex={0} className="arcade-dropdown-link">Contact</a>
+                </li>
+              </ul>
+            )}
           </li>
           <li>
             <button
