@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+// Import react-icons for Moon/Sun.
+import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
 // Google Fonts Import
 const FONT_URL =
@@ -441,7 +443,7 @@ function App() {
               outline: 'none',
               marginTop: 0,
               marginRight: 2,
-              fontSize: 18, // smaller
+              fontSize: 18,
               boxShadow: `0 0 0 2px ${
                 darkMode ? COLORS.pink : COLORS.purple
               }33,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)}`,
@@ -471,11 +473,13 @@ function App() {
             <span
               aria-hidden="true"
               style={{
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 lineHeight: 1,
                 transform: darkMode
-                  ? 'rotate(-14deg) scale(0.85)'
-                  : 'rotate(9deg) scale(0.92)',
+                  ? 'rotate(-14deg) scale(0.94)'
+                  : 'rotate(9deg) scale(0.97)',
                 filter: darkMode
                   ? 'drop-shadow(0 0 1.5px #ffe46c99)'
                   : 'drop-shadow(0 0 1.5px #511cc088)',
@@ -484,29 +488,37 @@ function App() {
                   1
                 ),
                 userSelect: 'none',
-                fontSize: 13,
+                fontSize: 18,
                 margin: 0,
                 padding: 0,
               }}
             >
               {darkMode ? (
-                // Unicode Moon - pure icon only
-                <span
-                  role="img"
+                // Moon icon for darkMode (night)
+                <MdNightlightRound
+                  size={21}
+                  style={{
+                    color: COLORS.yellow,
+                    marginLeft: 0,
+                    marginRight: 0,
+                    stroke: 'none'
+                  }}
                   aria-label="dark mode"
-                  style={{ fontSize: '1.18em' }}
-                >
-                  🌙
-                </span>
+                  title="Currently Dark Mode"
+                />
               ) : (
-                // Unicode Sun - pure icon only
-                <span
-                  role="img"
+                // Sun icon for lightMode (day)
+                <MdWbSunny
+                  size={22}
+                  style={{
+                    color: COLORS.purple,
+                    marginLeft: 0,
+                    marginRight: 0,
+                    stroke: 'none'
+                  }}
                   aria-label="light mode"
-                  style={{ fontSize: '1.18em' }}
-                >
-                  🌞
-                </span>
+                  title="Currently Light Mode"
+                />
               )}
             </span>
           </button>
