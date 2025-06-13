@@ -58,7 +58,6 @@ function App() {
 
   // Daily Challenge content
   const [quote, setQuote] = useState('');
-  const [joke, setJoke] = useState('');
 
   // Mount Google Fonts
   useEffect(() => {
@@ -82,7 +81,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch Quote & Joke
+  // Fetch Quote (removed Joke)
   useEffect(() => {
     async function fetchQuote() {
       try {
@@ -93,19 +92,7 @@ function App() {
         setQuote('Keep playing, keep winning!');
       }
     }
-    async function fetchJoke() {
-      try {
-        const resp = await fetch('https://v2.jokeapi.dev/joke/Any?type=single,twopart&lang=en');
-        const data = await resp.json();
-        if (data.type === 'single') setJoke(data.joke);
-        else if (data.type === 'twopart') setJoke(`${data.setup} ... ${data.delivery}`);
-        else setJoke('Why did the arcade get good grades? Because it had all the right buttons!');
-      } catch {
-        setJoke('Why did the arcade get good grades? Because it had all the right buttons!');
-      }
-    }
     fetchQuote();
-    fetchJoke();
   }, []);
 
   // PUBLIC_INTERFACE
@@ -759,45 +746,6 @@ function App() {
                 </div>
               </div>
               <div style={{
-                margin: '15px auto 8px auto',
-                maxWidth: 380,
-                color: darkMode ? COLORS.pink : COLORS.purple,
-                fontFamily: "'VT323',monospace",
-                fontSize: 15,
-                background: darkMode ? '#18102A55' : '#F7C94811',
-                padding: '14px 12px',
-                borderRadius: 8,
-                boxShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 2),
-              }}>
-                <strong>Joke of the Day:</strong>
-                <div style={{
-                  marginTop: 7,
-                  fontStyle: 'italic',
-                  letterSpacing: '.01em',
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.45em"
-                }} aria-live="polite">
-                  {joke ? (
-                    <>
-                      <span>{joke}</span>
-                      <span style={{
-                        fontFamily: "'Press Start 2P', monospace",
-                        fontSize: "0.8em",
-                        color: darkMode ? COLORS.yellow : COLORS.blue,
-                        opacity: 0.82,
-                        marginLeft: 6,
-                        letterSpacing: "0.025em",
-                        textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.blue, 1)
-                      }}>(JokeAPI)</span>
-                    </>
-                  ) : (
-                    <span>Loading a good laugh…</span>
-                  )}
-                </div>
-              </div>
-              <div style={{
                 marginTop: 20,
                 color: COLORS.yellow,
                 fontWeight: 700,
@@ -863,7 +811,7 @@ function App() {
           Made with <span aria-label="arcade heart">💖</span> by MiniMayhem Arcade Team &copy; {new Date().getFullYear()}
         </div>
         <div style={{ marginTop: 7, fontSize: 10, color: '#8887' }}>
-          <a href="https://zenquotes.io/" style={{ color: COLORS.blue, textDecoration: 'underline' }}>ZenQuotes.io</a> &amp; <a href="https://jokeapi.dev/" style={{ color: COLORS.pink, textDecoration: 'underline' }}>JokeAPI</a> powered.
+          <a href="https://zenquotes.io/" style={{ color: COLORS.blue, textDecoration: 'underline' }}>ZenQuotes.io</a> powered.
         </div>
       </footer>
       {/* KEYFRAMES and Style */}
