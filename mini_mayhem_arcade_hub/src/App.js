@@ -118,13 +118,19 @@ function App() {
       .map((_, i) => `0 0 ${4 + i * 4}px ${color}`)
       .join(',');
 
-  // Quick nav items
-  const quickLinks = [
-    { name: 'Games', to: '#games' },
-    { name: 'Daily Challenge', to: '#challenge' },
-    { name: 'Scoreboard', to: '#' },
-    { name: 'About', to: '#' },
-  ];
+  // We now hardcode nav links as per new spec; use state for dropdown open/close
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  // Utilities for closing dropdown if user clicks outside
+  useEffect(() => {
+    if (!settingsOpen) return;
+    function handleClick(e) {
+      const m = document.getElementById('mm-settings-dropdown-menu');
+      if (m && !m.contains(e.target)) setSettingsOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [settingsOpen]);
 
   return (
     <div
@@ -163,34 +169,45 @@ function App() {
             position: 'relative'
           }}
         >
-          {/* Logo */}
-          <span
-            className="mm-logo"
+          {/* Logo/Landing Link */}
+          <a
+            href="/"
+            className="mm-logo-link"
             style={{
-              color: COLORS.pink,
-              fontSize: '2rem',
-              letterSpacing: -2,
-              fontWeight: 900,
-              textShadow: neonShadow(COLORS.pink, 2),
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              fontFamily: "'Press Start 2P', VT323, monospace",
-              userSelect: 'none',
+              textDecoration: 'none',
+              outline: 'none',
+              marginRight: 0,
             }}
+            aria-label="Go to MiniMayhem Arcade Landing Page"
           >
             <span
+              className="mm-logo"
               style={{
-                color: COLORS.blue,
-                fontSize: '2.5rem',
-                textShadow: neonShadow(COLORS.blue),
+                color: COLORS.pink,
+                fontSize: '2rem',
+                letterSpacing: -2,
+                fontWeight: 900,
+                textShadow: neonShadow(COLORS.pink, 2),
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                fontFamily: "'Press Start 2P', VT323, monospace",
+                userSelect: 'none',
               }}
             >
-              🕹️
+              <span
+                style={{
+                  color: COLORS.blue,
+                  fontSize: '2.5rem',
+                  textShadow: neonShadow(COLORS.blue),
+                }}
+              >
+                🕹️
+              </span>
+              MiniMayhem Arcade
             </span>
-            MiniMayhem Arcade
-          </span>
-          {/* Nav Links, left-aligned */}
+          </a>
+          {/* New Nav Links, left-aligned */}
           <ul
             className="mm-nav-links"
             style={{
@@ -203,30 +220,210 @@ function App() {
               flex: '0 1 auto',
             }}
           >
-            {quickLinks.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.to}
+            {/* Our Games */}
+            <li>
+              <a
+                href="#games"
+                style={{
+                  color: darkMode ? COLORS.yellow : COLORS.purple,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  letterSpacing: 1,
+                  textShadow: neonShadow(
+                    darkMode ? COLORS.yellow : COLORS.purple, 2
+                  ),
+                  transition: 'color 0.23s, background 0.28s',
+                }}
+                className="mm-nav-link"
+              >
+                Our Games
+              </a>
+            </li>
+            {/* Top Game */}
+            <li>
+              <a
+                href="#top-game"
+                style={{
+                  color: darkMode ? COLORS.pink : COLORS.blue,
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  letterSpacing: 1,
+                  textShadow: neonShadow(
+                    darkMode ? COLORS.pink : COLORS.blue, 2
+                  ),
+                  transition: 'color 0.23s, background 0.28s',
+                }}
+                className="mm-nav-link"
+              >
+                Top Game
+              </a>
+            </li>
+            {/* Settings Dropdown */}
+            <li
+              style={{
+                position: 'relative',
+                userSelect: 'none',
+              }}
+              onMouseLeave={() => setSettingsOpen(false)}
+            >
+              <button
+                className="mm-nav-link mm-dropdown-btn"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded={settingsOpen}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: darkMode ? COLORS.blue : COLORS.purple,
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  cursor: 'pointer',
+                  boxShadow: 'none',
+                  outline: (settingsOpen ? `2px solid ${COLORS.purple}` : 'none'),
+                  letterSpacing: 1,
+                  textShadow: neonShadow(
+                    darkMode ? COLORS.blue : COLORS.purple, 2
+                  ),
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+                onClick={() => setSettingsOpen((o) => !o)}
+                onBlur={e => {
+                  setTimeout(() => setSettingsOpen(false), 120);
+                }}
+                tabIndex={0}
+              >
+                Settings
+                <span style={{
+                  fontSize: '1.1em',
+                  verticalAlign: 'middle',
+                  marginLeft: 3,
+                  userSelect: 'none'
+                }}>▼</span>
+              </button>
+              {/* Dropdown Panel */}
+              {settingsOpen && (
+                <ul
+                  id="mm-settings-dropdown-menu"
+                  className="mm-dropdown-menu"
                   style={{
-                    color: darkMode ? COLORS.yellow : COLORS.purple,
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    fontSize: '1rem',
-                    padding: '6px 12px',
-                    borderRadius: 6,
-                    letterSpacing: 1,
-                    textShadow: neonShadow(
-                      darkMode ? COLORS.yellow : COLORS.purple,
-                      2
-                    ),
-                    transition: 'color 0.23s, background 0.28s',
+                    listStyle: 'none',
+                    background: darkMode
+                      ? '#23224aee'
+                      : '#f7f7ffdd',
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    minWidth: 150,
+                    margin: 0,
+                    marginTop: 7,
+                    padding: 0,
+                    borderRadius: 7,
+                    boxShadow: `0 2.5px 18px 2px ${darkMode ? COLORS.purple : COLORS.blue}44`,
+                    border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
+                    zIndex: 200,
                   }}
-                  className="mm-nav-link"
+                  role="menu"
                 >
-                  {link.name}
-                </a>
-              </li>
-            ))}
+                  {/* About Us */}
+                  <li>
+                    <a
+                      href="#about-us"
+                      className="mm-dropdown-item"
+                      tabIndex={0}
+                      style={{
+                        display: 'block',
+                        color: darkMode ? COLORS.purple : COLORS.blue,
+                        padding: '10px 16px',
+                        textDecoration: 'none',
+                        background: 'none',
+                        fontWeight: 600,
+                        borderRadius: 7,
+                        fontFamily: fontFamilyArcade,
+                        fontSize: '1em',
+                        textAlign: 'left',
+                        letterSpacing: 0.5,
+                        cursor: 'pointer',
+                        outline: 'none',
+                        textShadow: neonShadow(darkMode ? COLORS.purple : COLORS.blue, 1),
+                        transition: 'background 0.19s, color 0.19s',
+                      }}
+                      onMouseDown={e => setSettingsOpen(false)}
+                      role="menuitem"
+                    >
+                      About Us
+                    </a>
+                  </li>
+                  {/* Help */}
+                  <li>
+                    <a
+                      href="#help"
+                      className="mm-dropdown-item"
+                      tabIndex={0}
+                      style={{
+                        display: 'block',
+                        color: darkMode ? COLORS.pink : COLORS.purple,
+                        padding: '10px 16px',
+                        textDecoration: 'none',
+                        background: 'none',
+                        fontWeight: 600,
+                        borderRadius: 7,
+                        fontFamily: fontFamilyArcade,
+                        fontSize: '1em',
+                        textAlign: 'left',
+                        letterSpacing: 0.5,
+                        cursor: 'pointer',
+                        outline: 'none',
+                        textShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 1),
+                        transition: 'background 0.19s, color 0.19s',
+                      }}
+                      onMouseDown={e => setSettingsOpen(false)}
+                      role="menuitem"
+                    >
+                      Help
+                    </a>
+                  </li>
+                  {/* Contact */}
+                  <li>
+                    <a
+                      href="#contact"
+                      className="mm-dropdown-item"
+                      tabIndex={0}
+                      style={{
+                        display: 'block',
+                        color: darkMode ? COLORS.yellow : COLORS.pink,
+                        padding: '10px 16px',
+                        textDecoration: 'none',
+                        background: 'none',
+                        fontWeight: 600,
+                        borderRadius: 7,
+                        fontFamily: fontFamilyArcade,
+                        fontSize: '1em',
+                        textAlign: 'left',
+                        letterSpacing: 0.5,
+                        cursor: 'pointer',
+                        outline: 'none',
+                        textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.pink, 1),
+                        transition: 'background 0.19s, color 0.19s',
+                      }}
+                      onMouseDown={e => setSettingsOpen(false)}
+                      role="menuitem"
+                    >
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              )}
+            </li>
           </ul>
           {/* Absolute right: Theme toggle */}
           <button
@@ -240,24 +437,27 @@ function App() {
               background: darkMode ? '#1c1c25cb' : '#f0f0ffcc',
               border: `2.5px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
               borderRadius: 8,
-              padding: '0.4em 0.55em',
+              padding: '0.2em 0.35em',
               marginLeft: 'auto',
               cursor: 'pointer',
               outline: 'none',
               marginTop: 0,
               marginRight: 2,
-              fontSize: 32,
-              boxShadow: `0 0 0 3px ${
+              fontSize: 22,
+              boxShadow: `0 0 0 2.5px ${
                 darkMode ? COLORS.pink : COLORS.purple
-              }44,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)}`,
+              }33,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)}`,
               color: darkMode ? COLORS.yellow : COLORS.purple,
               transition:
                 'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s',
               position: 'absolute',
-              right: 24,
+              right: 20,
               top: '50%',
               transform: 'translateY(-50%)',
               zIndex: 10,
+              minWidth: 32,
+              minHeight: 32,
+              lineHeight: 1,
             }}
             tabIndex={0}
             onKeyDown={(e) => {
@@ -276,17 +476,19 @@ function App() {
                 display: 'inline-block',
                 lineHeight: 1,
                 transform: darkMode
-                  ? 'rotate(-14deg) scale(1.07)'
-                  : 'rotate(9deg) scale(1.10)',
+                  ? 'rotate(-14deg) scale(0.85)'
+                  : 'rotate(9deg) scale(0.92)',
                 filter: darkMode
-                  ? 'drop-shadow(0 0 2px #ffe46c99)'
-                  : 'drop-shadow(0 0 2px #511cc099)',
+                  ? 'drop-shadow(0 0 1.5px #ffe46c99)'
+                  : 'drop-shadow(0 0 1.5px #511cc088)',
                 textShadow: neonShadow(
                   darkMode ? COLORS.yellow : COLORS.purple,
-                  2
+                  1
                 ),
                 userSelect: 'none',
-                fontSize: 28,
+                fontSize: 18,
+                margin: 0,
+                padding: 0,
               }}
             >
               {darkMode ? (
@@ -294,7 +496,7 @@ function App() {
                 <span
                   role="img"
                   aria-label="dark mode"
-                  style={{ fontSize: '1.7em' }}
+                  style={{ fontSize: '1.33em' }}
                 >
                   🌙
                 </span>
@@ -303,7 +505,7 @@ function App() {
                 <span
                   role="img"
                   aria-label="light mode"
-                  style={{ fontSize: '1.7em' }}
+                  style={{ fontSize: '1.33em' }}
                 >
                   🌞
                 </span>

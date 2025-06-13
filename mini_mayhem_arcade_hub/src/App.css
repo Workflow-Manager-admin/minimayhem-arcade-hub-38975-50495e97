@@ -211,6 +211,54 @@ body.light .mm-theme-toggle {
   text-shadow: none !important;
 }
 
+/* Navigation Improvements */
+.mm-nav-link:focus,
+.mm-nav-link:hover,
+.mm-dropdown-btn:focus,
+.mm-dropdown-btn:hover {
+  outline: 2px solid var(--neon-pink);
+  background: #ffb70333 !important;
+  color: var(--neon-purple) !important;
+}
+.mm-nav-link {
+  transition: background 0.2s, color 0.18s, outline 0.16s;
+}
+.mm-logo-link {
+  text-decoration: none;
+}
+
+.mm-dropdown-btn {
+  background: none !important;
+  border: none;
+  font-family: var(--arcade-font);
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  box-shadow: none;
+}
+
+.mm-dropdown-menu {
+  animation: mm-fade-in 0.18s cubic-bezier(.41,.5,.86,1.1);
+}
+
+.mm-dropdown-item:focus,
+.mm-dropdown-item:hover {
+  background: var(--neon-blue);
+  color: #fff !important;
+  outline: 2px solid var(--neon-pink);
+  text-shadow: 0 0 5px #ffb70388 !important;
+}
+
+@keyframes mm-fade-in {
+  from { opacity: 0; transform: translateY(-6px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+
 /* Scrollbar track and thumb customizations */
 ::-webkit-scrollbar-thumb {
   background: var(--neon-pink);
