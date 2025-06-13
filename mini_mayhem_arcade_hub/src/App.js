@@ -351,7 +351,7 @@ function App() {
                   fontSize: 38,
                   textShadow: neonShadow(game.color, 2),
                   marginBottom: 12,
-                  filter: 'brightness(1.05)'
+                  filter: 'none'
                 }}>{game.icon}</div>
                 <div
                   style={{
@@ -379,7 +379,7 @@ function App() {
                     color: game.color,
                     opacity: 0.6,
                     fontSize: 18,
-                    filter: 'blur(0.5px)',
+                    filter: 'none',
                   }}
                 >🟩</span>
               </div>

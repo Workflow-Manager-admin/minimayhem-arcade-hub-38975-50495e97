@@ -5,36 +5,71 @@
   --neon-yellow: #FFB703;
   --arcade-black: #0D0D0D;
   --neon-text: #fffbe6;
+  --arcade-font: 'Press Start 2P', 'VT323', 'Orbitron', monospace;
 }
+
+/* Google Fonts Arcade Imports */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@700&display=swap');
+
 /* Remove any frosted glass/blur effect globally */
+body.dark, body.light {
+  /* Both modes: sharp font and clear colors */
+  font-family: var(--arcade-font) !important;
+  background: inherit;
+  color: inherit;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: auto !important;
+  font-smooth: never !important;
+  text-rendering: geometricPrecision !important;
+  image-rendering: pixelated;
+}
+
 body.dark {
   background: linear-gradient(135deg, var(--arcade-black), #1E003A 100%) !important;
   color: var(--neon-text) !important;
-  /* No blur, keep background sharp */
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
 }
 body.light {
   background: linear-gradient(135deg, #fff 0%, var(--neon-blue) 130%) !important;
   color: #252525 !important;
-  /* No blur, keep background sharp */
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
 }
-* {
+
+/* All text elements use sharp arcade font */
+*, *:before, *:after {
   box-sizing: border-box;
+  font-family: var(--arcade-font), monospace !important;
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: auto !important;
+  font-smooth: never !important;
+  text-rendering: geometricPrecision !important;
+  image-rendering: pixelated;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--neon-pink);
 }
 ::-webkit-scrollbar { height: 7px; background: #141426; }
-a { outline: none; }
+a { outline: none !important; text-shadow: none !important; }
 
-/* Focus style - reduce haze, keep shadow but sharper */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, li, ul, button, input, select, textarea {
+  font-family: var(--arcade-font), monospace !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-font-smoothing: none !important;
+  -moz-osx-font-smoothing: auto !important;
+  font-smooth: never !important;
+  text-rendering: geometricPrecision !important;
+}
+
+/* Remove blurred text shadow for all focus */
 .mm-cta-btn:focus,
 .mm-theme-toggle:focus,
 .mm-game-card:focus {
   outline: 2.5px solid var(--neon-pink);
   background: #F7258522; /* reduce overlay */
   box-shadow: 0 0 11px 3px var(--neon-pink); /* less strong, no blur */
+  text-shadow: none !important;
+  filter: none !important;
 }
