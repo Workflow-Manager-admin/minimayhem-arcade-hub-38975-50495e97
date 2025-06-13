@@ -166,26 +166,59 @@ function BlockGame() {
   // Drag-and-drop logic
   function handleDragStart(idx, e) {
     e.preventDefault();
+    // Compute block's local offset so mouse stays under "pivot cell" of block piece
+    let block = activeBlocks[idx];
+    let target = e.target.getBoundingClientRect ? e.target.getBoundingClientRect() : null;
+    let boardRect = boardRef.current?.getBoundingClientRect();
+    // For block cell: find first cell inside block to use as drag anchor
+    let offsetInBlockX = 0, offsetInBlockY = 0;
+    if (block && boardRect && target) {
+      // We'll use the center of the block piece as anchor
+      offsetInBlockX = Math.floor(block.layout[0].length / 2);
+      offsetInBlockY = Math.floor(block.layout.length / 2);
+    }
     setDragIdx(idx);
-    setDragBlockOrigin({x:e.clientX, y:e.clientY});
-    setDragPos({x:e.clientX, y:e.clientY});
+    setDragBlockOrigin({
+      x: e.clientX,
+      y: e.clientY,
+      offsetBlockX: offsetInBlockX,
+      offsetBlockY: offsetInBlockY
+    });
+    setDragPos({ x: e.clientX, y: e.clientY });
     document.addEventListener("mousemove", handleDragMove);
     document.addEventListener("mouseup", handleDragEnd);
     document.body.style.userSelect = "none";
   }
-  function handleDragMove(e) { setDragPos({x:e.clientX, y:e.clientY}); }
+  function handleDragMove(e) {
+    setDragPos({ x: e.clientX, y: e.clientY });
+  }
   function handleDragEnd(e) {
-    if (dragIdx==null) return;
+    if (dragIdx == null) return;
     if (!boardRef.current) return;
     const rect = boardRef.current.getBoundingClientRect();
-    let row = Math.floor((e.clientY - rect.top) / cellSize);
-    let col = Math.floor((e.clientX - rect.left) / cellSize);
     const block = activeBlocks[dragIdx];
-    if (block&&row>=0&&col>=0 &&row+block.layout.length<=10&&col+block.layout[0].length<=10)
-      if (canPlaceBlock(board,block.layout,row,col)) handleCellDrop(row,col);
-    setDragIdx(null); setDragPos(null); setDragBlockOrigin(null);
-    document.removeEventListener("mousemove",handleDragMove);
-    document.removeEventListener("mouseup",handleDragEnd);
+    // Use calculated anchor/offset for proper snap
+    let offsetBlockX = dragBlockOrigin?.offsetBlockX || 0;
+    let offsetBlockY = dragBlockOrigin?.offsetBlockY || 0;
+    // Snap: center of dragged block aligns under pointer, so subtract anchor offset
+    let gridX = (e.clientX - rect.left) / cellSize - offsetBlockX;
+    let gridY = (e.clientY - rect.top) / cellSize - offsetBlockY;
+    let row = Math.round(gridY);
+    let col = Math.round(gridX);
+    if (
+      block &&
+      row >= 0 &&
+      col >= 0 &&
+      row + block.layout.length <= 10 &&
+      col + block.layout[0].length <= 10
+    ) {
+      if (canPlaceBlock(board, block.layout, row, col)) handleCellDrop(row, col);
+    }
+    setDragIdx(null);
+    setDragPos(null);
+    setDragBlockOrigin(null);
+    document.removeEventListener("mousemove", handleDragMove);
+    document.removeEventListener("mouseup", handleDragEnd);
     document.body.style.userSelect = "";
   }
 
@@ -305,21 +338,34 @@ function BlockGame() {
   }
 
   function BlockPreviewDrag({ shape, mouseX, mouseY, cellSize, origin, offsetRect }) {
-    if (!offsetRect) return null;
-    let shapeW = shape.layout[0].length * cellSize,
-        shapeH = shape.layout.length * cellSize;
-    let x = mouseX - (origin?.x??mouseX) + window.scrollX;
-    let y = mouseY - (origin?.y??mouseY) + window.scrollY;
-    x += (cellSize*shape.layout[0].length)/2-cellSize/2;
-    y += (cellSize*shape.layout.length)/2-cellSize/2;
+    if (!offsetRect || !shape) return null;
+    // Place the anchor cell of the block under the mouse
+    let blockW = shape.layout[0].length * cellSize,
+      blockH = shape.layout.length * cellSize;
+    let offsetBlockX = origin?.offsetBlockX || 0;
+    let offsetBlockY = origin?.offsetBlockY || 0;
+    // Calculate preview position: align block's local anchor to mouse pointer
+    let left = mouseX - offsetBlockX * cellSize;
+    let top = mouseY - offsetBlockY * cellSize;
     return (
-      <div style={{
-        pointerEvents:"none",position:"fixed",
-        left:x-shapeW/2,top:y-shapeH/2,
-        zIndex:1000, opacity:0.82,
-        filter:"blur(0.2px) brightness(1.08) drop-shadow(0 2px 14px #fff7)",
-      }}>
-        <BlockShape shape={shape.layout} color={shape.color} cellSize={cellSize} neon blur />
+      <div
+        style={{
+          pointerEvents: "none",
+          position: "fixed",
+          left: left,
+          top: top,
+          zIndex: 1000,
+          opacity: 0.82,
+          filter: "blur(0.2px) brightness(1.08) drop-shadow(0 2px 14px #fff7)",
+        }}
+      >
+        <BlockShape
+          shape={shape.layout}
+          color={shape.color}
+          cellSize={cellSize}
+          neon
+          blur
+        />
       </div>
     );
   }
