@@ -153,13 +153,13 @@ function LandingPage() {
         </div>
         <ul className="arcade-navlinks">
           <li>
-            <a href="#games">Games</a>
+            <a href="#games">Our Games</a>
           </li>
           <li>
-            <a href="#features">Features</a>
+            <a href="#topgames">Top Games</a>
           </li>
           <li>
-            <a href="#funzone">FunZone</a>
+            <a href="#settings">Settings</a>
           </li>
           <li>
             <button
