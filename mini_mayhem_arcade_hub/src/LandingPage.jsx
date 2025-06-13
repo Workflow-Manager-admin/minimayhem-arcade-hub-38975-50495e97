@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 // Framer Motion for animations (install if missing)
 import { motion } from "framer-motion";
 // React-icons for pixel/arcade icons (install if missing)
-import { FaGamepad, FaUser, FaTrophy, FaSun, FaMoon, FaTerminal } from "react-icons/fa6";
+import { FaGamepad, FaUser, FaTrophy, FaSun, FaMoon, FaTerminal } from "react-icons/fa";
 
 import "./LandingPage.css";
 
