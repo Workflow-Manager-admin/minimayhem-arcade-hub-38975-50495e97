@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 // Import react-icons for Moon/Sun.
 import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
+import TopGamesPage from './TopGamesPage';
+
 // Google Fonts Import
 const FONT_URL =
   'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap';
@@ -122,6 +124,15 @@ function App() {
 
   // We now hardcode nav links as per new spec; use state for dropdown open/close
   const [settingsOpen, setSettingsOpen] = useState(false);
+
+  // Simple navigation state for hash-based "pages"
+  const [currentPage, setCurrentPage] = useState(() => window.location.hash || '');
+
+  useEffect(() => {
+    const handleHash = () => setCurrentPage(window.location.hash || '');
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   // Utilities for closing dropdown if user clicks outside
   useEffect(() => {
@@ -533,240 +544,252 @@ function App() {
         minHeight: '100vh',
         width: '100vw',
       }}>
-        <section className="mm-hero" style={{
-          width: '100%',
-          textAlign: 'center',
-          paddingBottom: 32,
-        }}>
-          {/* Animated hero icon */}
-          <div className="mm-hero-arcade-icon"
-            style={{
-              margin: '0 auto 14px auto',
-              animation: 'icon-bounce 1.5s infinite alternate cubic-bezier(.93,.17,.47,1.13)'
-            }}
-          >
-            <span style={{
-              fontSize: 72,
-              textShadow: neonShadow(COLORS.blue, 4)
-            }}>👾</span>
-          </div>
-          <h1
-            style={{
-              fontSize: '2.8rem',
-              background: `linear-gradient(89deg, ${COLORS.pink}, ${COLORS.purple}, ${COLORS.blue})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontFamily: "'Press Start 2P', VT323, monospace",
-              letterSpacing: '.06em',
-              transition: 'text-shadow 0.5s',
-              textShadow: neonGlow
-                ? `${neonShadow(COLORS.pink, 4)}, ${neonShadow(COLORS.blue, 4)}`
-                : `${neonShadow(COLORS.purple, 3)}`,
-              margin: 0
-            }}
-          >Welcome to MiniMayhem Arcade</h1>
-          <div
-            className="mm-hero-description"
-            style={{
-              marginTop: 16,
-              marginBottom: 24,
-              fontSize: '1.1rem',
-              color: darkMode ? COLORS.blue : COLORS.pink,
-              textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 2),
-              maxWidth: 425,
-              marginInline: 'auto'
-            }}
-          >
-            Play lightning-fast mini-games, win daily challenges, and outscore your rivals in a neon blitz.
-          </div>
-          {/* CTA Button */}
-          <a
-            href="#games"
-            className="mm-cta-btn"
-            style={{
-              color: darkMode ? COLORS.pink : '#fff',
-              background: darkMode
-                ? `linear-gradient( 90deg, ${COLORS.purple} 0%, ${COLORS.pink} 100%)`
-                : `linear-gradient(90deg, ${COLORS.blue} 0%, ${COLORS.yellow} 100%)`,
-              border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
-              boxShadow: [
-                neonShadow(COLORS.yellow),
-                '0 0 16px 2px #fff3'
-              ].join(','),
-              fontFamily: "'Press Start 2P', monospace",
-              textTransform: 'uppercase',
-              fontWeight: 900,
-              fontSize: 18,
-              padding: '12px 28px',
-              borderRadius: 8,
-              letterSpacing: "0.06em",
-              cursor: 'pointer',
-              transition: 'background 0.2s, color 0.18s, box-shadow 0.2s'
-            }}
-          >Enter the Arcade!</a>
-        </section>
-        {/* FEATURE TEASERS */}
-        <section id="games" style={{
-          width: '100%',
-          margin: '0 auto',
-          maxWidth: 1200,
-          padding: '30px 12px 0 12px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}>
-          <h2 style={{
-            fontFamily: fontFamilyArcade,
-            fontSize: 28,
-            color: darkMode ? COLORS.yellow : COLORS.purple,
-            margin: '0 0 20px 0',
-            textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)
-          }}>🎮 Featured Games</h2>
-          {/* Game cards */}
-          <div className="mm-game-cards" style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 32,
-            justifyContent: 'center'
-          }}>
-            {games.map(game => (
-              <div
-                className="mm-game-card"
-                key={game.title}
+        {/* If hash == "#top-game", render TopGamesPage */}
+        {currentPage === '#top-game' ? (
+          <TopGamesPage
+            darkMode={darkMode}
+            neonShadow={neonShadow}
+            fontFamilyArcade={fontFamilyArcade}
+            COLORS={COLORS}
+          />
+        ) : (
+          <>
+            <section className="mm-hero" style={{
+              width: '100%',
+              textAlign: 'center',
+              paddingBottom: 32,
+            }}>
+              {/* Animated hero icon */}
+              <div className="mm-hero-arcade-icon"
                 style={{
-                  flex: '1 1 180px',
-                  minWidth: 180,
-                  maxWidth: 240,
-                  background: darkMode
-                    ? `linear-gradient(135deg, #292049 50%, #26126e 100%)`
-                    : `linear-gradient(135deg, #fff 60%,${game.color}11 120%)`,
-                  border: `2.5px solid ${game.color}`,
-                  borderRadius: 18,
-                  boxShadow: neonShadow(game.color, 4),
-                  margin: '8px 0',
-                  cursor: 'pointer',
-                  overflow: 'hidden',
-                  padding: 18,
-                  transition: 'transform 0.22s,cubic-bezier(.87,-0.29,.65,1.96),box-shadow 0.18s,border 0.13s',
-                  willChange: 'transform',
-                  position: 'relative'
-                }}
-                tabIndex={0}
-                onMouseOver={e => {
-                  e.currentTarget.style.transform = 'scale(1.065) rotate(-2deg)';
-                  e.currentTarget.style.boxShadow = `${neonShadow(game.color, 8)},0 0 24px 4px #fff2`
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.transform = 'scale(1) rotate(0)';
-                  e.currentTarget.style.boxShadow = neonShadow(game.color, 4);
+                  margin: '0 auto 14px auto',
+                  animation: 'icon-bounce 1.5s infinite alternate cubic-bezier(.93,.17,.47,1.13)'
                 }}
               >
-                {/* Arcade Animated icon */}
-                <div style={{
-                  fontSize: 38,
-                  textShadow: neonShadow(game.color, 2),
-                  marginBottom: 12,
-                  filter: 'none'
-                }}>{game.icon}</div>
-                <div
-                  style={{
-                    fontFamily: "'VT323',monospace",
-                    fontSize: 22,
-                    color: game.color,
-                    marginBottom: 10,
-                    letterSpacing: '0.04em',
-                    textShadow: neonShadow(game.color, 2)
-                  }}
-                >{game.title}</div>
-                <div style={{
-                  fontSize: 13,
-                  color: darkMode ? COLORS.blue : COLORS.purple,
-                  fontFamily: "'Press Start 2P', monospace",
-                  textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
-                }}>
-                  {game.description}
-                </div>
-                <span
-                  style={{
-                    position: 'absolute',
-                    right: 16,
-                    bottom: 12,
-                    color: game.color,
-                    opacity: 0.6,
-                    fontSize: 18,
-                    filter: 'none',
-                  }}
-                >🟩</span>
+                <span style={{
+                  fontSize: 72,
+                  textShadow: neonShadow(COLORS.blue, 4)
+                }}>👾</span>
               </div>
-            ))}
-          </div>
-        </section>
-        {/* DAILY CHALLENGE */}
-        <section id="challenge" style={{
-          marginTop: 55,
-          width: '100%',
-          maxWidth: 680,
-          textAlign: 'center',
-          padding: '30px 16px',
-          borderRadius: 14,
-          background: darkMode
-            ? `linear-gradient(137deg, ${COLORS.pink}12, ${COLORS.yellow}0e 120%)`
-            : `linear-gradient(134deg, #fff8, ${COLORS.blue}11 120%)`,
-          boxShadow: neonShadow(COLORS.yellow, 2)
-        }}>
-          <h2 style={{
-            fontFamily: fontFamilyArcade,
-            fontSize: 24,
-            color: COLORS.purple,
-            margin: 0,
-            textShadow: neonShadow(COLORS.purple, 2)
-          }}>🗓️ Daily Challenge!</h2>
-          <div style={{
-            margin: '18px auto 12px auto',
-            maxWidth: 400,
-            color: darkMode ? COLORS.blue : COLORS.pink,
-            fontSize: 15,
-            textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 1)
-          }}>
-            <strong>Motivation:</strong>
-            <div style={{
-              marginTop: 5, marginBottom: 14,
-              fontStyle: 'italic',
-              fontFamily: "'VT323',monospace"
-            }} aria-live="polite">
-              {quote ? <span>“{quote}”</span> : <span>Loading inspiration…</span>}
-            </div>
-          </div>
-          <div style={{
-            margin: '15px auto 8px auto',
-            maxWidth: 380,
-            color: darkMode ? COLORS.pink : COLORS.purple,
-            fontFamily: "'VT323',monospace",
-            fontSize: 15,
-            background: darkMode ? '#18102A55' : '#F7C94811',
-            padding: '14px 12px',
-            borderRadius: 8,
-            boxShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 2),
-          }}>
-            <strong>Joke of the Day:</strong>
-            <div style={{
-              marginTop: 7,
-              fontStyle: 'italic',
-              letterSpacing: '.01em'
-            }} aria-live="polite">
-              {joke ? <span>{joke}</span> : <span>Loading a good laugh…</span>}
-            </div>
-          </div>
-          <div style={{
-            marginTop: 20,
-            color: COLORS.yellow,
-            fontWeight: 700,
-            textShadow: neonShadow(COLORS.yellow),
-            fontSize: 19,
-          }}>
-            Can you beat today's high score? 🎯
-          </div>
-        </section>
+              <h1
+                style={{
+                  fontSize: '2.8rem',
+                  background: `linear-gradient(89deg, ${COLORS.pink}, ${COLORS.purple}, ${COLORS.blue})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontFamily: "'Press Start 2P', VT323, monospace",
+                  letterSpacing: '.06em',
+                  transition: 'text-shadow 0.5s',
+                  textShadow: neonGlow
+                    ? `${neonShadow(COLORS.pink, 4)}, ${neonShadow(COLORS.blue, 4)}`
+                    : `${neonShadow(COLORS.purple, 3)}`,
+                  margin: 0
+                }}
+              >Welcome to MiniMayhem Arcade</h1>
+              <div
+                className="mm-hero-description"
+                style={{
+                  marginTop: 16,
+                  marginBottom: 24,
+                  fontSize: '1.1rem',
+                  color: darkMode ? COLORS.blue : COLORS.pink,
+                  textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 2),
+                  maxWidth: 425,
+                  marginInline: 'auto'
+                }}
+              >
+                Play lightning-fast mini-games, win daily challenges, and outscore your rivals in a neon blitz.
+              </div>
+              {/* CTA Button */}
+              <a
+                href="#games"
+                className="mm-cta-btn"
+                style={{
+                  color: darkMode ? COLORS.pink : '#fff',
+                  background: darkMode
+                    ? `linear-gradient( 90deg, ${COLORS.purple} 0%, ${COLORS.pink} 100%)`
+                    : `linear-gradient(90deg, ${COLORS.blue} 0%, ${COLORS.yellow} 100%)`,
+                  border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
+                  boxShadow: [
+                    neonShadow(COLORS.yellow),
+                    '0 0 16px 2px #fff3'
+                  ].join(','),
+                  fontFamily: "'Press Start 2P', monospace",
+                  textTransform: 'uppercase',
+                  fontWeight: 900,
+                  fontSize: 18,
+                  padding: '12px 28px',
+                  borderRadius: 8,
+                  letterSpacing: "0.06em",
+                  cursor: 'pointer',
+                  transition: 'background 0.2s, color 0.18s, box-shadow 0.2s'
+                }}
+              >Enter the Arcade!</a>
+            </section>
+            {/* FEATURE TEASERS */}
+            <section id="games" style={{
+              width: '100%',
+              margin: '0 auto',
+              maxWidth: 1200,
+              padding: '30px 12px 0 12px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
+              <h2 style={{
+                fontFamily: fontFamilyArcade,
+                fontSize: 28,
+                color: darkMode ? COLORS.yellow : COLORS.purple,
+                margin: '0 0 20px 0',
+                textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)
+              }}>🎮 Featured Games</h2>
+              {/* Game cards */}
+              <div className="mm-game-cards" style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 32,
+                justifyContent: 'center'
+              }}>
+                {games.map(game => (
+                  <div
+                    className="mm-game-card"
+                    key={game.title}
+                    style={{
+                      flex: '1 1 180px',
+                      minWidth: 180,
+                      maxWidth: 240,
+                      background: darkMode
+                        ? `linear-gradient(135deg, #292049 50%, #26126e 100%)`
+                        : `linear-gradient(135deg, #fff 60%,${game.color}11 120%)`,
+                      border: `2.5px solid ${game.color}`,
+                      borderRadius: 18,
+                      boxShadow: neonShadow(game.color, 4),
+                      margin: '8px 0',
+                      cursor: 'pointer',
+                      overflow: 'hidden',
+                      padding: 18,
+                      transition: 'transform 0.22s,cubic-bezier(.87,-0.29,.65,1.96),box-shadow 0.18s,border 0.13s',
+                      willChange: 'transform',
+                      position: 'relative'
+                    }}
+                    tabIndex={0}
+                    onMouseOver={e => {
+                      e.currentTarget.style.transform = 'scale(1.065) rotate(-2deg)';
+                      e.currentTarget.style.boxShadow = `${neonShadow(game.color, 8)},0 0 24px 4px #fff2`
+                    }}
+                    onMouseOut={e => {
+                      e.currentTarget.style.transform = 'scale(1) rotate(0)';
+                      e.currentTarget.style.boxShadow = neonShadow(game.color, 4);
+                    }}
+                  >
+                    {/* Arcade Animated icon */}
+                    <div style={{
+                      fontSize: 38,
+                      textShadow: neonShadow(game.color, 2),
+                      marginBottom: 12,
+                      filter: 'none'
+                    }}>{game.icon}</div>
+                    <div
+                      style={{
+                        fontFamily: "'VT323',monospace",
+                        fontSize: 22,
+                        color: game.color,
+                        marginBottom: 10,
+                        letterSpacing: '0.04em',
+                        textShadow: neonShadow(game.color, 2)
+                      }}
+                    >{game.title}</div>
+                    <div style={{
+                      fontSize: 13,
+                      color: darkMode ? COLORS.blue : COLORS.purple,
+                      fontFamily: "'Press Start 2P', monospace",
+                      textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
+                    }}>
+                      {game.description}
+                    </div>
+                    <span
+                      style={{
+                        position: 'absolute',
+                        right: 16,
+                        bottom: 12,
+                        color: game.color,
+                        opacity: 0.6,
+                        fontSize: 18,
+                        filter: 'none',
+                      }}
+                    >🟩</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+            {/* DAILY CHALLENGE */}
+            <section id="challenge" style={{
+              marginTop: 55,
+              width: '100%',
+              maxWidth: 680,
+              textAlign: 'center',
+              padding: '30px 16px',
+              borderRadius: 14,
+              background: darkMode
+                ? `linear-gradient(137deg, ${COLORS.pink}12, ${COLORS.yellow}0e 120%)`
+                : `linear-gradient(134deg, #fff8, ${COLORS.blue}11 120%)`,
+              boxShadow: neonShadow(COLORS.yellow, 2)
+            }}>
+              <h2 style={{
+                fontFamily: fontFamilyArcade,
+                fontSize: 24,
+                color: COLORS.purple,
+                margin: 0,
+                textShadow: neonShadow(COLORS.purple, 2)
+              }}>🗓️ Daily Challenge!</h2>
+              <div style={{
+                margin: '18px auto 12px auto',
+                maxWidth: 400,
+                color: darkMode ? COLORS.blue : COLORS.pink,
+                fontSize: 15,
+                textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 1)
+              }}>
+                <strong>Motivation:</strong>
+                <div style={{
+                  marginTop: 5, marginBottom: 14,
+                  fontStyle: 'italic',
+                  fontFamily: "'VT323',monospace"
+                }} aria-live="polite">
+                  {quote ? <span>“{quote}”</span> : <span>Loading inspiration…</span>}
+                </div>
+              </div>
+              <div style={{
+                margin: '15px auto 8px auto',
+                maxWidth: 380,
+                color: darkMode ? COLORS.pink : COLORS.purple,
+                fontFamily: "'VT323',monospace",
+                fontSize: 15,
+                background: darkMode ? '#18102A55' : '#F7C94811',
+                padding: '14px 12px',
+                borderRadius: 8,
+                boxShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 2),
+              }}>
+                <strong>Joke of the Day:</strong>
+                <div style={{
+                  marginTop: 7,
+                  fontStyle: 'italic',
+                  letterSpacing: '.01em'
+                }} aria-live="polite">
+                  {joke ? <span>{joke}</span> : <span>Loading a good laugh…</span>}
+                </div>
+              </div>
+              <div style={{
+                marginTop: 20,
+                color: COLORS.yellow,
+                fontWeight: 700,
+                textShadow: neonShadow(COLORS.yellow),
+                fontSize: 19,
+              }}>
+                Can you beat today's high score? 🎯
+              </div>
+            </section>
+          </>
+        )}
       </main>
       {/* FOOTER */}
       <footer className="mm-footer" style={{
