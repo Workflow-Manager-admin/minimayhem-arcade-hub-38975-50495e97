@@ -382,9 +382,6 @@ function LandingPage() {
                 <FaMoon style={{ color: "#2D2D72", fontSize: "1.18rem" }} />
               )}
             </button>
-            <span className="arcade-footer-credit">
-              Designed by <a href="https://kavia.ai/" target="_blank" rel="noreferrer">KAVIA</a>
-            </span>
           </div>
         </footer>
       </main>
