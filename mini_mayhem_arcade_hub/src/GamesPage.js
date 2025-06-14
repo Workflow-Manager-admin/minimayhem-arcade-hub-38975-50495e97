@@ -68,7 +68,7 @@ function GamesPage() {
       title: 'Sliding Tile Puzzle',
       description: 'Slide blocks into order. How many moves will it take?',
       icon: <FaFont color="#00FFCB" size={48} />,
-      route: '/sliding-tile',
+      route: '/sliding-puzzle',
       color: '#00FFCB',
       accent: '#2D2D72'
     }

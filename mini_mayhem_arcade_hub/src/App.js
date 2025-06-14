@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
 import TopGamesPage from './TopGamesPage';
+import SlidingTilePuzzle from './SlidingTilePuzzle';
 
 // Google Fonts Import
 const FONT_URL =
@@ -126,12 +127,25 @@ function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   // Simple navigation state for hash-based "pages"
-  const [currentPage, setCurrentPage] = useState(() => window.location.hash || '');
+  const [currentPage, setCurrentPage] = useState(() =>
+    window.location.hash ||
+    window.location.pathname === "/sliding-puzzle"
+      ? "/sliding-puzzle"
+      : ""
+  );
 
   useEffect(() => {
-    const handleHash = () => setCurrentPage(window.location.hash || '');
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    const handleLocation = () => {
+      const path = window.location.pathname;
+      if (path === "/sliding-puzzle") setCurrentPage("/sliding-puzzle");
+      else setCurrentPage(window.location.hash || "");
+    };
+    window.addEventListener('hashchange', handleLocation);
+    window.addEventListener('popstate', handleLocation);
+    return () => {
+      window.removeEventListener('hashchange', handleLocation);
+      window.removeEventListener('popstate', handleLocation);
+    };
   }, []);
 
   // Utilities for closing dropdown if user clicks outside
@@ -544,8 +558,10 @@ function App() {
         minHeight: '100vh',
         width: '100vw',
       }}>
-        {/* If hash == "#top-game", render TopGamesPage */}
-        {currentPage === '#top-game' ? (
+        {/* Sliding Tile Puzzle Route */}
+        {currentPage === "/sliding-puzzle" ? (
+          <SlidingTilePuzzle />
+        ) : currentPage === '#top-game' ? (
           <TopGamesPage
             darkMode={darkMode}
             neonShadow={neonShadow}
@@ -808,8 +824,6 @@ function App() {
               </div>
             </section>
           </>
-        )}
-      </main>
       {/* FOOTER */}
       <footer className="mm-footer" style={{
         marginTop: 36,

@@ -22,4 +22,250 @@ modules by path ./.ve/ 15.1 KiB
     ./.ve/EditorOverlay.css 2.25 KiB [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./.ve/EditorOverlay.css 697 bytes [built] [code generated]
   ./.ve/EditorOverlay.jsx 1.58 KiB [built] [code generated]
-webpack 5.99.9 compiled successfully in 2654 ms
+webpack 5.99.9 compiled successfully in 2477 ms
+assets by status 691 bytes [cached] 1 asset
+assets by path *.js 4.15 MiB
+  asset bundle.js 4.1 MiB [emitted] (name: main)
+  asset main.d9010b3c3ca0c9dbabbf.hot-update.js 55.5 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.d9010b3c3ca0c9dbabbf.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 4.15 MiB = bundle.js 4.1 MiB main.d9010b3c3ca0c9dbabbf.hot-update.js 55.5 KiB
+cached modules 3.27 MiB [cached] 47 modules
+runtime modules 27.5 KiB 14 modules
+javascript modules 45.4 KiB
+  ./src/App.js 34.3 KiB [built] [code generated]
+  ./src/SlidingTilePuzzle.js 11.1 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 349 ms
+assets by status 691 bytes [cached] 1 asset
+assets by path *.js 4.14 MiB
+  asset bundle.js 4.1 MiB [emitted] (name: main)
+  asset main.793afddad32df3981ab7.hot-update.js 42.1 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.793afddad32df3981ab7.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 4.14 MiB = bundle.js 4.1 MiB main.793afddad32df3981ab7.hot-update.js 42.1 KiB
+cached modules 3.28 MiB [cached] 48 modules
+runtime modules 27.5 KiB 14 modules
+./src/App.js 34.7 KiB [built] [code generated]
+webpack 5.99.9 compiled successfully in 141 ms
+assets by status 691 bytes [cached] 1 asset
+assets by path *.js 1.4 MiB
+  asset bundle.js 1.39 MiB [emitted] (name: main)
+  asset main.87660622facff5e42ad3.hot-update.js 10.6 KiB [emitted] [immutable] [hmr] (name: main)
+asset main.87660622facff5e42ad3.hot-update.json 414 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.4 MiB = bundle.js 1.39 MiB main.87660622facff5e42ad3.hot-update.js 10.6 KiB
+cached modules 1.26 MiB [cached] 38 modules
+runtime modules 27.5 KiB 14 modules
+javascript modules 649 bytes
+  ./src/index.js 610 bytes [code generated]
+  ./src/App.js 39 bytes [built] [code generated] [1 error]
+
+ERROR in ./src/App.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src/App.js: Expected corresponding JSX closing tag for <>. (658:4)
+
+  656 |         `}
+  657 |       </style>
+> 658 |     </div>
+      |     ^
+  659 |   );
+  660 | }
+  661 |
+    at constructor (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:363:19)
+    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6609:19)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4732:14)
+    at JSXParserMixin.jsxParseElement (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4761:17)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4771:19)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseMaybeAssignAllowIn (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:17)
+    at JSXParserMixin.parseParenAndDistinguishExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11608:28)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11262:23)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4776:20)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10824:29)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10816:17)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10824:29)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10816:17)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10718:23)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10714:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10714:17)
+    at JSXParserMixin.jsxParseExpressionContainer (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4644:31)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4723:36)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4710:32)
+    at JSXParserMixin.jsxParseElement (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4761:17)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4771:19)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseMaybeAssignAllowIn (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:17)
+ @ ./src/index.js 5:0-24 13:32-35
+
+webpack 5.99.9 compiled with 1 error in 67 ms
+assets by status 691 bytes [cached] 1 asset
+assets by path *.js 1.39 MiB
+  asset bundle.js 1.39 MiB [emitted] (name: main)
+  asset main.daf1c359a7cb590e186d.hot-update.js 854 bytes [emitted] [immutable] [hmr] (name: main)
+asset main.daf1c359a7cb590e186d.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.39 MiB = bundle.js 1.39 MiB main.daf1c359a7cb590e186d.hot-update.js 854 bytes
+cached modules 1.26 MiB [cached] 39 modules
+runtime modules 27.5 KiB 14 modules
+./src/App.js 39 bytes [built] [1 error]
+
+ERROR in ./src/App.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src/App.js: Unexpected token, expected "," (575:6)
+
+  573 |             {/* ...rest of previously existing "main" content goes here */}
+  574 |           </>
+> 575 |       {/* FOOTER */}
+      |       ^
+  576 |       <footer className="mm-footer" style={{
+  577 |         marginTop: 36,
+  578 |         padding: '27px 0 14px 0',
+    at constructor (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:363:19)
+    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6609:19)
+    at JSXParserMixin.unexpected (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6629:16)
+    at JSXParserMixin.expect (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6910:12)
+    at JSXParserMixin.parseParenAndDistinguishExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11594:14)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11262:23)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4776:20)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10824:29)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10816:17)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10824:29)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10816:17)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10718:23)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10714:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10714:17)
+    at JSXParserMixin.jsxParseExpressionContainer (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4644:31)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4723:36)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4710:32)
+    at JSXParserMixin.jsxParseElement (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4761:17)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4771:19)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseMaybeAssignAllowIn (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:17)
+    at JSXParserMixin.parseParenAndDistinguishExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11608:28)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11262:23)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4776:20)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10718:23)
+ @ ./src/index.js 5:0-24 13:32-35
+
+webpack 5.99.9 compiled with 1 error in 47 ms
+assets by status 691 bytes [cached] 1 asset
+assets by path *.js 1.39 MiB
+  asset bundle.js 1.39 MiB [emitted] (name: main)
+  asset main.531b757ec20bc2772b8f.hot-update.js 854 bytes [emitted] [immutable] [hmr] (name: main)
+asset main.531b757ec20bc2772b8f.hot-update.json 28 bytes [emitted] [immutable] [hmr]
+Entrypoint main 1.39 MiB = bundle.js 1.39 MiB main.531b757ec20bc2772b8f.hot-update.js 854 bytes
+cached modules 1.26 MiB [cached] 39 modules
+runtime modules 27.5 KiB 14 modules
+./src/App.js 39 bytes [built] [1 error]
+
+ERROR in ./src/App.js
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/src/App.js: Unexpected token, expected "," (827:6)
+
+  825 |             </section>
+  826 |           </>
+> 827 |       {/* FOOTER */}
+      |       ^
+  828 |       <footer className="mm-footer" style={{
+  829 |         marginTop: 36,
+  830 |         padding: '27px 0 14px 0',
+    at constructor (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:363:19)
+    at JSXParserMixin.raise (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6609:19)
+    at JSXParserMixin.unexpected (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6629:16)
+    at JSXParserMixin.expect (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:6910:12)
+    at JSXParserMixin.parseParenAndDistinguishExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11594:14)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11262:23)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4776:20)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10824:29)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10816:17)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10824:29)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10816:17)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10718:23)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10714:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10714:17)
+    at JSXParserMixin.jsxParseExpressionContainer (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4644:31)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4723:36)
+    at JSXParserMixin.jsxParseElementAt (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4710:32)
+    at JSXParserMixin.jsxParseElement (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4761:17)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4771:19)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at /home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:39
+    at JSXParserMixin.allowInAnd (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:12361:12)
+    at JSXParserMixin.parseMaybeAssignAllowIn (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10734:17)
+    at JSXParserMixin.parseParenAndDistinguishExpression (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11608:28)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11262:23)
+    at JSXParserMixin.parseExprAtom (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:4776:20)
+    at JSXParserMixin.parseExprSubscripts (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:11012:23)
+    at JSXParserMixin.parseUpdate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10997:21)
+    at JSXParserMixin.parseMaybeUnary (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10977:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10830:61)
+    at JSXParserMixin.parseExprOps (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10835:23)
+    at JSXParserMixin.parseMaybeConditional (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10812:23)
+    at JSXParserMixin.parseMaybeAssign (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10765:21)
+    at JSXParserMixin.parseExpressionBase (/home/kavia/workspace/code-generation/minimayhem-arcade-hub-38975-50495e97/mini_mayhem_arcade_hub/node_modules/@babel/parser/lib/index.js:10718:23)
+ @ ./src/index.js 5:0-24 13:32-35
+
+webpack 5.99.9 compiled with 1 error in 49 ms
