@@ -4,6 +4,7 @@ import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
 import TopGamesPage from './TopGamesPage';
 import GamesPage from './GamesPage';
+import LandingPage from './LandingPage';
 
 // Google Fonts Import
 const FONT_URL =
@@ -556,93 +557,7 @@ function App() {
         ) : currentPage === '#games' ? (
           <GamesPage />
         ) : (
-          <>
-            {/* (Original landing/hero section code here unchanged) */}
-            <section id="challenge" style={{
-              marginTop: 55,
-              width: '100%',
-              maxWidth: 680,
-              textAlign: 'center',
-              padding: '30px 16px',
-              borderRadius: 14,
-              background: darkMode
-                ? `linear-gradient(137deg, ${COLORS.pink}12, ${COLORS.yellow}0e 120%)`
-                : `linear-gradient(134deg, #fff8, ${COLORS.blue}11 120%)`,
-              boxShadow: neonShadow(COLORS.yellow, 2)
-            }}>
-              <h2 style={{
-                fontFamily: fontFamilyArcade,
-                fontSize: 24,
-                color: COLORS.purple,
-                margin: 0,
-                textShadow: neonShadow(COLORS.purple, 2)
-              }}>🗓️ Daily Challenge!</h2>
-              <div style={{
-                margin: '18px auto 12px auto',
-                maxWidth: 400,
-                color: darkMode ? COLORS.blue : COLORS.pink,
-                fontSize: 15,
-                textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 1)
-              }}>
-                <strong>Motivation:</strong>
-                <div style={{
-                  marginTop: 5, marginBottom: 14,
-                  fontStyle: 'italic',
-                  fontFamily: "'VT323',monospace"
-                }} aria-live="polite">
-                  {quote ? <span>“{quote}”</span> : <span>Loading inspiration…</span>}
-                </div>
-              </div>
-              <div style={{
-                margin: '15px auto 8px auto',
-                maxWidth: 380,
-                color: darkMode ? COLORS.pink : COLORS.purple,
-                fontFamily: "'VT323',monospace",
-                fontSize: 15,
-                background: darkMode ? '#18102A55' : '#F7C94811',
-                padding: '14px 12px',
-                borderRadius: 8,
-                boxShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 2),
-              }}>
-                <strong>Joke of the Day:</strong>
-                <div style={{
-                  marginTop: 7,
-                  fontStyle: 'italic',
-                  letterSpacing: '.01em',
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.45em"
-                }} aria-live="polite">
-                  {joke ? (
-                    <>
-                      <span>{joke}</span>
-                      <span style={{
-                        fontFamily: "'Press Start 2P', monospace",
-                        fontSize: "0.8em",
-                        color: darkMode ? COLORS.yellow : COLORS.blue,
-                        opacity: 0.82,
-                        marginLeft: 6,
-                        letterSpacing: "0.025em",
-                        textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.blue, 1)
-                      }}>(JokeAPI)</span>
-                    </>
-                  ) : (
-                    <span>Loading a good laugh…</span>
-                  )}
-                </div>
-              </div>
-              <div style={{
-                marginTop: 20,
-                color: COLORS.yellow,
-                fontWeight: 700,
-                textShadow: neonShadow(COLORS.yellow),
-                fontSize: 19,
-              }}>
-                Can you beat today's high score? 🎯
-              </div>
-            </section>
-          </>
+          <LandingPage />
         )}
       </main>
       {/* FOOTER */}

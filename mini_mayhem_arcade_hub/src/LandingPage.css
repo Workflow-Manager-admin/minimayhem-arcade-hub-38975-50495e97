@@ -1,0 +1,298 @@
+.mm-landing {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: inherit;
+  font-family: 'Press Start 2P', 'VT323', 'Orbitron', monospace;
+  animation: mm-landing-fadein 0.85s cubic-bezier(.33,.19,.65,1.15);
+  box-sizing: border-box;
+}
+@keyframes mm-landing-fadein {
+  from { opacity: 0; transform: translateY(32px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+.mm-landing-header {
+  margin-top: 58px;
+  text-align: center;
+  user-select: none;
+}
+
+.mm-landing-title {
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  outline: none;
+  margin-bottom: 0.28em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 11px #F72585bb,
+    0 0 25px #F7258570,
+    0 0 4px #fff4;
+}
+.mm-landing-arcade-icon {
+  vertical-align: middle;
+  margin-right: 17px;
+  margin-left: -8px;
+  color: #4CC9F0;
+  text-shadow:
+    0 0 8px #4CC9F0,
+    0 0 14px #3A0CA3cc;
+}
+@keyframes icon-bounce {
+  0% { transform: scale(1) translateY(0); }
+  60% { transform: scale(1.12) translateY(-10px);}
+  100% { transform: scale(1) translateY(0);}
+}
+.mm-landing-tagline {
+  font-size: 1.13rem;
+  margin-top: 0.1em;
+  margin-bottom: 0.66em;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-shadow:
+    0 0 8px #FFB703cc,
+    0 0 25px #fff2;
+  filter: none;
+}
+
+.mm-landing-intro {
+  max-width: 520px;
+  margin: 0 auto 1.2em auto;
+  padding: 0 1.1em 0 1.1em;
+  text-align: center;
+}
+.mm-landing-description {
+  font-family: 'VT323', monospace;
+  font-size: 1.25em;
+  color: #fffbe6;
+  line-height: 1.56;
+  letter-spacing: 0.017em;
+  background: rgba(26,13,38,0.06);
+  padding: 1.15em 0.7em 1.15em 0.7em;
+  border-radius: 9px;
+  box-shadow: 0 0 6px 1px #F7258548;
+}
+body.light .mm-landing-description, .mm-landing[data-theme="light"] .mm-landing-description {
+  color: #222;
+  background: #f7f7ffcc;
+  box-shadow: 0 0 7px #4CC9F033;
+}
+.mm-accent {
+  color: #F72585;
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bold;
+  letter-spacing: 0.025em;
+}
+
+.mm-landing-games {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 650px;
+  padding: 1.4em 0 0.4em 0;
+}
+.mm-landing-games-title {
+  font-family: 'Orbitron', 'Press Start 2P', monospace;
+  font-size: 1.17rem;
+  font-weight: 900;
+  margin-bottom: 0.33em;
+  text-align: left;
+}
+
+.mm-landing-games-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mm-landing-game-item {
+  display: flex;
+  align-items: center;
+  background: rgba(76,201,240,0.06);
+  border: 2px solid rgba(247,37,133,0.09);
+  border-radius: 10px;
+  margin-bottom: 0.7em;
+  padding: 0.67em 1.3em 0.67em 0.45em;
+  font-family: 'VT323', monospace;
+  font-size: 1.16em;
+  color: #F72585;
+  letter-spacing: 0.03em;
+  transition: background 0.17s, border 0.16s, box-shadow 0.14s;
+  box-shadow: 0 4px 18px 0px #3A0CA320;
+  cursor: pointer;
+  outline: none;
+}
+
+.mm-landing-game-item:focus,
+.mm-landing-game-item:hover {
+  background: #3A0CA315;
+  border-color: #4CC9F0cc;
+  box-shadow: 0 0 16px 3px #3A0CA355;
+}
+
+.mm-landing-game-emoji {
+  font-size: 1.7em;
+  margin-right: 1.05em;
+  margin-left: 0.13em;
+  filter: none;
+  user-select: none;
+  display: inline-block;
+}
+.mm-landing-game-name {
+  font-family: 'Press Start 2P', monospace;
+  color: #3A0CA3;
+  font-size: 1.04em;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 2px #4CC9F0, 0 0 9px #fff2;
+  margin-right: 13px;
+  min-width: 135px;
+  flex-shrink: 0;
+}
+.mm-landing-game-desc {
+  font-family: 'VT323', monospace;
+  color: #fffbe6;
+  font-size: 0.91em;
+  margin-left: 8px;
+  letter-spacing: 0.01em;
+}
+body.light .mm-landing-game-desc,
+.mm-landing[data-theme="light"] .mm-landing-game-desc {
+  color: #3A0CA3;
+}
+
+.mm-landing-leaderboard {
+  margin: 1.7em 0 0.8em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mm-landing-leaderboard-promo {
+  background: linear-gradient(92deg, #3A0CA322 53%, #F7258522 160%);
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2em;
+  border-radius: 11px;
+  padding: 0.49em 1.3em 0.44em 1em;
+  box-shadow: 0 0 9px #3A0CA344;
+  color: #3A0CA3;
+  text-shadow: 0 0 3px #4CC9F0;
+  text-align: center;
+}
+
+.mm-landing-settings {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.1em;
+  gap: 23px;
+  flex-wrap: wrap;
+}
+.rowflex { flex-direction: row;}
+.mm-landing-settingblock {
+  background: #FFB70311;
+  color: #FFB703;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.99em;
+  padding: 0.44em 1.11em;
+  border-radius: 8px;
+  border: 2px solid #F7258533;
+  letter-spacing: 0.015em;
+  box-shadow: 0 0 11px #4CC9F022;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.31em;
+  outline: none;
+  transition: border 0.13s, background 0.14s;
+}
+.mm-landing-settingblock:focus,
+.mm-landing-settingblock:hover {
+  background: #F7258522;
+  color: #fffbe6;
+  border-color: #FFB703BB;
+}
+body.light .mm-landing-settingblock, .mm-landing[data-theme="light"] .mm-landing-settingblock {
+  background: #3A0CA315;
+  color: #3A0CA3;
+  border-color: #FFB70355;
+  box-shadow: 0 0 7px #F7258520;
+}
+
+.mm-landing-darkmode-banner {
+  margin: 2.2em auto 0.5em auto;
+  text-align: center;
+  padding: 0.48em 1.2em 0.37em 1.2em;
+  border-radius: 7px;
+  border: 2px solid #FFB703;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-size: 1.01em;
+  font-weight: 700;
+  display: inline-block;
+  box-shadow: 0 0 11px #FFB70335;
+  letter-spacing: 0.021em;
+  user-select: none;
+}
+.mm-landing-darkmode-switch {
+  margin-left: 10px;
+  padding: 1px 11px;
+  border-radius: 14px;
+  font-size: 0.87em;
+  font-family: inherit;
+  font-weight: bolder;
+  box-shadow: 0 0 3px #fff3;
+}
+
+.mm-landing-cta-row {
+  margin-top: 2.3em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.mm-landing-cta-btn {
+  font-size: 1.07em;
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  padding: 1.1em 2.4em;
+  border-radius: 15px;
+  border: 3px solid #FFB703;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 900;
+  outline: none;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0 0 20px #F7258570, 0 0 7px #FFB70322;
+  transition: background 0.20s, border 0.18s, color 0.18s, box-shadow 0.19s;
+}
+.mm-landing-cta-btn:focus,
+.mm-landing-cta-btn:hover {
+  background: linear-gradient(95deg, #4CC9F0 10%, #F72585 120%);
+  color: #fffbe6;
+  box-shadow: 0 0 22px 9px #F7258577, 0 0 15px #FFB70322;
+  border-color: #3A0CA3;
+}
+
+@media (max-width: 900px) {
+  .mm-landing-header { margin-top: 22px;}
+  .mm-landing { padding: 0 2vw; }
+  .mm-landing-games { max-width: 99vw; }
+  .mm-landing-games-list { font-size: 0.97em;}
+}
+@media (max-width: 700px) {
+  .mm-landing-title { font-size: 1.27rem;}
+  .mm-landing { min-width: 0vw;}
+  .mm-landing-games {
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+  }
+  .mm-landing-description { font-size: 1.01em; }
+}
+@media (max-width: 530px) {
+  .mm-landing-header { margin-top: 11px;}
+  .mm-landing-games-list { font-size: 0.83em;}
+  .mm-landing-intro { font-size: 0.98em;}
+  .mm-landing-game-emoji { font-size: 1.1em;}
+  .mm-landing-game-name { font-size: 0.97em;}
+  .mm-landing-settingblock { font-size: 0.81em;}
+  .mm-landing-cta-btn { font-size: 0.87em; padding: 13px 1.3em;}
+}
