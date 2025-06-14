@@ -76,6 +76,14 @@ function GamesPage() {
 
   // Handler for Play Now button/click
   function handlePlay(route) {
+    // Special case: Block Game route
+    if (route === '/block-game') {
+      if (window.location.pathname !== '/block-game') {
+        window.history.pushState({}, '', '/block-game');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }
+      return;
+    }
     if (navigate) navigate(route);
     else window.location.href = route;
   }
