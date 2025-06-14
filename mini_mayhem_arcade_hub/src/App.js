@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 // Import react-icons for Moon/Sun.
 import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
+// Import React Router components
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
+
 import TopGamesPage from './TopGamesPage';
 import GamesPage from './GamesPage';
 import LandingPage from './LandingPage';
