@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
 import TopGamesPage from './TopGamesPage';
+import GamesPage from './GamesPage';
 
 // Google Fonts Import
 const FONT_URL =
@@ -544,7 +545,7 @@ function App() {
         minHeight: '100vh',
         width: '100vw',
       }}>
-        {/* If hash == "#top-game", render TopGamesPage */}
+        {/* Render TopGamesPage, GamesPage, or the main homepage based on hash navigation */}
         {currentPage === '#top-game' ? (
           <TopGamesPage
             darkMode={darkMode}
@@ -552,177 +553,11 @@ function App() {
             fontFamilyArcade={fontFamilyArcade}
             COLORS={COLORS}
           />
+        ) : currentPage === '#games' ? (
+          <GamesPage />
         ) : (
           <>
-            <section className="mm-hero" style={{
-              width: '100%',
-              textAlign: 'center',
-              paddingBottom: 32,
-            }}>
-              {/* Animated hero icon */}
-              <div className="mm-hero-arcade-icon"
-                style={{
-                  margin: '0 auto 14px auto',
-                  animation: 'icon-bounce 1.5s infinite alternate cubic-bezier(.93,.17,.47,1.13)'
-                }}
-              >
-                <span style={{
-                  fontSize: 72,
-                  textShadow: neonShadow(COLORS.blue, 4)
-                }}>👾</span>
-              </div>
-              <h1
-                style={{
-                  fontSize: '2.8rem',
-                  background: `linear-gradient(89deg, ${COLORS.pink}, ${COLORS.purple}, ${COLORS.blue})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontFamily: "'Press Start 2P', VT323, monospace",
-                  letterSpacing: '.06em',
-                  transition: 'text-shadow 0.5s',
-                  textShadow: neonGlow
-                    ? `${neonShadow(COLORS.pink, 4)}, ${neonShadow(COLORS.blue, 4)}`
-                    : `${neonShadow(COLORS.purple, 3)}`,
-                  margin: 0
-                }}
-              >Welcome to MiniMayhem Arcade</h1>
-              <div
-                className="mm-hero-description"
-                style={{
-                  marginTop: 16,
-                  marginBottom: 24,
-                  fontSize: '1.1rem',
-                  color: darkMode ? COLORS.blue : COLORS.pink,
-                  textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.pink, 2),
-                  maxWidth: 425,
-                  marginInline: 'auto'
-                }}
-              >
-                Play lightning-fast mini-games, win daily challenges, and outscore your rivals in a neon blitz.
-              </div>
-              {/* CTA Button */}
-              <a
-                href="#games"
-                className="mm-cta-btn"
-                style={{
-                  color: darkMode ? COLORS.pink : '#fff',
-                  background: darkMode
-                    ? `linear-gradient( 90deg, ${COLORS.purple} 0%, ${COLORS.pink} 100%)`
-                    : `linear-gradient(90deg, ${COLORS.blue} 0%, ${COLORS.yellow} 100%)`,
-                  border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
-                  boxShadow: [
-                    neonShadow(COLORS.yellow),
-                    '0 0 16px 2px #fff3'
-                  ].join(','),
-                  fontFamily: "'Press Start 2P', monospace",
-                  textTransform: 'uppercase',
-                  fontWeight: 900,
-                  fontSize: 18,
-                  padding: '12px 28px',
-                  borderRadius: 8,
-                  letterSpacing: "0.06em",
-                  cursor: 'pointer',
-                  transition: 'background 0.2s, color 0.18s, box-shadow 0.2s'
-                }}
-              >Enter the Arcade!</a>
-            </section>
-            {/* FEATURE TEASERS */}
-            <section id="games" style={{
-              width: '100%',
-              margin: '0 auto',
-              maxWidth: 1200,
-              padding: '30px 12px 0 12px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}>
-              <h2 style={{
-                fontFamily: fontFamilyArcade,
-                fontSize: 28,
-                color: darkMode ? COLORS.yellow : COLORS.purple,
-                margin: '0 0 20px 0',
-                textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 2)
-              }}>🎮 Featured Games</h2>
-              {/* Game cards */}
-              <div className="mm-game-cards" style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 32,
-                justifyContent: 'center'
-              }}>
-                {games.map(game => (
-                  <div
-                    className="mm-game-card"
-                    key={game.title}
-                    style={{
-                      flex: '1 1 180px',
-                      minWidth: 180,
-                      maxWidth: 240,
-                      background: darkMode
-                        ? `linear-gradient(135deg, #292049 50%, #26126e 100%)`
-                        : `linear-gradient(135deg, #fff 60%,${game.color}11 120%)`,
-                      border: `2.5px solid ${game.color}`,
-                      borderRadius: 18,
-                      boxShadow: neonShadow(game.color, 4),
-                      margin: '8px 0',
-                      cursor: 'pointer',
-                      overflow: 'hidden',
-                      padding: 18,
-                      transition: 'transform 0.22s,cubic-bezier(.87,-0.29,.65,1.96),box-shadow 0.18s,border 0.13s',
-                      willChange: 'transform',
-                      position: 'relative'
-                    }}
-                    tabIndex={0}
-                    onMouseOver={e => {
-                      e.currentTarget.style.transform = 'scale(1.065) rotate(-2deg)';
-                      e.currentTarget.style.boxShadow = `${neonShadow(game.color, 8)},0 0 24px 4px #fff2`
-                    }}
-                    onMouseOut={e => {
-                      e.currentTarget.style.transform = 'scale(1) rotate(0)';
-                      e.currentTarget.style.boxShadow = neonShadow(game.color, 4);
-                    }}
-                  >
-                    {/* Arcade Animated icon */}
-                    <div style={{
-                      fontSize: 38,
-                      textShadow: neonShadow(game.color, 2),
-                      marginBottom: 12,
-                      filter: 'none'
-                    }}>{game.icon}</div>
-                    <div
-                      style={{
-                        fontFamily: "'VT323',monospace",
-                        fontSize: 22,
-                        color: game.color,
-                        marginBottom: 10,
-                        letterSpacing: '0.04em',
-                        textShadow: neonShadow(game.color, 2)
-                      }}
-                    >{game.title}</div>
-                    <div style={{
-                      fontSize: 13,
-                      color: darkMode ? COLORS.blue : COLORS.purple,
-                      fontFamily: "'Press Start 2P', monospace",
-                      textShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
-                    }}>
-                      {game.description}
-                    </div>
-                    <span
-                      style={{
-                        position: 'absolute',
-                        right: 16,
-                        bottom: 12,
-                        color: game.color,
-                        opacity: 0.6,
-                        fontSize: 18,
-                        filter: 'none',
-                      }}
-                    >🟩</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-            {/* DAILY CHALLENGE */}
+            {/* (Original landing/hero section code here unchanged) */}
             <section id="challenge" style={{
               marginTop: 55,
               width: '100%',

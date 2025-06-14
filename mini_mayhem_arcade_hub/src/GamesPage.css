@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap');
+
+.mm-games-bg {
+  background: #0A0A0A;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 54px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mm-games-inner {
+  width: 100%;
+  max-width: 1088px;
+  margin: 0 auto;
+  padding: 24px 14px 42px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Arcade Heading */
+.mm-games-heading {
+  font-family: 'Press Start 2P', 'VT323', 'Orbitron', monospace;
+  font-size: 2.15rem;
+  font-weight: 900;
+  text-align: center;
+  color: #32fb74;
+  background: linear-gradient(87deg, #00ffd2 33%, #32fb74 58%, #4CC9F0 98%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 14px;
+  text-shadow:
+    0 0 8px #4CC9F0,
+    0 0 18px #32fb74bb,
+    0 0 18px #fff4;
+  filter: none;
+  user-select: none;
+  outline: none;
+}
+
+/* Animated subheading */
+.mm-games-subheading {
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1.04rem;
+  text-align: center;
+  color: #d2d2dd;
+  margin: 0 0 36px 0;
+  letter-spacing: 0.02em;
+  line-height: 1.54;
+  max-width: 460px;
+  opacity: 0;
+  animation: mm-gamesub-fadein 1.1s cubic-bezier(.79,.11,.52,1.19) 0.23s forwards, mm-gamesub-slidey 0.9s cubic-bezier(.55,.29,1,1.2) 0.33s;
+}
+
+@keyframes mm-gamesub-fadein {
+  to { opacity: 1; }
+}
+@keyframes mm-gamesub-slidey {
+  from { transform: translateY(34px);}
+  to { transform: translateY(0);}
+}
+
+/* Responsive 2–3 column grid for game cards */
+.mm-games-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  justify-items: center;
+  align-items: stretch;
+  margin-top: 12px;
+}
+
+/* Game card core styling */
+.mm-gamecard {
+  display: flex;
+  flex-direction: column;
+  background: #1C1C1C;
+  border-radius: 18px;
+  border: 2.5px solid #242ecc;
+  min-width: 0;
+  min-height: 260px;
+  max-width: 320px;
+  width: 100%;
+  box-shadow:
+    0 0 11px 3px #32fb74bb,
+    0 0 16px 7px #4cc9f077;
+  padding: 24px 15px 17px 15px;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  transition:
+    box-shadow 0.19s,
+    border 0.12s,
+    transform 0.22s cubic-bezier(.73,-0.29,.85,1.79);
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+  z-index: 1;
+}
+.mm-gamecard:focus, .mm-gamecard:hover {
+  transform: scale(1.07) rotate(-1.5deg);
+  border-color: #4CC9F0;
+  box-shadow:
+    0 0 25px 12px #00ffd2aa,
+    0 0 17px 9px #32fb74cc,
+    0 0 11px 2px #4CC9F0bb,
+    0 0 20px 5px #0ff8;
+  outline: 2.5px solid #32fb7455;
+}
+
+/* Icon illustration avatar */
+.mm-gamecard-icon {
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 5px auto;
+  border-radius: 12px;
+  font-size: 2.48rem;
+  box-shadow:
+    0 0 20px 5px #4CC9F099,
+    0 0 4px #fff2;
+  filter: none;
+}
+
+/* Card header: title, badge */
+.mm-gamecard-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mm-gamecard-title {
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-size: 1.03rem;
+  color: #4CC9F0;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-shadow:
+    0 0 4px #16ffe4dd,
+    0 0 7px #0ff7;
+}
+
+.mm-gamecard-badge {
+  font-family: 'Press Start 2P', Arial, monospace;
+  font-size: 0.72em;
+  color: #fff;
+  background: linear-gradient(89deg,#00ffd2 30%,#F72585 120%);
+  border: none;
+  border-radius: 5px;
+  margin-left: 12px;
+  padding: 3px 10px 2.5px 10px;
+  font-weight: 900;
+  text-shadow: 0 0 4px #0ff7, 0 0 2px #f72585aa;
+  letter-spacing: .02em;
+  filter: none;
+  box-shadow: 0 0 7px #4cc9f0aa;
+}
+
+.mm-gamecard-desc {
+  color: #e4f9ed;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  margin: 7px 0 9px 0;
+  min-height: 40px;
+  text-shadow: 0 0 3px #32fb7455;
+  letter-spacing: .012em;
+}
+
+/* Meta tags under */
+.mm-gamecard-meta {
+  margin: 0 0 11px 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mm-gamecard-diff {
+  font-family: 'VT323', monospace;
+  font-size: 0.97em;
+  color: #8cf2ff;
+  background: #241e2d48;
+  border-radius: 5px;
+  padding: 2px 8px;
+  letter-spacing: .04em;
+  margin-right: .2em;
+}
+.mm-gamecard-completed {
+  color: #41e87a;
+  background: #0c6041aa;
+}
+
+.mm-gamecard-play {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.91em;
+  background: linear-gradient(89deg, #00ffd2 20%, #32fb74 98%);
+  color: #181c1f;
+  border: 2px solid #4CC9F0;
+  border-radius: 6px;
+  box-shadow: 0 0 16px 3px #16ffe455;
+  margin-top: auto;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  margin-bottom: -3px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background 0.2s, color 0.18s, box-shadow 0.21s;
+}
+.mm-gamecard:focus .mm-gamecard-play,
+.mm-gamecard:hover .mm-gamecard-play {
+  background: linear-gradient(91deg, #4CC9F0 10%, #00ffd2 100%);
+  color: #062f19;
+  box-shadow: 0 0 22px 6px #32fb74bb, 0 0 8px 2px #0ffb;
+  border-color: #32fb74;
+}
+
+@media (max-width: 876px) {
+  .mm-games-heading { font-size: 1.46rem;}
+  .mm-games-grid { grid-template-columns: repeat(auto-fit, minmax(188px, 1fr));}
+  .mm-gamecard { max-width: 98vw; }
+}
+@media (max-width: 666px) {
+  .mm-games-heading { font-size: 1.06rem;}
+  .mm-games-inner { padding: 12px 3vw 15vw 3vw;}
+  .mm-games-grid { grid-template-columns: 1fr; gap: 5vw;}
+  .mm-gamecard { padding: 5vw 2vw; min-width: 0; width: 95vw;}
+}
+
+/* Arcade/emoji icon coloring as needed */
+.mm-gi-blocks { color: #4CC9F0; text-shadow: 0 0 8px #00ffd2bb; }
+.mm-gi-memory { color: #F72585; text-shadow: 0 0 7px #F72585aa; }
+.mm-gi-bolt   { color: #FFB703; text-shadow: 0 0 6px #FFD60A77; }
+.mm-gi-type   { color: #3A0CA3; text-shadow: 0 0 7px #3A0CA3bb; }
+.mm-gi-sudoku { color: #FFB703; text-shadow: 0 0 6px #FFD60A88; }
+.mm-gi-tile   { color: #4CC9F0; text-shadow: 0 0 8px #00ffd288; }
