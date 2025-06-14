@@ -1,0 +1,259 @@
+/* GamesPage Neon Arcade UI
+   Color palette: 
+     --bg:        #0A0A0A;
+     --card-bg:   #1C1C1C;
+     --neon-pri:  #2D2D72;
+     --neon-acct: #F7C948;
+     --neon-hover:#9c9c9c;
+     --btn-1:     #2DFF5A;
+     --btn-2:     #339CFF;
+   Font: Press Start 2P, VT323, Orbitron
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@400;700&display=swap');
+
+:root {
+  --mmgp-background: #0A0A0A;
+  --mmgp-card-bg: #1C1C1C;
+  --mmgp-primary: #2D2D72;
+  --mmgp-accent: #F7C948;
+  --mmgp-hover: #9c9c9c;
+  --mmgp-btn1: #2DFF5A;
+  --mmgp-btn2: #339CFF;
+  --mmgp-heading-fg: #fffbe6;
+  --mmgp-outline: #27f8f8;
+  --mmgp-pixel-font: 'Press Start 2P', 'VT323', 'Orbitron', sans-serif;
+  --mmgp-desc-font: 'Orbitron', 'VT323', 'Press Start 2P', sans-serif;
+}
+
+.mm-gamespage-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: radial-gradient(ellipse at 30% 0%, #2d2d72 0, #0A0A0A 70%);
+  background-color: var(--mmgp-background);
+  box-sizing: border-box;
+  padding-bottom: 45px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.mm-gamespage-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 38px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Arcade Neon Heading */
+.mm-gamespage-heading {
+  font-family: var(--mmgp-pixel-font);
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  text-align: center;
+  color: var(--mmgp-heading-fg);
+  margin-top: 0;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px #2D2D72, 
+    0 0 21px #F7C94877, 
+    0 0 7px #00ffa633;
+  position: relative;
+  filter: none;
+  outline: none;
+}
+
+.mm-gamespage-emoji {
+  font-size: 2.2rem;
+  margin-right: 10px;
+  vertical-align: -4px;
+  filter: drop-shadow(0 0 5px #2DFF5Abb);
+}
+
+/* Animated Subheading */
+.mm-gamespage-subheading {
+  opacity: 0;
+  font-family: var(--mmgp-desc-font);
+  font-size: 1.09rem;
+  margin-bottom: 34px;
+  color: var(--mmgp-accent);
+  letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 560px;
+  line-height: 1.6;
+  text-shadow: 0 0 6px #F7C94899, 0 0 15px #2D2D72bb;
+  transition: opacity 0.7s cubic-bezier(.83,.12,.65,1.18), transform 0.49s;
+  transform: translateY(35px) scale(0.98);
+  background: none;
+  filter: none;
+  user-select: none;
+  outline: none;
+}
+.mm-gp-subheading-animate {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.mm-gamespage-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 36px 28px;
+  margin-top: 0;
+  justify-items: center;
+  align-items: stretch;
+}
+
+/* Game Card Styles */
+.mm-gp-card {
+  background: linear-gradient(133deg, var(--mmgp-card-bg) 77%, #262d59 150%);
+  border: 2.5px solid var(--mmgp-btn2);
+  border-radius: 16px;
+  box-shadow: 0 0 6px 1.2px var(--mmgp-btn2)88, 0 0 18px 7px #252b;
+  min-width: 0;
+  min-height: 232px;
+  max-width: 325px;
+  padding: 22px 12px 19px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: 
+    transform 0.23s cubic-bezier(.86,-0.48,.66,1.47), 
+    box-shadow 0.19s, 
+    border 0.18s;
+  outline: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.mm-gp-card:focus,
+.mm-gp-card:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow:
+    0 0 15px 6px var(--mmgp-btn1)bb,
+    0 0 42px 10px #F7C948cc,
+    0 0 17px 8px #fff2;
+  border-color: var(--mmgp-accent);
+  outline: 2.8px solid var(--mmgp-accent);
+}
+
+.mm-gp-card-icon {
+  margin-bottom: 13px;
+  font-size: 47px;
+  text-shadow: 
+    0 0 8px #F7C948,
+    0 0 7px #2DFF5A88;
+  filter: none;
+  user-select: none;
+}
+
+.mm-gp-card-title {
+  font-family: var(--mmgp-pixel-font);
+  font-size: 1.14rem;
+  color: var(--mmgp-primary);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: .045em;
+  word-break: break-word;
+  text-shadow:
+    0 0 8px #F7C94877,
+    0 0 12px #2D2D72bb;
+}
+
+.mm-gp-card-desc {
+  font-family: var(--mmgp-desc-font);
+  font-size: 1.01em;
+  color: #ECECF1;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: .01em;
+  text-shadow:
+    0 0 3px #2D2D1299,
+    0 0 12px #9c9c9c11;
+  min-height: 36px;
+  filter: none;
+}
+
+/* Neon Play Now button */
+.mm-gp-card-play {
+  font-family: var(--mmgp-pixel-font);
+  font-size: 1.07em;
+  font-weight: 700;
+  padding: 0.67em 1.33em;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  background: linear-gradient(
+    90deg, var(--mmgp-btn1) 0%, var(--mmgp-btn2) 100%
+  );
+  color: #0A0A0A !important;
+  box-shadow: 
+    0 0 8px 2px #27f8f7aa, 
+    0 0 18px 2px #2dff5a77;
+  cursor: pointer;
+  transition: 
+    background 0.15s, 
+    color 0.13s, 
+    transform 0.17s, 
+    box-shadow 0.18s;
+  margin-top: auto;
+  align-self: center;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  filter: none;
+}
+
+.mm-gp-card-play:focus,
+.mm-gp-card-play:hover {
+  background: linear-gradient(
+    90deg, var(--mmgp-accent) 20%, var(--mmgp-btn2) 80%
+  );
+  color: #2D2D72 !important;
+  box-shadow: 
+    0 0 20px 6px var(--mmgp-accent)aa, 
+    0 0 36px 9px var(--mmgp-primary)99;
+  transform: scale(1.12) rotate(-2deg);
+}
+
+@media (max-width: 890px) {
+  .mm-gamespage-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 32px 16px;
+  }
+  .mm-gp-card { max-width: 98vw;}
+  .mm-gamespage-heading { font-size: 1.6rem;}
+}
+
+@media (max-width: 650px) {
+  .mm-gamespage-grid { grid-template-columns: 1fr; gap: 7vw;}
+  .mm-gamespage-container { padding: 45px 3vw 30px 3vw;}
+  .mm-gp-card { padding: 6vw 3vw; max-width: 100vw;}
+}
+
+/* Accessible visual focus for buttons and cards */
+.mm-gp-card:focus, .mm-gp-card-play:focus {
+  outline: 2.6px solid #F7C948;
+  box-shadow:
+    0 0 22px 7px var(--mmgp-accent)bb, 
+    0 0 6px 2px #fffbe6bd;
+  background: #22242c33;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2D2D72;
+}
+::-webkit-scrollbar { 
+  background: #141426;
+  height: 7px;
+}
