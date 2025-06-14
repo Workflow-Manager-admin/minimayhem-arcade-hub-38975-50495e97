@@ -12,6 +12,8 @@ import {
 import TopGamesPage from './TopGamesPage';
 import GamesPage from './GamesPage';
 import LandingPage from './LandingPage';
+// BlockBuilder import for block-game page route
+import BlockBuilder from './BlockBuilder';
 
 // Google Fonts Import
 const FONT_URL =
@@ -154,504 +156,520 @@ function App() {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [settingsOpen]);
 
+  // --- SPA Routing: Switch from hash-based or manual routing to React Router ---
+  // For static SPA hosting (e.g., GitHub Pages, Netlify), be sure your deployment
+  // sends all unknown routes to index.html for client-side rendering.
+  // See: https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
+
   return (
-    <div
-      className="mm-app"
-      style={{
-        minHeight: '100vh',
-        fontFamily: fontFamilyArcade,
-        background: darkMode
-          ? `linear-gradient(135deg, ${COLORS.black}, #1E003A 100%)`
-          : `linear-gradient(135deg, #ffffff 0%, ${COLORS.blue} 130%)`,
-        transition: 'background 0.4s',
-      }}
-    >
-      {/* HEADER */}
-      <header className="mm-header" style={{
-        position: 'fixed',
-        top: 0,
-        width: '100vw',
-        zIndex: 90,
-        background: darkMode
-          ? `linear-gradient(to right, #18102A 60%, ${COLORS.purple} 170%)`
-          : '#ffffffe3',
-        borderBottom: `2px solid ${darkMode ? COLORS.pink : COLORS.purple}`,
-        boxShadow: `0 2px 16px 0 ${darkMode ? COLORS.purple : COLORS.blue}44`
-      }}>
-        <nav
-          className="mm-nav"
-          style={{
-            maxWidth: 1200,
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            position: 'relative'
-          }}
-        >
-          {/* Logo/Landing Link */}
-          <a
-            href="/"
-            className="mm-logo-link"
+    <Router>
+      <div
+        className="mm-app"
+        style={{
+          minHeight: '100vh',
+          fontFamily: fontFamilyArcade,
+          background: darkMode
+            ? `linear-gradient(135deg, ${COLORS.black}, #1E003A 100%)`
+            : `linear-gradient(135deg, #ffffff 0%, ${COLORS.blue} 130%)`,
+          transition: 'background 0.4s',
+        }}
+      >
+        {/* HEADER */}
+        <header className="mm-header" style={{
+          position: 'fixed',
+          top: 0,
+          width: '100vw',
+          zIndex: 90,
+          background: darkMode
+            ? `linear-gradient(to right, #18102A 60%, ${COLORS.purple} 170%)`
+            : '#ffffffe3',
+          borderBottom: `2px solid ${darkMode ? COLORS.pink : COLORS.purple}`,
+          boxShadow: `0 2px 16px 0 ${darkMode ? COLORS.purple : COLORS.blue}44`
+        }}>
+          <nav
+            className="mm-nav"
             style={{
-              textDecoration: 'none',
-              outline: 'none',
-              marginRight: 0,
+              maxWidth: 1200,
+              margin: '0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              width: '100%',
+              position: 'relative'
             }}
-            aria-label="Go to MiniMayhem Arcade Landing Page"
           >
-            <span
-              className="mm-logo"
+            {/* Logo/Landing Link */}
+            <a
+              href="/"
+              className="mm-logo-link"
               style={{
-                color: COLORS.pink,
-                fontSize: '2rem',
-                letterSpacing: -2,
-                fontWeight: 900,
-                textShadow: neonShadow(COLORS.pink, 2),
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                fontFamily: "'Press Start 2P', VT323, monospace",
-                userSelect: 'none',
+                textDecoration: 'none',
+                outline: 'none',
+                marginRight: 0,
               }}
+              aria-label="Go to MiniMayhem Arcade Landing Page"
             >
               <span
+                className="mm-logo"
                 style={{
-                  color: COLORS.blue,
-                  fontSize: '2.5rem',
-                  textShadow: neonShadow(COLORS.blue),
-                }}
-              >
-                🕹️
-              </span>
-              MiniMayhem Arcade
-            </span>
-          </a>
-          {/* New Nav Links, left-aligned */}
-          <ul
-            className="mm-nav-links"
-            style={{
-              listStyle: 'none',
-              display: 'flex',
-              gap: 24,
-              margin: '0 0 0 32px',
-              padding: 0,
-              alignItems: 'center',
-              flex: '0 1 auto',
-            }}
-          >
-            {/* Our Games */}
-            <li>
-              <a
-                href="#games"
-                style={{
-                  color: darkMode ? COLORS.yellow : COLORS.purple,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  fontSize: '1rem',
-                  padding: '6px 12px',
-                  borderRadius: 6,
-                  letterSpacing: 1,
-                  textShadow: neonShadow(
-                    darkMode ? COLORS.yellow : COLORS.purple, 2
-                  ),
-                  transition: 'color 0.23s, background 0.28s',
-                }}
-                className="mm-nav-link"
-              >
-                Our Games
-              </a>
-            </li>
-            {/* Top Game */}
-            <li>
-              <a
-                href="#top-game"
-                style={{
-                  color: darkMode ? COLORS.pink : COLORS.blue,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  fontSize: '1rem',
-                  padding: '6px 12px',
-                  borderRadius: 6,
-                  letterSpacing: 1,
-                  textShadow: neonShadow(
-                    darkMode ? COLORS.pink : COLORS.blue, 2
-                  ),
-                  transition: 'color 0.23s, background 0.28s',
-                }}
-                className="mm-nav-link"
-              >
-                Top Game
-              </a>
-            </li>
-            {/* Settings Dropdown */}
-            <li
-              style={{
-                position: 'relative',
-                userSelect: 'none',
-              }}
-              onMouseLeave={() => setSettingsOpen(false)}
-            >
-              <button
-                className="mm-nav-link mm-dropdown-btn"
-                type="button"
-                aria-haspopup="true"
-                aria-expanded={settingsOpen}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: darkMode ? COLORS.blue : COLORS.purple,
-                  fontWeight: 600,
-                  fontSize: '1rem',
-                  padding: '6px 12px',
-                  borderRadius: 6,
-                  cursor: 'pointer',
-                  boxShadow: 'none',
-                  outline: (settingsOpen ? `2px solid ${COLORS.purple}` : 'none'),
-                  letterSpacing: 1,
-                  textShadow: neonShadow(
-                    darkMode ? COLORS.blue : COLORS.purple, 2
-                  ),
+                  color: COLORS.pink,
+                  fontSize: '2rem',
+                  letterSpacing: -2,
+                  fontWeight: 900,
+                  textShadow: neonShadow(COLORS.pink, 2),
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 6,
+                  gap: 10,
+                  fontFamily: "'Press Start 2P', VT323, monospace",
+                  userSelect: 'none',
                 }}
-                onClick={() => setSettingsOpen((o) => !o)}
-                onBlur={e => {
-                  setTimeout(() => setSettingsOpen(false), 120);
-                }}
-                tabIndex={0}
               >
-                Settings
-                <span style={{
-                  fontSize: '1.1em',
-                  verticalAlign: 'middle',
-                  marginLeft: 3,
-                  userSelect: 'none'
-                }}>▼</span>
-              </button>
-              {/* Dropdown Panel */}
-              {settingsOpen && (
-                <ul
-                  id="mm-settings-dropdown-menu"
-                  className="mm-dropdown-menu"
+                <span
                   style={{
-                    listStyle: 'none',
-                    background: darkMode
-                      ? '#23224aee'
-                      : '#f7f7ffdd',
-                    position: 'absolute',
-                    top: '100%',
-                    left: 0,
-                    minWidth: 150,
-                    margin: 0,
-                    marginTop: 7,
-                    padding: 0,
-                    borderRadius: 7,
-                    boxShadow: `0 2.5px 18px 2px ${darkMode ? COLORS.purple : COLORS.blue}44`,
-                    border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
-                    zIndex: 200,
+                    color: COLORS.blue,
+                    fontSize: '2.5rem',
+                    textShadow: neonShadow(COLORS.blue),
                   }}
-                  role="menu"
                 >
-                  {/* About Us */}
-                  <li>
-                    <a
-                      href="#about-us"
-                      className="mm-dropdown-item"
-                      tabIndex={0}
-                      style={{
-                        display: 'block',
-                        color: darkMode ? COLORS.purple : COLORS.blue,
-                        padding: '10px 16px',
-                        textDecoration: 'none',
-                        background: 'none',
-                        fontWeight: 600,
-                        borderRadius: 7,
-                        fontFamily: fontFamilyArcade,
-                        fontSize: '1em',
-                        textAlign: 'left',
-                        letterSpacing: 0.5,
-                        cursor: 'pointer',
-                        outline: 'none',
-                        textShadow: neonShadow(darkMode ? COLORS.purple : COLORS.blue, 1),
-                        transition: 'background 0.19s, color 0.19s',
-                      }}
-                      onMouseDown={e => setSettingsOpen(false)}
-                      role="menuitem"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  {/* Help */}
-                  <li>
-                    <a
-                      href="#help"
-                      className="mm-dropdown-item"
-                      tabIndex={0}
-                      style={{
-                        display: 'block',
-                        color: darkMode ? COLORS.pink : COLORS.purple,
-                        padding: '10px 16px',
-                        textDecoration: 'none',
-                        background: 'none',
-                        fontWeight: 600,
-                        borderRadius: 7,
-                        fontFamily: fontFamilyArcade,
-                        fontSize: '1em',
-                        textAlign: 'left',
-                        letterSpacing: 0.5,
-                        cursor: 'pointer',
-                        outline: 'none',
-                        textShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 1),
-                        transition: 'background 0.19s, color 0.19s',
-                      }}
-                      onMouseDown={e => setSettingsOpen(false)}
-                      role="menuitem"
-                    >
-                      Help
-                    </a>
-                  </li>
-                  {/* Contact */}
-                  <li>
-                    <a
-                      href="#contact"
-                      className="mm-dropdown-item"
-                      tabIndex={0}
-                      style={{
-                        display: 'block',
-                        color: darkMode ? COLORS.yellow : COLORS.pink,
-                        padding: '10px 16px',
-                        textDecoration: 'none',
-                        background: 'none',
-                        fontWeight: 600,
-                        borderRadius: 7,
-                        fontFamily: fontFamilyArcade,
-                        fontSize: '1em',
-                        textAlign: 'left',
-                        letterSpacing: 0.5,
-                        cursor: 'pointer',
-                        outline: 'none',
-                        textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.pink, 1),
-                        transition: 'background 0.19s, color 0.19s',
-                      }}
-                      onMouseDown={e => setSettingsOpen(false)}
-                      role="menuitem"
-                    >
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li>
-          </ul>
-          {/* Theme toggle - right-most, small */}
-          <button
-            className="mm-theme-toggle"
-            aria-label="Toggle dark/light theme"
-            onClick={toggleTheme}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: darkMode ? '#1c1c25cb' : '#f0f0ffcc',
-              border: `2px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
-              borderRadius: 8,
-              padding: '0.09em 0.25em',
-              marginLeft: 'auto',
-              cursor: 'pointer',
-              outline: 'none',
-              marginTop: 0,
-              marginRight: 2,
-              fontSize: 18,
-              boxShadow: `0 0 0 2px ${
-                darkMode ? COLORS.pink : COLORS.purple
-              }33,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)}`,
-              color: darkMode ? COLORS.yellow : COLORS.purple,
-              transition:
-                'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s',
-              position: 'absolute',
-              right: 14,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              zIndex: 10,
-              minWidth: 27,
-              minHeight: 27,
-              lineHeight: 1,
-            }}
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleTheme();
-              }
-            }}
-            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            data-testid="theme-toggle-btn"
-            type="button"
-          >
-            <span
-              aria-hidden="true"
+                  🕹️
+                </span>
+                MiniMayhem Arcade
+              </span>
+            </a>
+            {/* New Nav Links, left-aligned */}
+            <ul
+              className="mm-nav-links"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                lineHeight: 1,
-                transform: darkMode
-                  ? 'rotate(-14deg) scale(0.94)'
-                  : 'rotate(9deg) scale(0.97)',
-                filter: darkMode
-                  ? 'drop-shadow(0 0 1.5px #ffe46c99)'
-                  : 'drop-shadow(0 0 1.5px #511cc088)',
-                textShadow: neonShadow(
-                  darkMode ? COLORS.yellow : COLORS.purple,
-                  1
-                ),
-                userSelect: 'none',
-                fontSize: 18,
-                margin: 0,
+                listStyle: 'none',
+                display: 'flex',
+                gap: 24,
+                margin: '0 0 0 32px',
                 padding: 0,
+                alignItems: 'center',
+                flex: '0 1 auto',
               }}
             >
-              {darkMode ? (
-                // Moon icon for darkMode (night)
-                <MdNightlightRound
-                  size={21}
+              {/* Our Games */}
+              <li>
+                <a
+                  href="#games"
                   style={{
-                    color: COLORS.yellow,
-                    marginLeft: 0,
-                    marginRight: 0,
-                    stroke: 'none'
+                    color: darkMode ? COLORS.yellow : COLORS.purple,
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    fontSize: '1rem',
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    letterSpacing: 1,
+                    textShadow: neonShadow(
+                      darkMode ? COLORS.yellow : COLORS.purple, 2
+                    ),
+                    transition: 'color 0.23s, background 0.28s',
                   }}
-                  aria-label="dark mode"
-                  title="Currently Dark Mode"
-                />
-              ) : (
-                // Sun icon for lightMode (day)
-                <MdWbSunny
-                  size={22}
+                  className="mm-nav-link"
+                >
+                  Our Games
+                </a>
+              </li>
+              {/* Top Game */}
+              <li>
+                <a
+                  href="#top-game"
                   style={{
-                    color: COLORS.purple,
-                    marginLeft: 0,
-                    marginRight: 0,
-                    stroke: 'none'
+                    color: darkMode ? COLORS.pink : COLORS.blue,
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    fontSize: '1rem',
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    letterSpacing: 1,
+                    textShadow: neonShadow(
+                      darkMode ? COLORS.pink : COLORS.blue, 2
+                    ),
+                    transition: 'color 0.23s, background 0.28s',
                   }}
-                  aria-label="light mode"
-                  title="Currently Light Mode"
-                />
-              )}
-            </span>
-          </button>
-        </nav>
-      </header>
-      {/* HERO SECTION */}
-      <main className="mm-main" style={{
-        paddingTop: 100,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: '100vh',
-        width: '100vw',
-      }}>
-        {/* Render TopGamesPage, GamesPage, or the main homepage based on hash navigation */}
-        {currentPage === '#top-game' ? (
-          <TopGamesPage
-            darkMode={darkMode}
-            neonShadow={neonShadow}
-            fontFamilyArcade={fontFamilyArcade}
-            COLORS={COLORS}
-          />
-        ) : currentPage === '#games' ? (
-          <GamesPage />
-        ) : (
-          <LandingPage />
-        )}
-      </main>
-      {/* FOOTER */}
-      <footer className="mm-footer" style={{
-        marginTop: 36,
-        padding: '27px 0 14px 0',
-        width: '100vw',
-        textAlign: 'center',
-        background: darkMode ? '#110829' : '#f9f9fb',
-        borderTop: `3px solid ${darkMode ? COLORS.blue : COLORS.purple}`,
-        boxShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
-        position: 'relative'
-      }}>
-        {/* Footer Links */}
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-          <nav>
-            <a href="#games" style={{
-              color: COLORS.blue,
-              textDecoration: 'none',
-              fontWeight: 700,
-              fontFamily: fontFamilyArcade,
-              fontSize: 16,
-              marginRight: 18,
-              textShadow: neonShadow(COLORS.blue, 1)
-            }}>
-              Games
-            </a>
-            <a href="#challenge" style={{
-              color: COLORS.pink,
-              textDecoration: 'none',
-              fontWeight: 700,
-              fontFamily: fontFamilyArcade,
-              fontSize: 16,
-              textShadow: neonShadow(COLORS.pink, 1)
-            }}>
-              Challenge
-            </a>
+                  className="mm-nav-link"
+                >
+                  Top Game
+                </a>
+              </li>
+              {/* Settings Dropdown */}
+              <li
+                style={{
+                  position: 'relative',
+                  userSelect: 'none',
+                }}
+                onMouseLeave={() => setSettingsOpen(false)}
+              >
+                <button
+                  className="mm-nav-link mm-dropdown-btn"
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded={settingsOpen}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: darkMode ? COLORS.blue : COLORS.purple,
+                    fontWeight: 600,
+                    fontSize: '1rem',
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    cursor: 'pointer',
+                    boxShadow: 'none',
+                    outline: (settingsOpen ? `2px solid ${COLORS.purple}` : 'none'),
+                    letterSpacing: 1,
+                    textShadow: neonShadow(
+                      darkMode ? COLORS.blue : COLORS.purple, 2
+                    ),
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                  }}
+                  onClick={() => setSettingsOpen((o) => !o)}
+                  onBlur={e => {
+                    setTimeout(() => setSettingsOpen(false), 120);
+                  }}
+                  tabIndex={0}
+                >
+                  Settings
+                  <span style={{
+                    fontSize: '1.1em',
+                    verticalAlign: 'middle',
+                    marginLeft: 3,
+                    userSelect: 'none'
+                  }}>▼</span>
+                </button>
+                {/* Dropdown Panel */}
+                {settingsOpen && (
+                  <ul
+                    id="mm-settings-dropdown-menu"
+                    className="mm-dropdown-menu"
+                    style={{
+                      listStyle: 'none',
+                      background: darkMode
+                        ? '#23224aee'
+                        : '#f7f7ffdd',
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      minWidth: 150,
+                      margin: 0,
+                      marginTop: 7,
+                      padding: 0,
+                      borderRadius: 7,
+                      boxShadow: `0 2.5px 18px 2px ${darkMode ? COLORS.purple : COLORS.blue}44`,
+                      border: `2px solid ${darkMode ? COLORS.purple : COLORS.blue}`,
+                      zIndex: 200,
+                    }}
+                    role="menu"
+                  >
+                    {/* About Us */}
+                    <li>
+                      <a
+                        href="#about-us"
+                        className="mm-dropdown-item"
+                        tabIndex={0}
+                        style={{
+                          display: 'block',
+                          color: darkMode ? COLORS.purple : COLORS.blue,
+                          padding: '10px 16px',
+                          textDecoration: 'none',
+                          background: 'none',
+                          fontWeight: 600,
+                          borderRadius: 7,
+                          fontFamily: fontFamilyArcade,
+                          fontSize: '1em',
+                          textAlign: 'left',
+                          letterSpacing: 0.5,
+                          cursor: 'pointer',
+                          outline: 'none',
+                          textShadow: neonShadow(darkMode ? COLORS.purple : COLORS.blue, 1),
+                          transition: 'background 0.19s, color 0.19s',
+                        }}
+                        onMouseDown={e => setSettingsOpen(false)}
+                        role="menuitem"
+                      >
+                        About Us
+                      </a>
+                    </li>
+                    {/* Help */}
+                    <li>
+                      <a
+                        href="#help"
+                        className="mm-dropdown-item"
+                        tabIndex={0}
+                        style={{
+                          display: 'block',
+                          color: darkMode ? COLORS.pink : COLORS.purple,
+                          padding: '10px 16px',
+                          textDecoration: 'none',
+                          background: 'none',
+                          fontWeight: 600,
+                          borderRadius: 7,
+                          fontFamily: fontFamilyArcade,
+                          fontSize: '1em',
+                          textAlign: 'left',
+                          letterSpacing: 0.5,
+                          cursor: 'pointer',
+                          outline: 'none',
+                          textShadow: neonShadow(darkMode ? COLORS.pink : COLORS.purple, 1),
+                          transition: 'background 0.19s, color 0.19s',
+                        }}
+                        onMouseDown={e => setSettingsOpen(false)}
+                        role="menuitem"
+                      >
+                        Help
+                      </a>
+                    </li>
+                    {/* Contact */}
+                    <li>
+                      <a
+                        href="#contact"
+                        className="mm-dropdown-item"
+                        tabIndex={0}
+                        style={{
+                          display: 'block',
+                          color: darkMode ? COLORS.yellow : COLORS.pink,
+                          padding: '10px 16px',
+                          textDecoration: 'none',
+                          background: 'none',
+                          fontWeight: 600,
+                          borderRadius: 7,
+                          fontFamily: fontFamilyArcade,
+                          fontSize: '1em',
+                          textAlign: 'left',
+                          letterSpacing: 0.5,
+                          cursor: 'pointer',
+                          outline: 'none',
+                          textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.pink, 1),
+                          transition: 'background 0.19s, color 0.19s',
+                        }}
+                        onMouseDown={e => setSettingsOpen(false)}
+                        role="menuitem"
+                      >
+                        Contact
+                      </a>
+                    </li>
+                  </ul>
+                )}
+              </li>
+            </ul>
+            {/* Theme toggle - right-most, small */}
+            <button
+              className="mm-theme-toggle"
+              aria-label="Toggle dark/light theme"
+              onClick={toggleTheme}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: darkMode ? '#1c1c25cb' : '#f0f0ffcc',
+                border: `2px solid ${darkMode ? COLORS.yellow : COLORS.purple}`,
+                borderRadius: 8,
+                padding: '0.09em 0.25em',
+                marginLeft: 'auto',
+                cursor: 'pointer',
+                outline: 'none',
+                marginTop: 0,
+                marginRight: 2,
+                fontSize: 18,
+                boxShadow: `0 0 0 2px ${
+                  darkMode ? COLORS.pink : COLORS.purple
+                }33,${neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)}`,
+                color: darkMode ? COLORS.yellow : COLORS.purple,
+                transition:
+                  'background 0.15s, color 0.19s, border 0.10s, box-shadow 0.12s',
+                position: 'absolute',
+                right: 14,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 10,
+                minWidth: 27,
+                minHeight: 27,
+                lineHeight: 1,
+              }}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleTheme();
+                }
+              }}
+              title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              data-testid="theme-toggle-btn"
+              type="button"
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  lineHeight: 1,
+                  transform: darkMode
+                    ? 'rotate(-14deg) scale(0.94)'
+                    : 'rotate(9deg) scale(0.97)',
+                  filter: darkMode
+                    ? 'drop-shadow(0 0 1.5px #ffe46c99)'
+                    : 'drop-shadow(0 0 1.5px #511cc088)',
+                  textShadow: neonShadow(
+                    darkMode ? COLORS.yellow : COLORS.purple,
+                    1
+                  ),
+                  userSelect: 'none',
+                  fontSize: 18,
+                  margin: 0,
+                  padding: 0,
+                }}
+              >
+                {darkMode ? (
+                  // Moon icon for darkMode (night)
+                  <MdNightlightRound
+                    size={21}
+                    style={{
+                      color: COLORS.yellow,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      stroke: 'none'
+                    }}
+                    aria-label="dark mode"
+                    title="Currently Dark Mode"
+                  />
+                ) : (
+                  // Sun icon for lightMode (day)
+                  <MdWbSunny
+                    size={22}
+                    style={{
+                      color: COLORS.purple,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      stroke: 'none'
+                    }}
+                    aria-label="light mode"
+                    title="Currently Light Mode"
+                  />
+                )}
+              </span>
+            </button>
           </nav>
-        </div>
-        <div style={{
-          marginTop: 15,
-          color: darkMode ? COLORS.yellow : COLORS.purple,
-          fontFamily: fontFamilyArcade,
-          fontSize: 14,
-          textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)
+        </header>
+        {/* ROUTING: Main SPA rendering area */}
+        <main className="mm-main" style={{
+          paddingTop: 100,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          minHeight: '100vh',
+          width: '100vw',
         }}>
-          Made with <span aria-label="arcade heart">💖</span> by MiniMayhem Arcade Team &copy; {new Date().getFullYear()}
-        </div>
-        <div style={{ marginTop: 7, fontSize: 10, color: '#8887' }}>
-          <a href="https://zenquotes.io/" style={{ color: COLORS.blue, textDecoration: 'underline' }}>ZenQuotes.io</a> &amp; <a href="https://jokeapi.dev/" style={{ color: COLORS.pink, textDecoration: 'underline' }}>JokeAPI</a> powered.
-        </div>
-      </footer>
-      {/* KEYFRAMES and Style */}
-      <style>
-        {`
-        html {
-          scroll-behavior: smooth;
-        }
-        .mm-app {
-          font-family: ${fontFamilyArcade};
-        }
-        @media (max-width: 768px) {
-          .mm-nav-links { gap: 13px !important; font-size: 97%;}
-          .mm-footer { font-size: 90%!important;}
-          .mm-game-cards { flex-direction: column !important; align-items: center; }
-        }
-        @media (max-width: 600px) {
-          .mm-header { padding: 9px 0!important; }
-          .mm-nav { padding: 9px 8px!important; flex-direction: column;}
-          .mm-logo { font-size: 1.13rem !important;}
-          .mm-hero-arcade-icon { font-size: 36px !important;}
-          .mm-hero-description, .mm-game-card, .mm-game-cards { font-size: 98%!important;}
-        }
-        @keyframes icon-bounce {
-         0% { transform: scale(1) translateY(0);}
-         85% { transform: scale(1.08) translateY(-7px);}
-         100% { transform: scale(1) translateY(0);}
-        }
-        `}
-      </style>
-    </div>
+          <Routes>
+            {/* Route for /block-game renders BlockBuilder component */}
+            <Route path="/block-game" element={<BlockBuilder />} />
+            {/* Default route renders either LandingPage, TopGamesPage, or GamesPage via hash for now (backcompat) */}
+            <Route
+              path="*"
+              element={
+                currentPage === '#top-game' ? (
+                  <TopGamesPage
+                    darkMode={darkMode}
+                    neonShadow={neonShadow}
+                    fontFamilyArcade={fontFamilyArcade}
+                    COLORS={COLORS}
+                  />
+                ) : currentPage === '#games' ? (
+                  <GamesPage />
+                ) : (
+                  <LandingPage />
+                )
+              }
+            />
+          </Routes>
+        </main>
+        {/* FOOTER */}
+        <footer className="mm-footer" style={{
+          marginTop: 36,
+          padding: '27px 0 14px 0',
+          width: '100vw',
+          textAlign: 'center',
+          background: darkMode ? '#110829' : '#f9f9fb',
+          borderTop: `3px solid ${darkMode ? COLORS.blue : COLORS.purple}`,
+          boxShadow: neonShadow(darkMode ? COLORS.blue : COLORS.purple, 1),
+          position: 'relative'
+        }}>
+          {/* Footer Links */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <nav>
+              <a href="#games" style={{
+                color: COLORS.blue,
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontFamily: fontFamilyArcade,
+                fontSize: 16,
+                marginRight: 18,
+                textShadow: neonShadow(COLORS.blue, 1)
+              }}>
+                Games
+              </a>
+              <a href="#challenge" style={{
+                color: COLORS.pink,
+                textDecoration: 'none',
+                fontWeight: 700,
+                fontFamily: fontFamilyArcade,
+                fontSize: 16,
+                textShadow: neonShadow(COLORS.pink, 1)
+              }}>
+                Challenge
+              </a>
+            </nav>
+          </div>
+          <div style={{
+            marginTop: 15,
+            color: darkMode ? COLORS.yellow : COLORS.purple,
+            fontFamily: fontFamilyArcade,
+            fontSize: 14,
+            textShadow: neonShadow(darkMode ? COLORS.yellow : COLORS.purple, 1)
+          }}>
+            Made with <span aria-label="arcade heart">💖</span> by MiniMayhem Arcade Team &copy; {new Date().getFullYear()}
+          </div>
+          <div style={{ marginTop: 7, fontSize: 10, color: '#8887' }}>
+            <a href="https://zenquotes.io/" style={{ color: COLORS.blue, textDecoration: 'underline' }}>ZenQuotes.io</a> &amp; <a href="https://jokeapi.dev/" style={{ color: COLORS.pink, textDecoration: 'underline' }}>JokeAPI</a> powered.
+          </div>
+        </footer>
+        {/* KEYFRAMES and Style */}
+        <style>
+          {`
+          html {
+            scroll-behavior: smooth;
+          }
+          .mm-app {
+            font-family: ${fontFamilyArcade};
+          }
+          @media (max-width: 768px) {
+            .mm-nav-links { gap: 13px !important; font-size: 97%;}
+            .mm-footer { font-size: 90%!important;}
+            .mm-game-cards { flex-direction: column !important; align-items: center; }
+          }
+          @media (max-width: 600px) {
+            .mm-header { padding: 9px 0!important; }
+            .mm-nav { padding: 9px 8px!important; flex-direction: column;}
+            .mm-logo { font-size: 1.13rem !important;}
+            .mm-hero-arcade-icon { font-size: 36px !important;}
+            .mm-hero-description, .mm-game-card, .mm-game-cards { font-size: 98%!important;}
+          }
+          @keyframes icon-bounce {
+           0% { transform: scale(1) translateY(0);}
+           85% { transform: scale(1.08) translateY(-7px);}
+           100% { transform: scale(1) translateY(0);}
+          }
+          `}
+        </style>
+      </div>
+    </Router>
   );
 }
 
