@@ -4,6 +4,7 @@ import { MdNightlightRound, MdWbSunny } from 'react-icons/md';
 
 import TopGamesPage from './TopGamesPage';
 import SlidingTilePuzzle from './SlidingTilePuzzle';
+import BlockGame from './BlockGame';
 
 // Google Fonts Import
 const FONT_URL =
@@ -18,7 +19,7 @@ const COLORS = {
   black: '#0D0D0D',
 };
 
-// Arcade Feature Cards Data
+// Arcade Feature Cards Data (for main page, not the /games page)
 const games = [
   {
     title: 'Typing Challenge',
@@ -123,21 +124,22 @@ function App() {
       .map((_, i) => `0 0 ${4 + i * 4}px ${color}`)
       .join(',');
 
-  // We now hardcode nav links as per new spec; use state for dropdown open/close
+  // Settings dropdown state
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  // Simple navigation state for hash-based "pages"
-  const [currentPage, setCurrentPage] = useState(() =>
-    window.location.hash ||
-    window.location.pathname === "/sliding-puzzle"
-      ? "/sliding-puzzle"
-      : ""
-  );
+  // Main routing state for this SPA. Add /block-game support.
+  const [currentPage, setCurrentPage] = useState(() => {
+    const path = window.location.pathname;
+    if (path === "/sliding-puzzle") return "/sliding-puzzle";
+    if (path === "/block-game") return "/block-game";
+    return window.location.hash || "";
+  });
 
   useEffect(() => {
     const handleLocation = () => {
       const path = window.location.pathname;
       if (path === "/sliding-puzzle") setCurrentPage("/sliding-puzzle");
+      else if (path === "/block-game") setCurrentPage("/block-game");
       else setCurrentPage(window.location.hash || "");
     };
     window.addEventListener('hashchange', handleLocation);
@@ -549,7 +551,7 @@ function App() {
           </button>
         </nav>
       </header>
-      {/* HERO SECTION */}
+      {/* HERO SECTION & SPA routing */}
       <main className="mm-main" style={{
         paddingTop: 100,
         display: 'flex',
@@ -558,9 +560,10 @@ function App() {
         minHeight: '100vh',
         width: '100vw',
       }}>
-        {/* Sliding Tile Puzzle Route */}
         {currentPage === "/sliding-puzzle" ? (
           <SlidingTilePuzzle />
+        ) : currentPage === "/block-game" ? (
+          <BlockGame />
         ) : currentPage === '#top-game' ? (
           <TopGamesPage
             darkMode={darkMode}
@@ -824,6 +827,8 @@ function App() {
               </div>
             </section>
           </>
+        )}
+      </main>
       {/* FOOTER */}
       <footer className="mm-footer" style={{
         marginTop: 36,
