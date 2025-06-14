@@ -1,0 +1,56 @@
+.mm-navbar {
+  font-family: 'Press Start 2P', 'VT323', 'Orbitron', monospace !important;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  box-sizing: border-box;
+  user-select: none;
+  transition: background 0.30s, border 0.13s, box-shadow 0.13s;
+}
+.mm-navbar-logo-link:focus { outline: 2.3px solid #F7C948; background: #ffeb9e21;}
+.mm-navbar-btn,
+.mm-navbar-profile-btn {
+  font-family: inherit;
+  font-weight: 800;
+  transition: background 0.15s, color 0.15s, box-shadow 0.18s, border 0.12s;
+}
+.mm-navbar-btn:focus,
+.mm-navbar-profile-btn:focus {
+  outline: 2px solid #F7C948;
+  background: #fffbe617 !important;
+  box-shadow: 0 0 10px 2px #F7C94855;
+}
+.mm-navbar-btn-active,
+.mm-navbar-btn-active:focus {
+  color: #F7C948 !important;
+  background: #2D2D72 !important;
+  border: 2px solid #F7C948 !important;
+  box-shadow: 0 0 8px 2px #F7C94855;
+}
+.mm-navbar-btn:hover,
+.mm-navbar-profile-btn:hover,
+.mm-navbar-btn:focus-visible,
+.mm-navbar-profile-btn:focus-visible {
+  background: #f1d15022 !important;
+  color: #2D2D72 !important;
+}
+.mm-navbar-theme-toggle {
+  font-family: 'Press Start 2P', 'Orbitron', monospace;
+  border-radius: 8px;
+  font-size: 1.5em;
+  transition: background 0.13s, color 0.13s, border 0.1s, box-shadow 0.10s;
+}
+@media (max-width: 995px) {
+  .mm-navbar-inner { padding: 0 5vw !important; }
+}
+@media (max-width: 900px) {
+  .mm-navbar-navlinks { display: none !important; }
+  .mm-navbar-mobile-toggle { display: inline-flex !important; }
+}
+@media (min-width: 900px) {
+  .mm-navbar-mobile-toggle { display: none !important; }
+  .mm-navbar-navlinks { display: flex !important; }
+}
+@media (max-width: 600px) {
+  .mm-navbar-inner { height: 48px !important; min-height: 37px !important; }
+  .mm-navbar-logo-link { font-size: 1.08em !important;}
+}
