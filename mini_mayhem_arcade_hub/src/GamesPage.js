@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './GamesPage.css';
 import { FaRegKeyboard, FaBolt, FaPuzzlePiece, FaThLarge, FaFont, FaBrain } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom'; // If not using react-router, fallback to window.location
-
-// Neon arcade pixel/modern font: 'Press Start 2P', 'VT323', 'Orbitron', sans-serif
 
 // PUBLIC_INTERFACE
 function GamesPage() {
   // For animating subheading on mount
   const [showSubhead, setShowSubhead] = useState(false);
-  // Hook for SPA navigation
-  let navigate = null;
-  try {
-    // If user has react-router, prefer it for navigation
-    navigate = useNavigate();
-  } catch (e) {}
 
   useEffect(() => {
     // Animate subheading when mounted
@@ -22,21 +13,22 @@ function GamesPage() {
     return () => clearTimeout(tm);
   }, []);
 
-  // Game cards data
+  // Game cards data (only Block Game and Sliding Tile Puzzle have implemented routes in current SPA)
   const games = [
     {
       title: 'Block Game',
       description: "Stack, rotate, and clear rows in this neon arcade take on Tetris! Beat your high score.",
       icon: <FaThLarge color="#2DFF5A" size={48} />,
-      route: '/block-game',
+      pathHash: '#block-game',
       color: '#2DFF5A',
       accent: '#2D2D72'
     },
+    // Other games are for UI consistency but navigation will only work for implemented games
     {
       title: 'Memory Game',
       description: 'Flip the cards. Find all matching pairs. Beat your best!',
       icon: <FaBrain color="#F7C948" size={48} />,
-      route: '/memory-game',
+      pathHash: '#memory-game',
       color: '#F7C948',
       accent: '#2D2D72'
     },
@@ -44,7 +36,7 @@ function GamesPage() {
       title: 'Reaction Speed Test',
       description: 'Test your reflexes with sudden neon signals!',
       icon: <FaBolt color="#339CFF" size={48} />,
-      route: '/reaction-speed',
+      pathHash: '#reaction-speed',
       color: '#339CFF',
       accent: '#2D2D72'
     },
@@ -52,7 +44,7 @@ function GamesPage() {
       title: 'Word Typing Challenge',
       description: 'Type words ASAP. Fast fingers = high scores!',
       icon: <FaRegKeyboard color="#FF3EFF" size={48} />,
-      route: '/typing-challenge',
+      pathHash: '#typing-challenge',
       color: '#FF3EFF',
       accent: '#2D2D72'
     },
@@ -60,7 +52,7 @@ function GamesPage() {
       title: 'Sudoku',
       description: 'Number logic — fill the grid, flex your brain!',
       icon: <FaPuzzlePiece color="#FFE35B" size={48} />,
-      route: '/sudoku',
+      pathHash: '#sudoku',
       color: '#FFE35B',
       accent: '#2D2D72'
     },
@@ -68,24 +60,15 @@ function GamesPage() {
       title: 'Sliding Tile Puzzle',
       description: 'Slide blocks into order. How many moves will it take?',
       icon: <FaFont color="#00FFCB" size={48} />,
-      route: '/sliding-puzzle',
+      pathHash: '#sliding-puzzle',
       color: '#00FFCB',
       accent: '#2D2D72'
     }
   ];
 
   // Handler for Play Now button/click
-  function handlePlay(route) {
-    // Special case: Block Game route
-    if (route === '/block-game') {
-      if (window.location.pathname !== '/block-game') {
-        window.history.pushState({}, '', '/block-game');
-        window.dispatchEvent(new PopStateEvent('popstate'));
-      }
-      return;
-    }
-    if (navigate) navigate(route);
-    else window.location.href = route;
+  function handlePlay(pathHash) {
+    window.location.hash = pathHash;
   }
 
   return (
@@ -112,9 +95,9 @@ function GamesPage() {
               tabIndex={0}
               role="listitem"
               aria-label={`Game: ${game.title}`}
-              onClick={() => handlePlay(game.route)}
+              onClick={() => handlePlay(game.pathHash)}
               onKeyDown={e => {
-                if (e.key === 'Enter' || e.key === ' ') handlePlay(game.route);
+                if (e.key === 'Enter' || e.key === ' ') handlePlay(game.pathHash);
               }}
             >
               <div className="mm-gp-card-icon" style={{ color: game.color }}>
@@ -125,7 +108,7 @@ function GamesPage() {
               <button
                 className="mm-gp-card-play mm-cta-btn"
                 tabIndex={0}
-                onClick={e => {e.stopPropagation(); handlePlay(game.route);}}
+                onClick={e => {e.stopPropagation(); handlePlay(game.pathHash);}}
                 style={{
                   background: `linear-gradient(85deg, ${game.color} 35%, ${game.accent} 90%)`
                 }}
