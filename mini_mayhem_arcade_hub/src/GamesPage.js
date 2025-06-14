@@ -26,7 +26,7 @@ function GamesPage() {
   const games = [
     {
       title: 'Block Game',
-      description: 'Classic falling blocks — how long can you survive?',
+      description: "Stack, rotate, and clear rows in this neon arcade take on Tetris! Beat your high score.",
       icon: <FaThLarge color="#2DFF5A" size={48} />,
       route: '/block-game',
       color: '#2DFF5A',
