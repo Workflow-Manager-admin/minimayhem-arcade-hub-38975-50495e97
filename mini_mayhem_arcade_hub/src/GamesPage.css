@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600&display=swap');
 
+/* Arcadedark/light override classes added for dynamic theme */
 .mm-games-bg {
-  background: #0A0A0A;
   min-height: 100vh;
   width: 100vw;
   padding: 54px 0 0 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  transition: background 0.5s;
+}
+.mm-games-bg.mm-dark {
+  background: linear-gradient(135deg, #0A0A0A, #18102A 80%);
+}
+.mm-games-bg.mm-light {
+  background: linear-gradient(135deg, #fdfdfd 0%, #e5f8ff 110%);
 }
 
 .mm-games-inner {
