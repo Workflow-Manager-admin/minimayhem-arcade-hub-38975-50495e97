@@ -1,74 +1,145 @@
 import React, { useState, useEffect } from "react";
-import { FaGamepad, FaTrophy, FaChartBar, FaSmileBeam, FaUserCircle, FaBars, FaTimes, FaStar } from "react-icons/fa";
+import {
+  FaGamepad, FaTrophy, FaChartBar, FaSmileBeam,
+  FaRegKeyboard, FaBolt, FaPuzzlePiece, FaBrain,
+  FaBars, FaTimes, FaMedal
+} from "react-icons/fa";
 import { MdOutlineLightMode, MdNightlightRound } from "react-icons/md";
+import "./NavBar.css";
 
 /*
-  MiniMayhem Arcade Hub - NavBar
-  Responsive, arcade-themed, theme-toggling navigation bar
-  Requires: react-icons
+  PUBLIC_INTERFACE
+  NavBar for MiniMayhem Arcade Hub
+  Responsive, arcade-style, light/dark mode.  
+  Props:
+    - darkMode: true/false for current theme
+    - onToggleTheme: () => void
+    - currentSection: optional string for highlighting active route
+    - onNav: (section) => void (optional callback for SPA context)
+    - style, ...rest: passthrough
 */
-
-// PUBLIC_INTERFACE
-function NavBar({ darkMode, onToggleTheme, palette, currentSection, onNav }) {
-  /**
-   * NavBar props:
-   * - darkMode: boolean indicating dark mode
-   * - onToggleTheme: function to toggle dark/light
-   * - palette: color palette {primary, secondary, accent}
-   * - currentSection: string for active nav (optional)
-   * - onNav: (section) => void (optional for SPA context)
-   **/
+function NavBar({
+  darkMode,
+  onToggleTheme,
+  currentSection,
+  onNav,
+  style = {},
+  ...rest
+}) {
+  // Mobile menu open/close
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Responsive close on nav click or resize
+  // Keyboard accessibility: Escape closes mobile drawer, links support space/enter
   useEffect(() => {
     if (!mobileOpen) return;
+    function handleKey(e) {
+      if (e.key === "Escape") setMobileOpen(false);
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [mobileOpen]);
+
+  // Responsive close if resizing back to desktop
+  useEffect(() => {
     function closeOnResize() {
-      if (window.innerWidth > 900) setMobileOpen(false);
+      if (mobileOpen && window.innerWidth > 900) setMobileOpen(false);
     }
     window.addEventListener("resize", closeOnResize);
     return () => window.removeEventListener("resize", closeOnResize);
   }, [mobileOpen]);
 
-  const colors = palette || {
+  // Color palette (matches given requirements)
+  const colors = {
     primary: "#2D2D72",
     secondary: "#F7C948",
     accent: "#9c9c9c",
   };
 
-  // Nav Links
+  // Navigation links for hub + games + sections
   const navLinks = [
-    { key: "games", icon: <FaGamepad />, label: "Games" },
-    { key: "scoreboard", icon: <FaChartBar />, label: "Scoreboard" },
-    { key: "achievements", icon: <FaStar />, label: "Achievements" },
-    { key: "funzone", icon: <FaSmileBeam />, label: "FunZone" },
+    { key: "arcade", label: "Arcade Hub", icon: <FaGamepad /> , href: "/" },
+    { key: "typing", label: "Typing Challenge", icon: <FaRegKeyboard />, href: "#typing-challenge" },
+    { key: "reaction", label: "Reaction Speed", icon: <FaBolt />, href: "#reaction-speed" },
+    { key: "sudoku", label: "Sudoku", icon: <FaPuzzlePiece />, href: "#sudoku" },
+    { key: "memory", label: "Memory Match", icon: <FaBrain />, href: "#memory-match" },
+    { key: "scoreboard", label: "Scoreboard", icon: <FaChartBar />, href: "#scoreboard" },
+    { key: "achievements", label: "Achievements", icon: <FaMedal />, href: "#achievements" },
+    { key: "funzone", label: "FunZone", icon: <FaSmileBeam />, href: "#funzone" },
   ];
 
-  // Handler for link
-  function handleNav(key) {
+  // Navigation action: fire SPA callback if present, or use default link
+  function handleNav(key, href) {
     setMobileOpen(false);
     if (onNav) onNav(key);
-    // Use hash by default for SPA navigation
-    window.location.hash = "#" + key;
+    // By default, update hash for navigation (fallback for SPA)
+    if (href && href.startsWith("#")) window.location.hash = href;
+    // For "/": use window.location (home)
+    else if (href === "/") window.location.href = "/";
   }
 
-  // For accessibility & mobile, focus/blur logic for menu
-  function handleLinkKey(e, key) {
-    if (e.key === "Enter" || e.key === " ") handleNav(key);
+  // Element builder for nav link
+  function NavLink({ item, active }) {
+    return (
+      <li>
+        <a
+          className={active ? "mm-navbar-btn mm-navbar-btn-active" : "mm-navbar-btn"}
+          href={item.href}
+          tabIndex={0}
+          style={{
+            background: "none",
+            border: "none",
+            outline: "none",
+            padding: "6.5px 13px",
+            borderRadius: 7,
+            color: active
+              ? colors.secondary
+              : darkMode
+                ? "#fffbe6"
+                : colors.primary,
+            fontWeight: 900,
+            fontSize: "1rem",
+            letterSpacing: "0.05em",
+            display: "flex",
+            alignItems: "center",
+            gap: 7,
+            textDecoration: "none",
+            cursor: "pointer",
+            boxShadow: active
+              ? `0 0 7px 3px ${colors.secondary}66`
+              : "none",
+            textShadow: active
+              ? `0 0 3px ${colors.secondary}`
+              : "none",
+            border: active ? `2.5px solid ${colors.secondary}` : "none",
+            transition: "background 0.17s, color 0.21s, box-shadow 0.17s",
+            margin: 0
+          }}
+          aria-current={active ? "page" : undefined}
+          aria-label={`Navigate to ${item.label}`}
+          onClick={e => {
+            e.preventDefault();
+            handleNav(item.key, item.href);
+          }}
+          onKeyDown={e => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleNav(item.key, item.href);
+            }
+          }}
+        >
+          <span aria-hidden="true" style={{ fontSize: 19 }}>{item.icon}</span>
+          <span>{item.label}</span>
+        </a>
+      </li>
+    );
   }
 
-  // Profile/sidebar triggers (for future modal/sidebar use)
-  const handleProfile = () => {
-    setMobileOpen(false);
-    // For demo, just alert (replace with sidebar logic)
-    window.location.hash = "#profile";
-  };
-
-  // ARCADE LOGO (PROMINENT)
+  // LOGO LEFT - arcade title
   const Logo = (
     <a
       href="/"
       className="mm-navbar-logo-link"
+      aria-label="Go to MiniMayhem Arcade Home"
       style={{
         textDecoration: "none",
         color: colors.secondary,
@@ -76,167 +147,124 @@ function NavBar({ darkMode, onToggleTheme, palette, currentSection, onNav }) {
         alignItems: "center",
         fontFamily: "'Press Start 2P', VT323, monospace",
         fontWeight: 900,
-        fontSize: 19,
-        letterSpacing: "-1.2px",
+        fontSize: 18,
+        letterSpacing: "-1.1px",
         textShadow: darkMode
           ? `0 0 10px ${colors.secondary},0 0 8px #fff7`
           : `0 0 5px ${colors.primary}`,
-        gap: 10,
+        gap: 7,
         userSelect: "none",
+        padding: "2px 0"
       }}
+      tabIndex={0}
     >
-      <FaGamepad style={{ fontSize: 27, marginRight: 4, color: colors.primary, filter: darkMode ? "drop-shadow(0 0 6px #222)" : "none" }} />
-      MiniMayhem Arcade
+      <FaGamepad style={{
+        fontSize: 25, marginRight: 4, color: colors.primary,
+        filter: darkMode ? "drop-shadow(0 0 5px #221)" : "none"
+      }} />
+      <span style={{
+        fontFamily: "'Press Start 2P', VT323, monospace",
+        fontSize: "1.13em",
+        color: darkMode ? "#fffbe6" : colors.primary,
+        letterSpacing: "-0.7px",
+        marginLeft: 1,
+        userSelect: "none"
+      }}>
+        MiniMayhem Arcade
+      </span>
     </a>
   );
 
   return (
     <nav
       className={`mm-navbar${darkMode ? " mm-navbar-dark" : " mm-navbar-light"}`}
+      aria-label="Main navigation bar"
       style={{
         width: "100vw",
+        minWidth: "0",
         position: "fixed",
         top: 0,
         left: 0,
-        zIndex: 999,
+        zIndex: 1200,
         background: darkMode
-          ? `linear-gradient(91deg, #191837 76%, ${colors.primary} 180%)`
-          : `linear-gradient(91deg, #fdf7e9 76%, ${colors.accent}15 130%)`,
+          ? `linear-gradient(90deg, #191837 70%, ${colors.primary} 170%)`
+          : `linear-gradient(89deg, #fdf7e9 68%, ${colors.accent}11 110%)`,
         borderBottom: `2.5px solid ${colors.secondary}`,
         boxShadow: darkMode
           ? `0 3px 16px 1px ${colors.accent}33`
           : `0 2px 15px 1px ${colors.primary}22`,
         fontFamily: "'Press Start 2P', VT323, monospace",
+        ...style
       }}
-      aria-label="Main navigation bar"
+      {...rest}
     >
       <div
         className="mm-navbar-inner"
         style={{
-          maxWidth: 1240,
+          maxWidth: 1280,
           margin: "0 auto",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0 12px",
-          height: 64,
-          minHeight: 56,
+          padding: "0 25px",
+          height: 60,
+          minHeight: 44,
         }}
       >
+        {/* LOGO */}
         <span style={{ display: "flex", alignItems: "center" }}>{Logo}</span>
 
-        {/* Desktop Nav */}
+        {/* Desktop Nav (centered) */}
         <ul
           className="mm-navbar-navlinks"
           style={{
             display: mobileOpen ? "none" : "flex",
             alignItems: "center",
-            gap: 14,
-            margin: 0,
+            gap: 9,
+            margin: "0 0 0 25px",
             padding: 0,
             listStyle: "none",
+            flex: "0 1 auto"
           }}
         >
-          {navLinks.map(({ key, icon, label }) => (
-            <li key={key}>
-              <button
-                type="button"
-                className={`mm-navbar-btn${currentSection === key ? " mm-navbar-btn-active" : ""}`}
-                style={{
-                  background: "none",
-                  border: "none",
-                  outline: "none",
-                  padding: "7px 13px",
-                  borderRadius: 7,
-                  color:
-                    key === currentSection
-                      ? colors.secondary
-                      : darkMode
-                        ? "#fffbe6"
-                        : colors.primary,
-                  fontWeight: 900,
-                  fontSize: "1rem",
-                  letterSpacing: "0.07em",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 7,
-                  transition: "background 0.17s, color 0.2s, box-shadow 0.17s",
-                  cursor: "pointer",
-                  boxShadow: currentSection === key
-                    ? `0 0 7px 3px ${colors.secondary}66`
-                    : "none",
-                  textShadow: currentSection === key
-                    ? `0 0 3px ${colors.secondary}` : "none",
-                  border: currentSection === key ? `2.5px solid ${colors.secondary}` : "none",
-                }}
-                onClick={() => handleNav(key)}
-                onKeyDown={e => handleLinkKey(e, key)}
-                tabIndex={0}
-                aria-current={currentSection === key ? "page" : undefined}
-                aria-label={`Navigate to ${label}`}
-              >
-                <span aria-hidden="true" style={{ fontSize: 19 }}>{icon}</span>
-                <span>{label}</span>
-              </button>
-            </li>
+          {navLinks.map(item => (
+            <NavLink
+              key={item.key}
+              item={item}
+              active={currentSection === item.key}
+            />
           ))}
-          {/* Profile/Sidebar */}
-          <li>
-            <button
-              type="button"
-              className="mm-navbar-profile-btn"
-              style={{
-                background: "none",
-                border: "none",
-                color: darkMode ? colors.accent : colors.primary,
-                fontWeight: 800,
-                fontSize: "1em",
-                display: "flex",
-                alignItems: "center",
-                gap: 7,
-                padding: "7px 7px",
-                borderRadius: 100,
-                cursor: "pointer",
-                transition: "background 0.16s, color 0.13s",
-              }}
-              onClick={handleProfile}
-              tabIndex={0}
-              aria-label="Profile and Sidebar"
-            >
-              <FaUserCircle style={{ fontSize: 22 }} />
-              <span className="mm-navbar-profile-text" style={{ display: "inline" }}>Profile</span>
-            </button>
-          </li>
         </ul>
 
-        {/* THEME TOGGLE for DESKTOP and MOBILE */}
+        {/* THEME TOGGLE (right) */}
         <button
           className="mm-navbar-theme-toggle"
           type="button"
           aria-label="Toggle dark/light mode"
           onClick={onToggleTheme}
           style={{
-            marginLeft: 12,
-            background: darkMode ? "#222034ee" : "#faf7dd",
+            marginLeft: 14,
+            background: darkMode ? "#232355" : "#faf7dd",
             border: `2.5px solid ${darkMode ? colors.secondary : colors.primary}`,
             color: darkMode ? colors.secondary : colors.primary,
             borderRadius: 7,
-            padding: 4,
-            fontSize: 20,
+            padding: 6,
+            fontSize: 22,
             cursor: "pointer",
             boxShadow: darkMode
-              ? `0 0 9px 2px ${colors.secondary}55`
+              ? `0 0 9px 2px ${colors.secondary}45`
               : `0 0 7px 2px ${colors.primary}22`,
             outline: "none"
           }}
           tabIndex={0}
+          title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
           {darkMode
             ? <MdOutlineLightMode title="Switch to light mode" />
             : <MdNightlightRound title="Switch to dark mode" />}
         </button>
 
-        {/* Mobile NAV HAMBURGER */}
+        {/* MOBILE MENU TOGGLER */}
         <button
           className="mm-navbar-mobile-toggle"
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -251,37 +279,37 @@ function NavBar({ darkMode, onToggleTheme, palette, currentSection, onNav }) {
             fontSize: 27,
             marginLeft: 10,
             borderRadius: 9,
-            zIndex: 1100,
+            zIndex: 1600,
             cursor: "pointer",
-            transition: "background 0.2s",
+            transition: "background 0.18s"
           }}
           onClick={() => setMobileOpen(o => !o)}
         >
           {mobileOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
-      {/* Mobile Drawer */}
+      {/* MOBILE DRAWER */}
       {mobileOpen && (
         <div
           className="mm-navbar-mobile-drawer"
           style={{
             width: "100vw",
-            minHeight: "50vh",
+            minHeight: "45vh",
             position: "fixed",
-            top: 64,
+            top: 60,
             left: 0,
             background: darkMode
-              ? `linear-gradient(105deg, #161432ea 69%, ${colors.primary}ee 140%)`
-              : `linear-gradient(99deg, #fffdfcea 69%, ${colors.accent}33 130%)`,
-            zIndex: 9999,
+              ? `linear-gradient(110deg, #161432ea 72%, ${colors.primary}ee 130%)`
+              : `linear-gradient(99deg, #fffdfcec 66%, ${colors.accent}33 110%)`,
+            zIndex: 1999,
             boxShadow: `0 7px 24px 4px ${colors.primary}51`,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             padding: "20px 0 14px 0",
-            animation: "mm-navbar-mobile-fade-in 0.18s cubic-bezier(.43,.49,.73,1.22)",
+            animation: "mm-navbar-mobile-fade-in 0.21s cubic-bezier(.43,.49,.73,1.22)",
           }}
-          aria-label="mobile nav"
+          aria-label="Mobile navigation menu"
         >
           <ul
             style={{
@@ -290,103 +318,85 @@ function NavBar({ darkMode, onToggleTheme, palette, currentSection, onNav }) {
               padding: 0,
               display: "flex",
               flexDirection: "column",
-              gap: 14,
+              gap: 13,
               alignItems: "center",
-              width: "100%",
+              width: "100%"
             }}
           >
-            {navLinks.map(({ key, icon, label }) => (
-              <li key={key} style={{ width: "100%" }}>
-                <button
-                  className={`mm-navbar-btn${currentSection === key ? " mm-navbar-btn-active" : ""}`}
-                  type="button"
+            {navLinks.map(item => (
+              <li key={item.key} style={{ width: "100%" }}>
+                <a
+                  className={`mm-navbar-btn${currentSection === item.key ? " mm-navbar-btn-active" : ""}`}
+                  href={item.href}
+                  tabIndex={0}
                   style={{
                     background: "none",
                     border: "none",
                     outline: "none",
-                    width: "96vw",
+                    width: "95vw",
                     padding: "15px 0",
                     borderRadius: 7,
-                    color:
-                      key === currentSection
-                        ? colors.secondary
-                        : darkMode
-                          ? "#fffbe6"
-                          : colors.primary,
+                    color: currentSection === item.key
+                      ? colors.secondary
+                      : darkMode
+                        ? "#fffbe6"
+                        : colors.primary,
                     fontWeight: 900,
                     fontSize: "1rem",
                     letterSpacing: "0.07em",
                     display: "flex",
                     alignItems: "center",
-                    gap: 15,
+                    gap: 13,
                     textAlign: "left",
-                    transition: "background 0.17s, color 0.2s, box-shadow 0.17s",
-                    cursor: "pointer",
-                    boxShadow: currentSection === key
-                      ? `0 0 12px 4px ${colors.secondary}25`
+                    textDecoration: "none",
+                    boxShadow: currentSection === item.key
+                      ? `0 0 12px 4px ${colors.secondary}35`
                       : "none",
-                    border: currentSection === key ? `2.5px solid ${colors.secondary}` : "none",
+                    border: currentSection === item.key ? `2.5px solid ${colors.secondary}` : "none",
+                    transition: "background 0.17s, color 0.2s, box-shadow 0.17s",
                   }}
-                  onClick={() => handleNav(key)}
-                  tabIndex={0}
-                  aria-current={currentSection === key ? "page" : undefined}
-                  aria-label={`Navigate to ${label}`}
+                  aria-current={currentSection === item.key ? "page" : undefined}
+                  aria-label={`Navigate to ${item.label}`}
+                  onClick={e => {
+                    e.preventDefault();
+                    handleNav(item.key, item.href);
+                  }}
+                  onKeyDown={e => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleNav(item.key, item.href);
+                    }
+                  }}
                 >
-                  <span aria-hidden="true" style={{ fontSize: 19 }}>{icon}</span>
-                  <span>{label}</span>
-                </button>
+                  <span aria-hidden="true" style={{ fontSize: 19 }}>{item.icon}</span>
+                  <span>{item.label}</span>
+                </a>
               </li>
             ))}
-            <li style={{ width: "100%" }}>
-              <button
-                className="mm-navbar-profile-btn"
-                type="button"
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: darkMode ? colors.accent : colors.primary,
-                  fontWeight: 800,
-                  fontSize: "1em",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 14,
-                  padding: "13px 0",
-                  borderRadius: 100,
-                  cursor: "pointer",
-                  width: "96vw",
-                }}
-                onClick={handleProfile}
-                tabIndex={0}
-                aria-label="Profile and Sidebar"
-              >
-                <FaUserCircle style={{ fontSize: 24 }} />
-                <span className="mm-navbar-profile-text" style={{ display: "inline" }}>Profile</span>
-              </button>
-            </li>
-            <li style={{ width: "100%", marginTop: 7 }}>
+            <li style={{ width: "100%", marginTop: 11 }}>
               <button
                 className="mm-navbar-theme-toggle"
                 type="button"
+                aria-label="Toggle theme"
                 style={{
-                  width: "92vw",
+                  width: "93vw",
                   margin: "0 auto",
-                  background: darkMode ? "#222034ee" : "#faf7dd",
+                  background: darkMode ? "#222034ea" : "#faf7dd",
                   border: `2.5px solid ${darkMode ? colors.secondary : colors.primary}`,
                   color: darkMode ? colors.secondary : colors.primary,
                   borderRadius: 8,
-                  padding: 10,
-                  fontSize: 20,
+                  padding: 8,
+                  fontSize: 22,
                   cursor: "pointer",
-                  marginTop: 2,
-                  marginBottom: 3,
+                  marginTop: 6,
+                  marginBottom: 2,
                   boxShadow: darkMode
-                    ? `0 0 9px 2px ${colors.secondary}35`
+                    ? `0 0 9px 2px ${colors.secondary}25`
                     : `0 0 7px 2px ${colors.primary}15`,
                   outline: "none"
                 }}
                 onClick={onToggleTheme}
                 tabIndex={0}
-                aria-label="Toggle theme"
               >
                 {darkMode
                   ? <MdOutlineLightMode title="Switch to light mode" />
@@ -397,12 +407,11 @@ function NavBar({ darkMode, onToggleTheme, palette, currentSection, onNav }) {
           </ul>
         </div>
       )}
-
-      {/* Mobile open/close fade animation style */}
+      {/* Inline keyframes for mobile fade-in */}
       <style>
         {`
         @keyframes mm-navbar-mobile-fade-in {
-          from { opacity: 0; transform: translateY(-11px);}
+          from { opacity: 0; transform: translateY(-13px);}
           to   { opacity: 1; transform: translateY(0);}
         }
         @media (max-width: 900px) {
